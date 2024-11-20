@@ -1,0 +1,36 @@
+{
+    "selectors": {
+        "td": {
+            "product_info": ".cmp-compare-product__card--info-content-text",
+            "card_name": "[data-cardname]"
+          },
+      "scotiabank": {
+        "cardName": ".bns--title.title--h3.text-left h3",
+        "annualFee": "._row .cmp-text p:has(b:contains('Annual fee')) + div p", 
+        "purchaseInterestRate": "._row .cmp-text p:has(b:contains('Purchase interest rate')) + div p",  
+        "cardType": ".cmp-text p b",
+        "additionalFeatures": ".cmp-text p b"
+      },
+      "greatCanadianRebates": {
+        "cardName": ".listshopname",
+        "annualFee": ".listrebate", 
+        "interestRates": ".conditions", 
+        "additionalFeatures": ".moredetails"
+      },
+      "cibc": {
+        "card_name": "h3.product-title a",
+        "annual_fee": ".product-rate-title:contains(Annual fee) + .product-rate-value b",
+        "purchase_rate": ".product-rate-title:contains(Purchase interest rate) + .product-rate-value b",
+        "benefits": ".product-benefits ul li"
+      },
+      "nationalBank": {
+        "cardName": "h1.card-title",
+        "annualFee": "p:contains('Annual Fee')",
+        "purchaseInterestRate": "p:contains('Interest Rate')",
+        "cardType": "span.card-type",
+        "additionalFeatures": "div.features ul"
+      }
+  
+    }
+  }
+  
