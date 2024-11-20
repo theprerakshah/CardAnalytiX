@@ -2,8 +2,9 @@
     "selectors": {
         "td": {
             "product_info": ".cmp-compare-product__card--info-content-text",
-            "card_name": "[data-cardname]"
-          },
+            "card_name": "[data-cardname]",
+            "annualFee": "div.cmp-compare-product__card--info-content-text:has(p:contains(Annual Fee)) > strong > p"
+          },       
       "scotiabank": {
         "cardName": ".bns--title.title--h3.text-left h3",
         "annualFee": "._row .cmp-text p:has(b:contains('Annual fee')) + div p", 
