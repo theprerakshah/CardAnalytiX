@@ -3,14 +3,17 @@
         "td": {
             "product_info": ".cmp-compare-product__card--info-content-text",
             "card_name": "[data-cardname]",
-            "annualFee": "div.cmp-compare-product__card--info-content-text:has(p:contains(Annual Fee)) > strong > p"
+            "annualFee": ".cmp-compare-product__card--info-content-text:has(p:contains(Annual Fee)) > strong p:matches(^\\$)",
+            "purchaseInterestRate": ".cmp-compare-product__card--info-content-text:has(p:contains(Interest)) > strong p",
+            "advantages": ".cmp-compare-product__card--info-content-text p:contains(Earn)"
+            
           },       
       "scotiabank": {
         "cardName": ".bns--title.title--h3.text-left h3",
         "annualFee": "._row div.col-md-4 div.cmp-text p:matches(^\\$)",
         "purchaseInterestRate": "._row div.col-md-4 div.cmp-text p:matches(\\d+\\.\\d+%)",  
         "cardType": ".cmp-text p b",
-        "additionalFeatures": ".cmp.cmp-text.aem-GridColumn.aem-GridColumn--default--12 > p"
+        "additionalFeatures": ".cmp.cmp-text.aem-GridColumn.aem-GridColumn--default--12 > p:contains(earn)"
       },
       "greatCanadianRebates": {
         "cardName": ".listshopname",
@@ -19,7 +22,7 @@
         "additionalFeatures": ".moredetails"
       },
       "cibc": {
-        "card_name": "h3.product-title a",
+        "card_name": "h3.product-title a b",
         "annual_fee": ".product-rate-title:contains(Annual fee) + .product-rate-value b",
         "purchase_rate": ".product-rate-title:contains(Purchase interest rate) + .product-rate-value b",
         "benefits": ".product-benefits ul li"

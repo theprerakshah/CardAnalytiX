@@ -1,28 +1,84 @@
-Card Name: TD Cash Back Visa Infinite* | Product Info: Earn up to $500 in valueCBI-ROC-ARR, including 10% in Cash Back Dollars in the first 3 months on Bonus Eligible Purchases up to a total spend of $3,5002. Conditions apply. Account must be approved by January 6, 2025.
+Card Name: TD Cash Back Visa Infinite*
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
 Annual Fee: $139
-Card Name: TD Cash Back Visa* | Product Info: $139 Annual Fee
+Advantages: Earn up to $500 in value, including 10% in Cash Back Dollars in the first 3 months on Bonus Eligible Purchases up to a total spend of $3,500. Conditions apply. Account must be approved by January 6, 2025.
+
+Card Name: TD Cash Back Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
 Annual Fee: $0
-Card Name: TD® Aeroplan® Visa Infinite* | Product Info: 20.99% Interest: Purchases
-Annual Fee: Earn up to $1,300 in valueAVI-ROC-ARR including up to 40,000 Aeroplan pointsUIDNQEN2 and no Annual Fee for the first yearUIDNQEN2. Conditions Apply. Account must be approved by January 6, 2025.
-Card Name: TD® Aeroplan® Visa Platinum* Credit | Product Info: 22.99% Interest: Cash Advances
+Advantages: Earn Cash Back Dollars. Redeem them to help pay down your Account balance.
+
+Card Name: TD® Aeroplan® Visa Infinite*
+Card Type: Visa Card
+Purchase Interest Rate: 19.99%%
 Annual Fee: $139
-Card Name: TD® Aeroplan® Visa Infinite Privilege* Credit | Product Info: Earn Cash Back Dollars. Redeem them to help pay down your Account balancea1.
-Annual Fee: Earn up to $500 in valueAVP-ROC-HASH, including up to 20,000 Aeroplan pointsUDI-NQ-EN-4 and no Annual Fee for the first yearUDI-NQ-EN-4. Conditions Apply. Account must be approved by January 6, 2025.
-Card Name: TD First Class Travel® Visa Infinite* | Product Info: $0 Annual Fee
+Advantages: Earn up to $1,300 in value including up to 40,000 Aeroplan points and no Annual Fee for the first year.
+
+Card Name: TD® Aeroplan® Visa Platinum* Credit
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
 Annual Fee: $89
-Card Name: TD Platinum Travel Visa* | Product Info: 19.99% Interest: Purchases
+Advantages: Earn up to $500 in value, including up to 20,000 Aeroplan points and no Annual Fee for the first year.
+
+Card Name: TD® Aeroplan® Visa Infinite Privilege* Credit
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
 Annual Fee: $599
-Card Name: TD Rewards Visa* | Product Info: 22.99% Interest: Cash Advances
-Annual Fee: Earn up to $1,000 in valueFCT-ROC-18, including up to 135,000 TD Rewards PointsUDI-NQ-EN-11 and no Annual Fee for the first yearUDI-NQ-EN-11. Conditions Apply. Account must be approved by January 6, 2025.
-Card Name: TD Low Rate Visa* | Product Info: Earn up to $1,300 in valueAVI-ROC-ARR including up to 40,000 Aeroplan pointsUIDNQEN2 and no Annual Fee for the first yearUIDNQEN2. Conditions Apply. Account must be approved by January 6, 2025.
+Advantages: Earn up to $2,900 in value including up to 80,000 Aeroplan points.
+
+Card Name: TD First Class Travel® Visa Infinite*
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
 Annual Fee: $139
-Card Name: TD U.S. Dollar Visa* | Product Info: $139 Annual Fee
-Annual Fee: Earn up to $370 in valueUDINQEN13SUP18, including up to 50,000 TD Rewards PointsUDINQEN13 and no Annual Fee for the first yearUDINQEN13. Conditions Apply. Account must be approved by January 6, 2025.
-Card Name: TD Business Travel Visa* | Product Info: 20.99% Interest: Purchases
-Annual Fee: 
-Card Name: TD® Aeroplan® Visa* Business | Product Info: 22.99% Interest: Cash Advances
-Annual Fee: 
-Card Name: TD Business Cash Back Visa* | Product Info: Earn up to $500 in valueAVP-ROC-HASH, including up to 20,000 Aeroplan pointsUDI-NQ-EN-4 and no Annual Fee for the first yearUDI-NQ-EN-4. Conditions Apply. Account must be approved by January 6, 2025.
+Advantages: Earn up to $1,000 in value, including up to 135,000 TD Rewards Points and no Annual Fee for the first year.
+
+Card Name: TD Platinum Travel Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
 Annual Fee: $89
-Card Name: TD Business Select RateTM Visa* | Product Info: $89 Annual Fee
-Annual Fee: Earn a value of $50UDINQEN14,UDINQEN14plus in TD Rewards Points to use on eligible Amazon.ca purchases plus, no Annual Fee. Conditions Apply. Account must be approved by January 6, 2025.
+Advantages: Earn up to $370 in value, including up to 50,000 TD Rewards Points and no Annual Fee for the first year.
+
+Card Name: TD Rewards Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
+Annual Fee: $0
+Advantages: Earn a value of $50 in TD Rewards Points to use on eligible Amazon.ca purchases plus, no Annual Fee.
+
+Card Name: TD Low Rate Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
+Annual Fee: $25
+Advantages: Earn a value of up to $1,122 in TD Rewards Points (that's up to 175,000 TD Rewards Points) full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
+
+Card Name: TD U.S. Dollar Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
+Annual Fee: $39 USD
+Advantages: Earn up to 50,000 Aeroplan points with full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
+
+Card Name: TD Business Travel Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
+Annual Fee: $149
+Advantages: No Advantages
+
+Card Name: TD® Aeroplan® Visa* Business
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
+Annual Fee: $149
+Advantages: No Advantages
+
+Card Name: TD Business Cash Back Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 20.99%%
+Annual Fee: $0
+Advantages: No Advantages
+
+Card Name: TD Business Select Rate Visa*
+Card Type: Visa Card
+Purchase Interest Rate: 22.99%%
+Annual Fee: $0
+Advantages: No Advantages
+

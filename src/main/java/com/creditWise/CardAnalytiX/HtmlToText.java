@@ -34,9 +34,10 @@ public class HtmlToText
 		JSONObject nationalBankSelectors = jsonObject.getJSONObject("selectors").getJSONObject("nationalBank");
 
 		// Extract the selectors
-		String tdProductInfoSelector = tdSelectors.getString("product_info");
+		String tdAdvantages = tdSelectors.getString("advantages");
 		String tdCardNameSelector = tdSelectors.getString("card_name");
 		String tdCardAnuallFeeSelector = tdSelectors.getString("annualFee");
+		String tdPurchaseRate = tdSelectors.getString("purchaseInterestRate");
 		String scotiaCardNameSelector = scotiaSelectors.getString("cardName");
 		String scotiaAnnualFeeSelector = scotiaSelectors.getString("annualFee");
 		String scotiaPurchaseRate = scotiaSelectors.getString("purchaseInterestRate");
@@ -84,26 +85,67 @@ public class HtmlToText
 
 				// --- TD Data Extraction ---
 				Elements tdCardNameElements = doc.select(tdCardNameSelector);
-				Elements tdProductInfoElements = doc.select(tdProductInfoSelector);
 				Elements tdAnnualFeeInfoElements = doc.select(tdCardAnuallFeeSelector);
-				// Selector for the "Annual Fee" text
-				// Fetch "$139"
-
+				Elements tdInterestRateElements = doc.select(tdPurchaseRate); // This will target the interest rate percentage
+				Elements tdAdditionalFeatureElements = doc.select(tdAdvantages); // Select all paragraphs containing "earn"
+				
+				// Remove all <sup> tags from the selected elements
+				tdCardNameElements.select("sup").remove();
+				tdAnnualFeeInfoElements.select("sup").remove();
+				tdInterestRateElements.select("sup").remove();
+				tdAdditionalFeatureElements.select("sup").remove();
+				
 				String tdCardNameRegex = "(?<=Recently Viewed\\s)(.*?)(?=\\sCard)";
-
-				for(int i = 0; i < tdCardNameElements.size(); i++)
-				{
+				
+				for (int i = 0; i < tdCardNameElements.size(); i++) {
 					String rawCardName = tdCardNameElements.size() > i ? tdCardNameElements.get(i).text() : "No Card Name";
-					String productInfo = tdProductInfoElements.size() > i ? tdProductInfoElements.get(i).text() : "No Product Info";
-
 					String cardName = extractCardName(rawCardName, tdCardNameRegex);
 					String annualFee = extractFee(tdAnnualFeeInfoElements, i);
-					//					String cardAnuallFee = extractCardName(rawCardName, tdCardNameRegex);
-
-					tdExtractedText.append("Card Name: ").append(cleanText(cardName)).append(" | ");
-					tdExtractedText.append("Product Info: ").append(cleanText(productInfo)).append("\n");
+				
+					if (annualFee.isEmpty() || "No data".equalsIgnoreCase(annualFee)) {
+						annualFee = "$0";
+					}
+					
+					// Extract the interest rate (only percentage values like 19.99%)
+					String purchaseInterestRate = "No Interest Rate"; // Default in case no rate is found
+					if (tdInterestRateElements.size() > i) {
+						String interestText = tdInterestRateElements.get(i).text();
+						// Extract only the percentage value using regex (e.g., 19.99%)
+						purchaseInterestRate = interestText.replaceAll("[^\\d.]+%", "").trim() + "%";
+					}
+				
+					// Extract additional feature if any paragraph contains "earn"
+					String additionalFeature = "No Advantages"; // Default if no match
+					if (i < tdAdditionalFeatureElements.size()) {
+						String additionalText = tdAdditionalFeatureElements.get(i).text();
+						
+						// Remove unwanted parts (like hyperlinks and extra info like UDINQEN13SUP18)
+						additionalText = additionalText.replaceAll("<a[^>]*>(.*?)</a>", ""); // Remove <a> tags (href links)
+						additionalText = additionalText.replaceAll("\\s+Conditions Apply.*", ""); // Remove anything after "Conditions Apply"
+						
+						// Clean the text further by removing any non-relevant tags or content
+						additionalFeature = additionalText.trim();
+					}
+				
+					// Determine card type based on card name
+					String cardType = "Unknown"; // Default card type
+					if (cardName.toLowerCase().contains("visa")) {
+						cardType = "Visa Card";
+					} else if (cardName.toLowerCase().contains("mastercard")) {
+						cardType = "MasterCard";
+					}
+				
+					// Append extracted data
+					tdExtractedText.append("Card Name: ").append(cleanText(cardName)).append("\n");
+					tdExtractedText.append("Card Type: ").append(cardType).append("\n"); // Add card type to the output
+					tdExtractedText.append("Purchase Interest Rate: ").append(cleanText(purchaseInterestRate)).append("\n");
 					tdExtractedText.append("Annual Fee: ").append(cleanText(annualFee)).append("\n");
+					tdExtractedText.append("Advantages: ").append(cleanText(additionalFeature)).append("\n\n");
 				}
+				
+
+
+
 
 				// --- Scotiabank Data Extraction ---
 				Elements scotiaCardNameElements = doc.select(scotiaCardNameSelector);
@@ -128,11 +170,16 @@ public class HtmlToText
 						cardType = "American Express";
 					}
 				
-					scotiaExtractedText.append("Card Name: ").append(cardName).append(" | ");
-					scotiaExtractedText.append("Card Type: ").append(cardType).append(" | "); // Add card type to output
-					scotiaExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
-					scotiaExtractedText.append("Purchase Interest Rate: ").append(purchaseInterestRate).append(" | ");
-					scotiaExtractedText.append("Additional Feature: ").append(additionalFeature).append(" | ");
+					scotiaExtractedText.append("Card Name: ").append(cardName);
+					scotiaExtractedText.append("\n");
+					scotiaExtractedText.append("Card Type: ").append(cardType); // Add card type to output
+					scotiaExtractedText.append("\n");
+					scotiaExtractedText.append("Annual Fee: ").append(annualFee);
+					scotiaExtractedText.append("\n");
+					scotiaExtractedText.append("Purchase Interest Rate: ").append(purchaseInterestRate);
+					scotiaExtractedText.append("\n");
+					scotiaExtractedText.append("Additional Feature: ").append(additionalFeature);
+					scotiaExtractedText.append("\n");
 					scotiaExtractedText.append("\n");
 				}
 				
@@ -153,7 +200,7 @@ public class HtmlToText
 					rebateExtractedText.append("Card Name: ").append(cardName).append(" | ");
 					rebateExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
 					rebateExtractedText.append("Interest Rates: ").append(interestRates).append(" | ");
-					rebateExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n");
+					rebateExtractedText.append("Advantages ").append(additionalFeatures).append("\n");
 				}
 
 				// --- CIBC Data Extraction ---
@@ -161,20 +208,30 @@ public class HtmlToText
 				Elements cibcAnnualFeeElements = doc.select(cibcAnnualFeeSelector);
 				Elements cibcInterestRateElements = doc.select(cibcInterestRateSelector);
 				Elements cibcAdditionalFeaturesElements = doc.select(cibcAdditionalFeaturesSelector);
-
-				for(int i = 0; i < cibcCardNameElements.size(); i++)
-				{
+				
+				for (int i = 0; i < cibcCardNameElements.size(); i++) {
+					// Extract card name, annual fee, interest rate, and additional features
 					String cardName = cibcCardNameElements.size() > i ? cibcCardNameElements.get(i).text() : "No Card Name";
 					String annualFee = cibcAnnualFeeElements.size() > i ? cibcAnnualFeeElements.get(i).text() : "No Annual Fee";
 					String interestRates = cibcInterestRateElements.size() > i ? cibcInterestRateElements.get(i).text() : "No Interest Rates";
 					String additionalFeatures = cibcAdditionalFeaturesElements.size() > i ? cibcAdditionalFeaturesElements.get(i).text() : "No Additional Features";
-
-					cibcExtractedText.append("Card Name: ").append(cardName).append(" | ");
-					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
-					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" | ");
-					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n");
+					
+					// Filter out non-percentage values from the interest rates
+					if (interestRates.matches(".*\\d+\\.\\d+%.*")) {
+						// If the interest rate contains a percentage, keep it
+						interestRates = interestRates.replaceAll(".*(\\d+\\.\\d+%)$", "$1");
+					} else {
+						// Otherwise, set it to "No Interest Rates"
+						interestRates = "No Interest Rates";
+					}
+				
+					// Append the results to the output
+					cibcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
+					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" \n ");
+					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" \n ");
+					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n\n");
 				}
-
+				
 				// --- National Bank Data Extraction ---
 				Elements nationalBankCardNameElements = doc.select(nationalBankCardNameSelector);
 				Elements nationalBankAnnualFeeElements = doc.select(nationalBankAnnualFeeSelector);
