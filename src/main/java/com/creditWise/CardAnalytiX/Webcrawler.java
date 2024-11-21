@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 import java.io.*;
 import java.util.*;
 
-public class WebCrawler {
+public class Webcrawler {
 
     private static final String SAVE_DIRECTORY = "saved_pages";
     private static final int MAX_PAGES_PER_SITE = 100; // Limit for each site
@@ -88,7 +88,7 @@ public class WebCrawler {
     }
 
     public static void main(String[] args) {
-        WebCrawler crawler = new WebCrawler();
+        Webcrawler crawler = new Webcrawler();
         List<String> urls = crawler.readUrlsFromFile("src/urls.txt");
 
         for (String baseUrl : urls) {
