@@ -7,10 +7,10 @@
           },       
       "scotiabank": {
         "cardName": ".bns--title.title--h3.text-left h3",
-        "annualFee": "._row .cmp-text p:has(b:contains('Annual fee')) + div p", 
-        "purchaseInterestRate": "._row .cmp-text p:has(b:contains('Purchase interest rate')) + div p",  
+        "annualFee": "._row div.col-md-4 div.cmp-text p:matches(^\\$)",
+        "purchaseInterestRate": "._row div.col-md-4 div.cmp-text p:matches(\\d+\\.\\d+%)",  
         "cardType": ".cmp-text p b",
-        "additionalFeatures": ".cmp-text p b"
+        "additionalFeatures": ".cmp.cmp-text.aem-GridColumn.aem-GridColumn--default--12 > p"
       },
       "greatCanadianRebates": {
         "cardName": ".listshopname",
@@ -30,7 +30,11 @@
         "purchaseInterestRate": "p:contains('Interest Rate')",
         "cardType": "span.card-type",
         "additionalFeatures": "div.features ul"
-      }
+      },
+      "finly": {
+        "annualFee": ".MuiStack-root .MuiTypography-root.MuiTypography-body1.mui-11tvxh"  
+    }
+    
   
     }
   }

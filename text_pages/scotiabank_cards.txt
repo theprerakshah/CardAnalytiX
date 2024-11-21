@@ -1,18 +1,18 @@
-Card Name: Scotiabank Passport® Visa Infinite* Card | Annual Fee: Annual Fee $139/year | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank Gold American Express® Card | Annual Fee: Annual Fee $120/year | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® Visa Infinite* Card | Annual Fee: Annual Fee $120/year | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank Passport® Visa Infinite* Card | Annual Fee: Including up to 45,000 bonus Scene+TM points with minimum purchase and your first year annual fee waived.2 | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank Gold American Express® Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank American Express® Card | Annual Fee: Earn up to $9501 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.2 | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® Visa Infinite* Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® Visa*  Card | Annual Fee: Earn 10% cash back on all purchases for the first 3 months (up to $2,000 in total purchases).7 Plus, pay no annual fee in your first year.7 | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® No-Fee Visa* Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank® Scene+TM Visa* Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank Passport® Visa Infinite* Card | Annual Fee: Earn up to $9501 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.2 | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank Gold American Express® Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank® Scene+TM Visa* Card (for students) | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® No-Fee Visa* Card (for students) | Annual Fee: Earn 10% cash back on all purchases for the first 3 months (up to $2,000 in total purchases).7 Plus, pay no annual fee in your first year.7 | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® Visa* Card (for students) | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank® Scene+TM Visa* Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotia Momentum® No-Fee Visa* Card | Annual Fee: NO ANNUAL FEE | Purchase Interest Rate: Purchase interest rate | 
-Card Name: Scotiabank American Express® Card | Annual Fee: Annual fee | Purchase Interest Rate: Purchase interest rate | 
+Card Name: Scotiabank Passport® Visa Infinite* Card | Card Type: Visa Card | Annual Fee: $150 | Purchase Interest Rate: Interest rates 19.99% purchases 22.99% cash advances | Additional Feature: Are you new to Canada in the past three years? Visit a branch to apply. Use our Branch Locator | 
+Card Name: Scotiabank Gold American Express® Card | Card Type: American Express | Annual Fee: $120 | Purchase Interest Rate: Interest rates 19.99% purchases 22.99% cash advances | Additional Feature: Are you new to Canada in the past three years? Visit a branch to apply. Use our Branch Locator | 
+Card Name: Scotia Momentum® Visa Infinite* Card | Card Type: Visa Card | Annual Fee: $120 | Purchase Interest Rate: Interest rates 20.99% purchases 22.99% cash advances | Additional Feature: Are you new to Canada in the past three years? Visit a branch to apply. Use our Branch Locator | 
+Card Name: Scotiabank Passport® Visa Infinite* Card | Card Type: Visa Card | Annual Fee: $150 | Purchase Interest Rate: 20.99% | Additional Feature: TRAVEL AND LIFESTYLE | 
+Card Name: Scotiabank Gold American Express® Card | Card Type: American Express | Annual Fee: $120 | Purchase Interest Rate: 22.99% | Additional Feature: Earn up to $1,1003 in value in the first 12 months, including up to 35,000 bonus Scene+ points.4 | 
+Card Name: Scotiabank American Express® Card | Card Type: American Express | Annual Fee: $0 | Purchase Interest Rate: 20.99% | Additional Feature: You could earn Up to 3X the points5 | 
+Card Name: Scotia Momentum® Visa Infinite* Card | Card Type: Visa Card | Annual Fee: $120 | Purchase Interest Rate: 22.99% | Additional Feature: TRAVEL AND LIFESTYLE | 
+Card Name: Scotia Momentum® Visa*  Card | Card Type: Visa Card | Annual Fee: $39 | Purchase Interest Rate: 20.99% | Additional Feature: Earn up to $9501 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.2 | 
+Card Name: Scotia Momentum® No-Fee Visa* Card | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 22.99% | Additional Feature: You could earn Up to 6X the points6 | 
+Card Name: Scotiabank® Scene+TM Visa* Card | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 20.99% | Additional Feature: CASH BACK | 
+Card Name: Scotiabank Passport® Visa Infinite* Card | Card Type: Visa Card | Annual Fee: $150 | Purchase Interest Rate: 22.99% | Additional Feature: Earn 10% cash back on all purchases for the first 3 months (up to $2,000 in total purchases).7 Plus, pay no annual fee in your first year.7 | 
+Card Name: Scotiabank Gold American Express® Card | Card Type: American Express | Annual Fee: $120 | Purchase Interest Rate: 20.99% | Additional Feature: You could earn Up to 4% cash back8 | 
+Card Name: Scotiabank® Scene+TM Visa* Card (for students) | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 22.99% | Additional Feature: TRAVEL AND LIFESTYLE | 
+Card Name: Scotia Momentum® No-Fee Visa* Card (for students) | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 19.99% | Additional Feature: Earn up to $1,1003 in value in the first 12 months, including up to 35,000 bonus Scene+ points.4 | 
+Card Name: Scotia Momentum® Visa* Card (for students) | Card Type: Visa Card | Annual Fee: $39 | Purchase Interest Rate: 22.99% | Additional Feature: You could earn Up to 3X the points5 | 
+Card Name: Scotiabank® Scene+TM Visa* Card | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 20.99% | Additional Feature: TRAVEL AND LIFESTYLE | 
+Card Name: Scotia Momentum® No-Fee Visa* Card | Card Type: Visa Card | Annual Fee: $0 | Purchase Interest Rate: 22.99% | Additional Feature: Earn up to $9501 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.2 | 
+Card Name: Scotiabank American Express® Card | Card Type: American Express | Annual Fee: $0 | Purchase Interest Rate: 19.99% | Additional Feature: You could earn Up to 6X the points6 | 

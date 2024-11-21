@@ -38,6 +38,9 @@ public class HtmlToText
 		String tdCardNameSelector = tdSelectors.getString("card_name");
 		String tdCardAnuallFeeSelector = tdSelectors.getString("annualFee");
 		String scotiaCardNameSelector = scotiaSelectors.getString("cardName");
+		String scotiaAnnualFeeSelector = scotiaSelectors.getString("annualFee");
+		String scotiaPurchaseRate = scotiaSelectors.getString("purchaseInterestRate");
+		String scotiaAdditionalFeature = scotiaSelectors.getString("additionalFeatures");
 		String rebateCardNameSelector = canadianRebatesSelectors.getString("cardName");
 		String rebateAnnualFeeSelector = canadianRebatesSelectors.getString("annualFee");
 		String rebateInterestRateSelector = canadianRebatesSelectors.getString("interestRates");
@@ -104,20 +107,35 @@ public class HtmlToText
 
 				// --- Scotiabank Data Extraction ---
 				Elements scotiaCardNameElements = doc.select(scotiaCardNameSelector);
-				Elements scotiaAnnualFeeElements = doc.select("p:contains(Annual fee)");
-				Elements scotiaPurchaseInterestRateElements = doc.select("p:contains(Purchase interest rate)");
-
-				for(int i = 0; i < scotiaCardNameElements.size(); i++)
-				{
+				Elements scotiaAnnualFeeElements = doc.select(scotiaAnnualFeeSelector);
+				Elements scotiaPurchaseInterestRateElements = doc.select(scotiaPurchaseRate);
+				Elements scotiaAdditionalFeatureElements = doc.select(scotiaAdditionalFeature);
+				
+				for (int i = 0; i < scotiaCardNameElements.size(); i++) {
 					String cardName = scotiaCardNameElements.size() > i ? scotiaCardNameElements.get(i).text() : "No Card Name";
 					String annualFee = extractFee(scotiaAnnualFeeElements, i);
 					String purchaseInterestRate = extractFee(scotiaPurchaseInterestRateElements, i);
-
+					 String additionalFeature = extractFeature(scotiaAdditionalFeatureElements, i);
+				
+				
+					// Determine card type based on card name
+					String cardType = "Unknown";
+					if (cardName.toLowerCase().contains("visa")) {
+						cardType = "Visa Card";
+					} else if (cardName.toLowerCase().contains("mastercard")) {
+						cardType = "MasterCard";
+					} else if (cardName.toLowerCase().contains("american express")) {
+						cardType = "American Express";
+					}
+				
 					scotiaExtractedText.append("Card Name: ").append(cardName).append(" | ");
+					scotiaExtractedText.append("Card Type: ").append(cardType).append(" | "); // Add card type to output
 					scotiaExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
 					scotiaExtractedText.append("Purchase Interest Rate: ").append(purchaseInterestRate).append(" | ");
+					scotiaExtractedText.append("Additional Feature: ").append(additionalFeature).append(" | ");
 					scotiaExtractedText.append("\n");
 				}
+				
 
 				// --- Great Canadian Rebates Data Extraction ---
 				Elements rebateCardNameElements = doc.select(rebateCardNameSelector);
@@ -233,7 +251,13 @@ public class HtmlToText
 	{
 		return elements.size() > index ? elements.get(index).text() : "No Data";
 	}
-
+	public static String extractFeature(Elements elements, int index) {
+		if (elements.size() > index) {
+			return elements.get(index).text(); // Get the text from the matching element
+		}
+		return "No Additional Feature"; // Default value if no additional feature found
+	}
+	
 	// Save extracted text to a file
 	private static void saveToFile(String filePath, String content)
 	{
