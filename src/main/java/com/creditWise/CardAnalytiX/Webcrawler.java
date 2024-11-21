@@ -54,9 +54,11 @@ public class WebCrawler {
 
             // Fetch the document from the URL
             Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0")
-                    .timeout(15_000)
-                    .get();
+            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0")
+            .header("Accept-Language", "en-US,en;q=0.9")
+            .header("Accept-Encoding", "gzip, deflate, br")
+            .timeout(30_000)
+            .get();
 
             System.out.println("Visiting: " + url);
             visitedPages.add(url); // Mark the URL as visited

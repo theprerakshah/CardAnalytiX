@@ -1,120 +1,144 @@
 Card Name: CIBC Aventura® Visa Infinite* Card 
+ Card Type: Visa Card 
  Annual Fee: $139 
  Interest Rates: No Interest Rates 
  Additional Features: 2 points per $1 on travel booked through the CIBC Rewards Centre4
 
 Card Name: CIBC Aeroplan® Visa Infinite* Card 
+ Card Type: Visa Card 
  Annual Fee: $139 
  Interest Rates: No Interest Rates 
  Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases5
 
 Card Name: CIBC Aventura® Visa Infinite Privilege* Card 
+ Card Type: Visa Card 
  Annual Fee: $499 
- Interest Rates: No Interest Rates 
- Additional Features: Lounge access2 | NEXUSTM application fee rebate† | Visa* concierge service2
-
-Card Name: CIBC Aeroplan® Visa Infinite Privilege* Card 
- Annual Fee: $599 
  Interest Rates: No Interest Rates 
  Additional Features: 1.5 points per $1 directly with Air Canada® and Air Canada Vacations®, 3
 
-Card Name: CIBC Aventura® Gold Visa* Card 
- Annual Fee: $139 
+Card Name: CIBC Aeroplan® Visa Infinite Privilege* Card 
+ Card Type: Visa Card 
+ Annual Fee: $599 
  Interest Rates: No Interest Rates 
  Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging and groceries3
 
-Card Name: CIBC Aventura® Visa* Card 
- Annual Fee: $0 
- Interest Rates: No Interest Rates 
- Additional Features: First bag free1, 6 | Visa* concierge service7, 8 | Preferred pricing9
-
-Card Name: CIBC Aeroplan® Visa* Card 
- Annual Fee: $0 
+Card Name: CIBC Aventura® Gold Visa* Card 
+ Card Type: Visa Card 
+ Annual Fee: $139 
  Interest Rates: No Interest Rates 
  Additional Features: 3 points per $1 on travel booked through the CIBC Rewards Centre7
 
-Card Name: CIBC Aventura® Visa* Card for Students 
+Card Name: CIBC Aventura® Visa* Card 
+ Card Type: Visa Card 
  Annual Fee: $0 
  Interest Rates: No Interest Rates 
  Additional Features: 2 points on eligible dining, transportation, gas, electric vehicle charging and groceries8
 
-Card Name: CIBC Aeroplan® Visa* Card for Students 
+Card Name: CIBC Aeroplan® Visa* Card 
+ Card Type: Visa Card 
  Annual Fee: $0 
- Interest Rates: No Interest Rates 
- Additional Features: Annual travel credit3 | Lounge access2 | NEXUSTM, † fee rebate5 and more
-
-Card Name: CIBC Dividend® Visa Infinite* Card 
- Annual Fee: $120 
  Interest Rates: No Interest Rates 
  Additional Features: 2 points per $1 directly with Air Canada® and Air Canada Vacations®, 4
 
-Card Name: CIBC Dividend Platinum® Visa* Card 
- Annual Fee: $99 
+Card Name: CIBC Aventura® Visa* Card for Students 
+ Card Type: Visa Card 
+ Annual Fee: $0 
  Interest Rates: No Interest Rates 
  Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging, groceries, travel and dining4
 
-Card Name: CIBC Dividend® Visa* Card 
- Annual Fee: $0 
- Interest Rates: No Interest Rates 
- Additional Features: Lounge access6, 8 | First bag free† | Priority Airport Services6, 11
-
-Card Name: CIBC Dividend® Visa* Card for Students 
+Card Name: CIBC Aeroplan® Visa* Card for Students 
+ Card Type: Visa Card 
  Annual Fee: $0 
  Interest Rates: No Interest Rates 
  Additional Features: 2 points per $1 on travel booked through the CIBC Rewards Centre5
 
-Card Name: CIBC Costco Mastercard® 
- Annual Fee: $0 
+Card Name: CIBC Dividend® Visa Infinite* Card 
+ Card Type: Visa Card 
+ Annual Fee: $120 
  Interest Rates: No Interest Rates 
  Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases6
 
-Card Name: CIBC U.S. Dollar Aventura® Gold Visa* Card 
- Annual Fee: $35 US 
+Card Name: CIBC Dividend Platinum® Visa* Card 
+ Card Type: Visa Card 
+ Annual Fee: $99 
  Interest Rates: No Interest Rates 
- Additional Features: Lounge access3 | NEXUSTM, † fee rebate8
-
-Card Name: CIBC Select Visa* Card 
- Annual Fee: $29 
- Interest Rates: No Interest Rates 
- Additional Features: 1 point per $1 on travel booked through the CIBC Rewards Centre4
-
-Card Name: CIBC Aventura® Visa* Card for Business 
- Annual Fee: $180 
- Interest Rates: 2.99% 
- Additional Features: 1 point per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases3
-
-Card Name: CIBC Aeroplan® Visa* Business Card 
- Annual Fee: $180 
- Interest Rates: No Interest Rates 
- Additional Features: Book travel with personalized assistance6
-
-Card Name: CIBC Costco Business Mastercard® 
- Annual Fee: $0 
- Interest Rates: No Interest Rates 
- Additional Features: 1 point per $1 directly with Air Canada® and Air Canada Vacations®, 2
-
-Card Name: CIBC Aventura® Visa* Card for Business Plus 
- Annual Fee: $1202, 3 
- Interest Rates: 9.99% 
- Additional Features: 1 point per $1 on eligible gas, electric vehicle charging and groceries2
-
-Card Name: CIBC Aeroplan® Visa* Business Plus Card 
- Annual Fee: $120 
- Interest Rates: 9.99% 
  Additional Features: Preferred pricing4 | Earn points twice at over 170 retailers3
 
-Card Name: CIBC bizline® Visa* Card 
+Card Name: CIBC Dividend® Visa* Card 
+ Card Type: Visa Card 
  Annual Fee: $0 
  Interest Rates: No Interest Rates 
- Additional Features: 1 point per $1 on travel booked through the CIBC Rewards Centre4
+ Additional Features: Preferred pricing4 | Earn points twice at over 170 retailers3
+
+Card Name: CIBC Dividend® Visa* Card for Students 
+ Card Type: Visa Card 
+ Annual Fee: $0 
+ Interest Rates: No Interest Rates 
+ Additional Features: 2 points per $1 on travel booked through the CIBC Rewards Centre3
+
+Card Name: CIBC Costco Mastercard® 
+ Card Type: MasterCard 
+ Annual Fee: $0 
+ Interest Rates: No Interest Rates 
+ Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging, flights, hotels and other travel4
+
+Card Name: CIBC U.S. Dollar Aventura® Gold Visa* Card 
+ Card Type: Visa Card 
+ Annual Fee: $35 US 
+ Interest Rates: No Interest Rates 
+ Additional Features: Transfer Aventura points between accounts9
+
+Card Name: CIBC Select Visa* Card 
+ Card Type: Visa Card 
+ Annual Fee: $29 
+ Interest Rates: No Interest Rates 
+ Additional Features: 2 points per $1 directly with Air Canada® and Air Canada Vacations®, 2
+
+Card Name: CIBC Aventura® Visa* Card for Business 
+ Card Type: Visa Card 
+ Annual Fee: $180 
+ Interest Rates: No Interest Rates 
+ Additional Features: 1.5 points per $1 on internet, cable, travel, dining and more2
+
+Card Name: CIBC Aeroplan® Visa* Business Card 
+ Card Type: Visa Card 
+ Annual Fee: $180 
+ Interest Rates: No Interest Rates 
+ Additional Features: 2 points per $1 on travel booked through the CIBC Rewards Centre5
+
+Card Name: CIBC Costco Business Mastercard® 
+ Card Type: MasterCard 
+ Annual Fee: $0 
+ Interest Rates: No Interest Rates 
+ Additional Features: 1.5 points per $1 on eligible gas, electric vehicle charging and travel purchases6
+
+Card Name: CIBC Aventura® Visa* Card for Business Plus 
+ Card Type: Visa Card 
+ Annual Fee: $1202, 3 
+ Interest Rates: No Interest Rates 
+ Additional Features: Transfer Aventura points between accounts12
+
+Card Name: CIBC Aeroplan® Visa* Business Plus Card 
+ Card Type: Visa Card 
+ Annual Fee: $120 
+ Interest Rates: No Interest Rates 
+ Additional Features: 2 points per $1 directly with Air Canada® and Air Canada Vacations®, 3
+
+Card Name: CIBC bizline® Visa* Card 
+ Card Type: Visa Card 
+ Annual Fee: $0 
+ Interest Rates: No Interest Rates 
+ Additional Features: 1.5 points per $1 on internet, cable, travel, dining and more3
 
 Card Name: CIBC Corporate Classic Plus Visa* Card 
+ Card Type: Visa Card 
  Annual Fee: $202 
- Interest Rates: 9.99% 
- Additional Features: 1 point per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases3
+ Interest Rates: No Interest Rates 
+ Additional Features: No Additional Features
 
 Card Name: CIBC Classic Visa* Card 
+ Card Type: Visa Card 
  Annual Fee: $0 
  Interest Rates: No Interest Rates 
- Additional Features: Free SPC+ membership◇ | CIBC Pace ItTM Installment Plans♢♢
+ Additional Features: No Additional Features
 

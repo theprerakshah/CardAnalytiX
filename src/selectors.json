@@ -24,12 +24,15 @@
       "cibc": {
         "card_name": "h3.product-title a b",
         "annual_fee": ".product-rate-title:contains(Annual fee) + .product-rate-value b",
-        "purchase_rate": ".product-rate-title:contains(Purchase interest rate) + .product-rate-value b",
-        "benefits": ".product-benefits ul li"
+        "purchase_rate": ".product-rate-title:contains('Purchase interest rate') + .product-rate-value *",
+        "advatnages": ".product-benefits ul li:contains(points)"
+      },
+      "rbc": {
+        "cardName": "ul li a[data-dig-label*='pbmenu - Rewards - RBC']"
       },
       "nationalBank": {
         "cardName": "h1.card-title",
-        "annualFee": "p:contains('Annual Fee')",
+        "annualFee": "p:contains('Annual fee') + div b",
         "purchaseInterestRate": "p:contains('Interest Rate')",
         "cardType": "span.card-type",
         "additionalFeatures": "div.features ul"

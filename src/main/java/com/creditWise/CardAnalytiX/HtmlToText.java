@@ -32,6 +32,7 @@ public class HtmlToText
 		JSONObject canadianRebatesSelectors = jsonObject.getJSONObject("selectors").getJSONObject("greatCanadianRebates");
 		JSONObject cibcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("cibc");
 		JSONObject nationalBankSelectors = jsonObject.getJSONObject("selectors").getJSONObject("nationalBank");
+		JSONObject rbcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("rbc");
 
 		// Extract the selectors
 		String tdAdvantages = tdSelectors.getString("advantages");
@@ -46,12 +47,13 @@ public class HtmlToText
 		String rebateAnnualFeeSelector = canadianRebatesSelectors.getString("annualFee");
 		String rebateInterestRateSelector = canadianRebatesSelectors.getString("interestRates");
 		String rebateAdditionalFeaturesSelector = canadianRebatesSelectors.getString("additionalFeatures");
+		String rbcCardName = rbcSelectors.getString("cardName");
 
 		// CIBC Selectors (fixed key names)
 		String cibcCardNameSelector = cibcSelectors.getString("card_name"); // Use "card_name"
 		String cibcAnnualFeeSelector = cibcSelectors.getString("annual_fee"); // Use "annual_fee"
 		String cibcInterestRateSelector = cibcSelectors.getString("purchase_rate"); // Use "purchase_rate"
-		String cibcAdditionalFeaturesSelector = cibcSelectors.getString("benefits"); // Use "benefits"
+		String cibcAdditionalFeaturesSelector = cibcSelectors.getString("advatnages"); // Use "benefits"
 
 		// National Bank Selectors
 		String nationalBankCardNameSelector = nationalBankSelectors.getString("cardName");
@@ -77,6 +79,8 @@ public class HtmlToText
 			StringBuilder rebateExtractedText = new StringBuilder();
 			StringBuilder cibcExtractedText = new StringBuilder();
 			StringBuilder nationalBankExtractedText = new StringBuilder();
+			StringBuilder rbcExtractedText = new StringBuilder();
+
 
 			for(Path htmlFile : htmlFiles)
 			{
@@ -202,8 +206,6 @@ public class HtmlToText
 					rebateExtractedText.append("Interest Rates: ").append(interestRates).append(" | ");
 					rebateExtractedText.append("Advantages ").append(additionalFeatures).append("\n");
 				}
-
-				// --- CIBC Data Extraction ---
 				Elements cibcCardNameElements = doc.select(cibcCardNameSelector);
 				Elements cibcAnnualFeeElements = doc.select(cibcAnnualFeeSelector);
 				Elements cibcInterestRateElements = doc.select(cibcInterestRateSelector);
@@ -216,25 +218,51 @@ public class HtmlToText
 					String interestRates = cibcInterestRateElements.size() > i ? cibcInterestRateElements.get(i).text() : "No Interest Rates";
 					String additionalFeatures = cibcAdditionalFeaturesElements.size() > i ? cibcAdditionalFeaturesElements.get(i).text() : "No Additional Features";
 					
+					// Determine card type based on card name
+					String cardType = "Unknown Card Type"; // Default value
+					if (cardName.toLowerCase().contains("visa")) {
+						cardType = "Visa Card";
+					} else if (cardName.toLowerCase().contains("mastercard")) {
+						cardType = "MasterCard";
+					} // Add more conditions here for other card types, if needed
+				
 					// Filter out non-percentage values from the interest rates
-					if (interestRates.matches(".*\\d+\\.\\d+%.*")) {
-						// If the interest rate contains a percentage, keep it
+					if (interestRates.matches(".*\\d+\\.\\d+%$")) {
 						interestRates = interestRates.replaceAll(".*(\\d+\\.\\d+%)$", "$1");
 					} else {
-						// Otherwise, set it to "No Interest Rates"
 						interestRates = "No Interest Rates";
 					}
 				
 					// Append the results to the output
 					cibcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
+					cibcExtractedText.append("Card Type: ").append(cardType).append(" \n "); // Include card type
 					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" \n ");
 					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" \n ");
 					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n\n");
 				}
+			// --- RBC Data Extraction ---
+Elements rbcCardNameElements = doc.select(rbcCardName);
+
+for (int i = 0; i < rbcCardNameElements.size(); i++) {
+    String cardName = rbcCardNameElements.size() > i ? rbcCardNameElements.get(i).text() : "No Card Name";
+
+    // Determine the card type based on the card name
+    String cardType = "Unknown"; // Default card type
+    if (cardName.toLowerCase().contains("visa")) {
+        cardType = "Visa Card";
+    } else if (cardName.toLowerCase().contains("mastercard")) {
+        cardType = "MasterCard";
+    }
+
+    // Append extracted data
+    rbcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
+    rbcExtractedText.append("Card Type: ").append(cardType).append("\n");
+}
+
 				
 				// --- National Bank Data Extraction ---
 				Elements nationalBankCardNameElements = doc.select(nationalBankCardNameSelector);
-				Elements nationalBankAnnualFeeElements = doc.select(nationalBankAnnualFeeSelector);
+				Elements nationalBankAnnualFeeElements = doc.select(".text-image-text-container b");
 				Elements nationalBankInterestRateElements = doc.select(nationalBankPurchaseInterestRateSelector);
 				Elements nationalBankCardTypeElements = doc.select(nationalBankCardTypeSelector);
 				Elements nationalBankAdditionalFeaturesElements = doc.select(nationalBankAdditionalFeaturesSelector);
@@ -247,11 +275,8 @@ public class HtmlToText
 					String cardType = nationalBankCardTypeElements.size() > i ? nationalBankCardTypeElements.get(i).text() : "No Card Type";
 					String additionalFeatures = nationalBankAdditionalFeaturesElements.size() > i ? nationalBankAdditionalFeaturesElements.get(i).text() : "No Additional Features";
 
-					nationalBankExtractedText.append("Card Name: ").append(cardName).append(" | ");
 					nationalBankExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
-					nationalBankExtractedText.append("Purchase Interest Rate: ").append(purchaseInterestRate).append(" | ");
-					nationalBankExtractedText.append("Card Type: ").append(cardType).append(" | ");
-					nationalBankExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n");
+			
 				}
 			}
 
@@ -261,6 +286,7 @@ public class HtmlToText
 			saveToFile(outputDirectory + "rebate_cards.txt", rebateExtractedText.toString());
 			saveToFile(outputDirectory + "cibc_cards.txt", cibcExtractedText.toString());
 			saveToFile(outputDirectory + "national_bank_cards.txt", nationalBankExtractedText.toString());
+			saveToFile(outputDirectory + "rbc_cards.txt", rbcExtractedText.toString());
 
 			System.out.println("Data extraction complete! Check the output files.");
 
