@@ -105,35 +105,4 @@ public class WordCompletion
 		return findNodeByFrequency(node.right, frequency, prefix);
 	}
 
-	//    public static String getSuggestedWord(String userInput, Set<String> validWords) {
-	//        for (String validWord : validWords) {
-	//            if (validWord.startsWith(userInput.toLowerCase())) {
-	//                return validWord;
-	//            }
-	//        }
-	//        return null; // No match found
-	//    }
-	//
-	//    /**
-	//     * Prompts the user with the suggestion and asks for confirmation.
-	//     * @param suggestedWord The suggested word.
-	//     * @param userInput The original user input.
-	//     * @param scanner The Scanner object for user input.
-	//     * @return The accepted or original user input.
-	//     */
-	//    public static String getConfirmedWord(String suggestedWord, String userInput, Scanner scanner) {
-	//        if (suggestedWord != null) {
-	//            System.out.println("(Word Completion Check applied: Did you mean \"" + suggestedWord + "\")?");
-	//            System.out.print("Do you mean \"" + suggestedWord + "\"? (Yes/No): ");
-	//            String response = scanner.nextLine().trim().toLowerCase();
-	//            if (response.equals("yes")) {
-	//                return suggestedWord; // Accept the suggestion
-	//            } else {
-	//                return userInput; // Reject the suggestion, return original input
-	//            }
-	//        } else {
-	//            return userInput; // No suggestion, return original input
-	//        }
-	//    }
-
 }

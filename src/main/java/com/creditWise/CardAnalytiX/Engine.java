@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Engine
 {
-	public static void main(String[] args) throws IOException
+	public static ArrayList<CreditCard> Engine1() throws IOException
 	{
 
 		String SoctiaBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/scotiabank_cards.txt";
@@ -19,24 +19,26 @@ public class Engine
 
 		//		CardList has all the creditcard data. Use this list for data.
 		ArrayList<CreditCard> cardList = cardObjectFiller(BankData);
-		for(CreditCard creditCard : cardList)
-		{
-			System.out.println(creditCard.getCardType());
-		}
-
+		//		for(CreditCard creditCard : cardList)
+		//		{
+		//			System.out.println(creditCard.getCardType());
+		//		}
+		return cardList;
 	}
 
 	private static ArrayList<CreditCard> cardObjectFiller(String[] BankDataPath) throws IOException
 	{
 		ArrayList<CreditCard> cardList = new ArrayList<CreditCard>();
+
 		for(String bankPath : BankDataPath)
 		{
 			BufferedReader br = new BufferedReader(new FileReader(bankPath));
 			String line = "";
+			String bankName = bankPath.split("/")[6].split("_")[0];
 			while((line = br.readLine()) != null)
 			{
 				String[] tsvElement = line.split("\t");
-				cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4]));
+				cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4], bankName));
 			}
 
 		}

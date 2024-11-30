@@ -7,8 +7,9 @@ public class CreditCard
 	String	annualFee;
 	String	purchaseInterestRate;
 	String	additionalFeatures;
+	String	bank;
 
-	public CreditCard(String cardName, String cardType, String annualFee, String purchaseInterestRate, String additionalFeatures)
+	public CreditCard(String cardName, String cardType, String annualFee, String purchaseInterestRate, String additionalFeatures, String bank)
 	{
 		super();
 		this.cardName = cardName;
@@ -16,6 +17,17 @@ public class CreditCard
 		this.annualFee = annualFee;
 		this.purchaseInterestRate = purchaseInterestRate;
 		this.additionalFeatures = additionalFeatures;
+		this.bank = bank;
+	}
+
+	public String getBank()
+	{
+		return bank;
+	}
+
+	public void setBank(String bank)
+	{
+		this.bank = bank;
 	}
 
 	public String getCardName()
