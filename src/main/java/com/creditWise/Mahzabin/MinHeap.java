@@ -1,4 +1,4 @@
-package com.creditWise.CardAnalytiX;
+package com.creditWise.Mahzabin;
 
 public class MinHeap { // Member variables of this class
     private int[] Heap;

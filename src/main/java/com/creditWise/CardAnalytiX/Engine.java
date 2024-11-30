@@ -15,15 +15,14 @@ public class Engine
 		String TDBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/scotiabank_cards.txt";
 		String RBCBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/scotiabank_cards.txt";
 		String CIBCBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/scotiabank_cards.txt";
-		String BankData[] = {SoctiaBankData};
+		String BankData[] = {SoctiaBankData, TDBankData};
 
 		//		CardList has all the creditcard data. Use this list for data.
 		ArrayList<CreditCard> cardList = cardObjectFiller(BankData);
-		//		for(CreditCard creditCard : cardList)
-		//		{
-		//
-		//			System.out.println(creditCard.getCardName());
-		//		}
+		for(CreditCard creditCard : cardList)
+		{
+			System.out.println(creditCard.getCardType());
+		}
 
 	}
 
