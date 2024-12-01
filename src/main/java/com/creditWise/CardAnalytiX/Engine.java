@@ -15,13 +15,13 @@ public class Engine
 	{
 		HashMap<String, String> bankToPath = new HashMap<String, String>();
 
-		String SoctiaBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/scotiabank_cards.txt";
-		String TDBankData = "/home/prerakshah/git/CardAnalytiX/text_pages/td_cards.txt";
-		String RBCBankData = "/home/prerakshah/git/CardAnalytiX/src/main/resources/rbc_cards.txt";
-		String CIBCBankData = "/CardAnalytiX/src/main/resources/cibc_cards.txt";
+		String SoctiaBankData = "/scotiabank_cards.txt";
+		String TDBankData = "/td_cards.txt";
+		String CIBCBankData = "/cibc_cards.txt";
+		String RBCBankData = "/rbc_cards.txt";
 		bankToPath.put("TD Bank", TDBankData);
 		bankToPath.put("Soctia Bank", SoctiaBankData);
-		//		bankToPath.put("CIBC", CIBCBankData);
+		bankToPath.put("CIBC", CIBCBankData);
 		//		bankToPath.put("RBC", RBCBankData);
 
 		ArrayList<CreditCard> cardList = cardObjectFiller(bankToPath);
@@ -32,16 +32,22 @@ public class Engine
 	{
 		ArrayList<CreditCard> cardList = new ArrayList<CreditCard>();
 
-		for(Map.Entry<String, String> set : BankDataPath.entrySet())
+		for(Map.Entry<String, String> mapi : BankDataPath.entrySet())
 		{
-			//			InputStream inputStream = Engine.class.getClassLoader().getResourceAsStream(set.getValue());
-			BufferedReader br = new BufferedReader(new FileReader(set.getValue()));
+			InputStream inputStream = Engine.class.getResourceAsStream(mapi.getValue());
+			if(inputStream == null)
+			{
+				System.out.println("there is null in inputstream");
+				break;
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+			//			BufferedReader br = new BufferedReader(new FileReader(set.getValue()));
 			String line = "";
 			//			String bankName = bankPath.split("/")[6].split("_")[0];
 			while((line = br.readLine()) != null)
 			{
 				String[] tsvElement = line.split("\t");
-				cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4], set.getKey()));
+				cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4], mapi.getKey()));
 			}
 		}
 

@@ -231,7 +231,7 @@ public class HtmlToText
 				Elements cibcAnnualFeeElements = doc.select(cibcAnnualFeeSelector);
 				Elements cibcInterestRateElements = doc.select(cibcInterestRateSelector);
 				Elements cibcAdditionalFeaturesElements = doc.select(cibcAdditionalFeaturesSelector);
-
+				flag = true;
 				for(int i = 0; i < cibcCardNameElements.size(); i++)
 				{
 					// Extract card name, annual fee, interest rate, and additional features
@@ -262,11 +262,19 @@ public class HtmlToText
 					}
 
 					// Append the results to the output
-					cibcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
-					cibcExtractedText.append("Card Type: ").append(cardType).append(" \n "); // Include card type
-					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" \n ");
-					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" \n ");
-					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n\n");
+					//					cibcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
+					//					cibcExtractedText.append("Card Type: ").append(cardType).append(" \n "); // Include card type
+					//					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" \n ");
+					//					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" \n ");
+					//					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n\n");
+					if(flag)
+					{
+						cibcExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
+						flag = false;
+					}
+
+					cibcExtractedText.append(cardName.trim() + "\t" + cardType.trim() + "\t" + annualFee.trim() + "\t" + interestRates.trim() + "\t" + additionalFeatures.trim() + "\n");
+
 				}
 				// --- RBC Data Extraction ---
 				Elements rbcCardNameElements = doc.select(rbcCardName);
