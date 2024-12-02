@@ -1,29 +1,10 @@
-Card Name	Card Type	Annual Fee	Purchase Interest Rate	Additional Feature
-RBC Rewards Visa Preferred	Visa Card	$49	19.99%	Earn 1.5 RBC Rewards points per dollar spent and enjoy exclusive discounts.
-RBC U.S. Dollar Visa Gold	Visa Card	$65 	19.99%	Shop in U.S. dollars with no foreign transaction fees.
-RBC Platinum Mastercard	Mastercard	$120	19.99%	Comprehensive insurance coverage and rewards tailored for frequent travelers.
-RBC Visa CreditLine	Visa Card	$0	12.99%	Low-interest credit line for personal or business use.
-RBC RateAdvantage Visa	Visa Card	$0	4.99%	Get low interest rates that adjust with the prime rate.
-RBC Rewards+ Business Visa	Visa Card	$0	19.99%	Earn RBC Rewards points on all business purchases with no annual fee.
-RBC Flex Rate Mastercard	Mastercard	$29	13.99%	Get a competitive low rate and flexible repayment options.
-RBC Day to Day Banking Visa	Visa Card	$0	19.99%	Basic rewards card with no annual fee.
-RBC Preferred Client Visa	Visa Card	$50	19.99%	Earn points for preferred clients with exclusive offers.
-RBC Travel Rewards Mastercard	Mastercard	$99	19.99%	Travel benefits and rewards for frequent flyers.
-RBC Avion Elite Visa Infinite	Visa Card	$150	19.99%	Elite travel perks with Avion rewards system.
-RBC Home & Auto Rewards Visa	Visa Card	$49	19.99%	Earn rewards for home and auto purchases.
-RBC Student Budget Mastercard	Mastercard	$0	19.99%	Budget-friendly card for students with rewards.
-RBC Infinite Privilege Elite Visa	Visa Card	$250	19.99%	Premium privileges and enhanced travel benefits.
-RBC Small Business Visa Platinum	Visa Card	$175	19.99%	Business rewards tailored for small enterprises.
-RBC Avion Visa Infinite	Visa Card	$120 	19.99%	Earn 35,000 welcome points ($350 value) and enjoy travel flexibility.
-RBC Cash Back Mastercard	Mastercard	$0 	19.99%	Earn up to 2% cash back on grocery purchases and 1% on all other purchases.
-RBC Rewards+ Visa	Visa Card	$0 	19.99%	Earn 1 RBC Rewards point for every $1 spent on all purchases.
-RBC Avion Visa Platinum	Visa Card	$120 	19.99%	Earn 15,000 welcome points and enjoy premium travel insurance benefits.
-RBC Signature RBC Rewards Visa	Visa Card	$39 	19.99%	Earn 1 RBC Rewards point per dollar spent and enjoy flexible reward options.
-RBC Cash Back Preferred World Elite Mastercard	Mastercard	$99 	19.99%	Earn 4% cash back on eligible purchases, with no limits on earnings.
-RBC ION Visa	Visa Card	$48 	19.99%	Earn up to 2x RBC Rewards points on eligible purchases and enjoy built-in budgeting tools.
-RBC Avion Visa Infinite Privilege	Visa Card	$399 	19.99%	Access exclusive travel benefits, including airport lounge access with Priority Pass.
-RBC Student Cash Back Mastercard	Mastercard	$0 	19.99%	Earn 2% cash back on groceries and no annual fee, perfect for students.
-RBC British Airways Visa Infinite	Visa Card	$165 	19.99%	Earn Avios with every purchase, and get a companion ticket every year.
-RBC Cathay Pacific Visa Platinum	Visa Card	$120 	19.99%	Earn Asia Miles and enjoy travel insurance benefits.
-RBC Cash Back Mastercard	Mastercard	$0 	22.99%	Earn 1% cash back on all purchases with no annual fee.
-RBC Avion Visa Infinite Business	Visa Card	$175 	19.99%	Tailored for business owners, earn Avion points and enjoy premium travel benefits.
+Card Name: RBC Petro-Canada 
+ Card Type: Unknown
+Card Name: RBC Avion Visa Infinite 
+ Card Type: Visa Card
+Card Name: RBC ION Visa 
+ Card Type: Visa Card
+Card Name: RBC Avion Visa Infinite Privilege 
+ Card Type: Visa Card
+Card Name: RBC ION+ Visa 
+ Card Type: Visa Card
