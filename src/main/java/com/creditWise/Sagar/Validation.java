@@ -1,5 +1,6 @@
 package com.creditWise.Sagar;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,6 +29,25 @@ public class Validation
 	{
 		return validWords.contains(input.toLowerCase());
 	}
+
+	// Method to validate interest rate input
+    public static boolean isValidInterestRate(String input) {
+        try {
+            // Parse the input to a double
+            double interestRate = Double.parseDouble(input);
+ 
+            // Check if the value is non-negative
+            return interestRate >= 0;
+        } catch (NumberFormatException e) {
+            // Input is not a valid number
+            return false;
+        }
+    }
+	// Validation method for bank names
+    public static boolean isValidBankName(String userInput, List<String> validBankNames) {
+        // Check if the input matches any valid bank name (case-insensitive)
+        return validBankNames.stream().anyMatch(bank -> bank.equalsIgnoreCase(userInput));
+    }
 
 	//Validates that a mandatory field is not empty.
 	public static String validateMandatoryField(String input, String prompt)
