@@ -8,45 +8,28 @@ import java.util.Set;
 public class Validation
 {
 
-	/**
-	 * Validates that the input for the annual fee range is in a valid format.
-	 * @param input The annual fee range input.
-	 * @return true if the format is valid, false otherwise.
-	 */
+	
+	// Validates that the input for the annual fee range is in a valid format.
 	public static boolean isValidAnnualFeeRange(String input)
 	{
 		// Validate the format of the annual fee range (e.g., "$0-$50", "$50-$100", "$100+")
 		return input.matches("\\$\\d+(\\-\\$\\d+|\\+)?");
 	}
-
-	/**
-	 * Validates that the rewards input is in a valid format.
-	 * @param input The rewards input.
-	 * @param validWords The set of valid words to check against.
-	 * @return true if the input is valid, false otherwise.
-	 */
+	
+	//Validates that the rewards input is in a valid format.
 	public static boolean isValidRewards(String input, Set<String> validWords)
 	{
 		return validWords.contains(input.toLowerCase());
 	}
 
-	/**
-	 * Validates that the card type input is in a valid format.
-	 * @param input The card type input.
-	 * @param validWords The set of valid words to check against.
-	 * @return true if the card type is valid, false otherwise.
-	 */
+	
+	 //Validates that the card type input is in a valid format.	 
 	public static boolean isValidCardType(String input, Set<String> validWords)
 	{
 		return validWords.contains(input.toLowerCase());
 	}
 
-	/**
-	 * Validates that a mandatory field is not empty.
-	 * @param input The user input.
-	 * @param prompt The prompt message to display.
-	 * @return The validated input.
-	 */
+	//Validates that a mandatory field is not empty.
 	public static String validateMandatoryField(String input, String prompt)
 	{
 		while(input.isEmpty())
