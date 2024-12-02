@@ -1,8 +1,19 @@
 package com.creditWise.Sakshi;
 
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class SearchFrequency {
 
@@ -12,7 +23,7 @@ public class SearchFrequency {
         // File path for CSV and text files
         String resourceFolder = "src/main/resources/";
         String csvFile = resourceFolder + "search_terms.csv"; // CSV file to store user input search terms
-        String textPagesFolder = "src/main/resources/"; // Folder where card details text files are stored
+        String textPagesFolder = "text_pages/"; // Folder where card details text files are stored
 
         // Ensure the resources and text_pages folders exist
         try {
@@ -26,7 +37,7 @@ public class SearchFrequency {
         // Initialize CSV file with headers if it doesn't exist
         if (!Files.exists(Paths.get(csvFile))) {
             try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFile))) {
-                writer.write("Card Type,Annual Fee,Bank Name,Interest Rate,Frequency\n");
+                writer.write("Bank Name,Card Type,Annual Fee,Bank Name,Interest Rate,Frequency\n");
             } catch (IOException e) {
                 System.out.println("Error creating CSV file: " + e.getMessage());
                 return;
@@ -38,43 +49,53 @@ public class SearchFrequency {
 
         boolean continueSearching = true;
         while (continueSearching) {
+            
             System.out.println("\nChoose an option:");
-            System.out.println("1. Card Type");
-            System.out.println("2. Annual Fee");
-            System.out.println("3. Bank Name");
-            System.out.println("4. Interest Rate");
-            System.out.println("5. View popular search terms");
-            System.out.println("6. Exit");
+            System.out.println("1. Bank Name");
+            System.out.println("2. Card Name");
+            System.out.println("3. Card Type");
+            System.out.println("4. Annual Fee");
+            System.out.println("5. Interest Rate");
+            System.out.println("6. View popular search terms");
+            System.out.println("7. Exit");
 
             System.out.print("Enter your choice (1-6): ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
+                System.out.print("Enter Bank Name (e.g., 'Chase', 'Bank of America'): ");
+                String bankName = scanner.nextLine().toLowerCase();
+                saveToCSV(csvFile, null, null, bankName, null);
+                break;
+                case "2":
+                System.out.print("Enter Card Type (e.g., 'Visa', 'MasterCard'): ");
+                String cardName = scanner.nextLine().toLowerCase();
+                saveToCSV(csvFile, cardName, null, null, null);
+                break;
+
+                case "10":
                     System.out.print("Enter Card Type (e.g., 'Visa', 'MasterCard'): ");
                     String cardType = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, cardType, null, null, null);
                     break;
+                case "20":
+                break;
 
-                case "2":
+                case "4":
                     System.out.print("Enter Annual Fee (e.g., '99', '199'): ");
                     String annualFee = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, null, annualFee, null, null);
                     break;
 
-                case "3":
-                    System.out.print("Enter Bank Name (e.g., 'Chase', 'Bank of America'): ");
-                    String bankName = scanner.nextLine().toLowerCase();
-                    saveToCSV(csvFile, null, null, bankName, null);
-                    break;
-
-                case "4":
+             
+                case "5":
                     System.out.print("Enter Interest Rate (e.g., '3.5', '5.0'): ");
                     String interestRate = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, null, null, null, interestRate);
                     break;
 
-                case "5":
+                case "6":
                     // Step 1: Ask user for the field they want popular terms from
                     System.out.println("Choose a field to view popular search terms:");
                     System.out.println("1. Card Type");
@@ -87,7 +108,7 @@ public class SearchFrequency {
                     viewPopularSearchTerms(csvFile, fieldChoice, scanner);
                     break;
 
-                case "6":
+                case "7":
                     System.out.println("Thank you for using the tool. Goodbye!");
                     continueSearching = false;
                     break;
@@ -187,10 +208,7 @@ public class SearchFrequency {
     private static void showCardsBasedOnTerm(String chosenTerm) {
         try {
             // Define the list of card files to read from
-            String[] cardFiles = {"src/main/resources/scotiabank_cards.txt", "src/main/resources/td_cards.txt", "src/main/resources/cibc_cards.txt"};
-
-            // Variable to store the final output of card details to show
-            StringBuilder cardDetailsOutput = new StringBuilder();
+            String[] cardFiles = {"text_pages/scotiabank_cards.txt", "text_pages/td_cards.txt", "text_pages/cibc_cards.txt"};
 
             for (String filePath : cardFiles) {
                 File file = new File(filePath);
@@ -199,49 +217,30 @@ public class SearchFrequency {
                     BufferedReader reader = new BufferedReader(new FileReader(file));
                     String line;
                     boolean termFound = false;
-
-                    // Read file line by line and look for the chosen term
                     while ((line = reader.readLine()) != null) {
-                        // If the term is present in the line, add the card details
+                        // If the term is present in the file, display the card details
                         if (line.toLowerCase().contains(chosenTerm.toLowerCase())) {
                             termFound = true;
-
-                            // Collect and format card details related to the found term
-                            String[] cardData = parseCardDetails(line);
-
-                            // Skip Bank Name in the output
-                            cardDetailsOutput.append("Card Name: ").append(cardData[1]).append("\n");
-                            cardDetailsOutput.append("Card Type: ").append(cardData[2]).append("\n");
-                            cardDetailsOutput.append("Annual Fee: ").append(cardData[3]).append("\n");
-                            cardDetailsOutput.append("Interest Rate: ").append(cardData[4]).append("\n");
-                            cardDetailsOutput.append("Advantages: ").append(cardData[5]).append("\n");
-                            cardDetailsOutput.append("--------------------------------------------------\n");
+                            System.out.println("\nCard Details from " + file.getName() + ":");
+                            // Print the entire file contents after the term
+                            do {
+                                System.out.println(line);
+                                line = reader.readLine();
+                            } while (line != null && !line.trim().isEmpty());
                         }
                     }
                     reader.close();
 
-                    // If term is not found in the file, print a message
                     if (!termFound) {
-                        cardDetailsOutput.append("\nNo cards found for the term '").append(chosenTerm).append("' in ").append(file.getName()).append(".\n");
+                        System.out.println("No cards found for term '" + chosenTerm + "' in " + file.getName());
                     }
+                } else {
+                    System.out.println("Card file not found: " + filePath);
                 }
             }
-
-            // Print final output with all card details found
-            if (cardDetailsOutput.length() > 0) {
-                System.out.println(cardDetailsOutput.toString());
-            } else {
-                System.out.println("No cards found for the term '" + chosenTerm + "'.");
-            }
         } catch (IOException e) {
-            System.out.println("Error reading card details: " + e.getMessage());
+            System.out.println("Error reading card details from text files: " + e.getMessage());
         }
     }
-
-    // Helper method to parse card details from a line of text
-    private static String[] parseCardDetails(String line) {
-        // Example format: Card Name, Card Type, Bank Name, Annual Fee, Interest Rate, Advantages
-        // Adjust based on actual file format
-        return line.split(",\\s*");
-    }
 }
+
