@@ -21,7 +21,7 @@ public class SearchFrequency {
         Scanner scanner = new Scanner(System.in);
 
         // File path for CSV and text files
-        String resourceFolder = "resources/";
+        String resourceFolder = "src/main/resources/";
         String csvFile = resourceFolder + "search_terms.csv"; // CSV file to store user input search terms
         String textPagesFolder = "text_pages/"; // Folder where card details text files are stored
 
@@ -37,7 +37,7 @@ public class SearchFrequency {
         // Initialize CSV file with headers if it doesn't exist
         if (!Files.exists(Paths.get(csvFile))) {
             try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(csvFile))) {
-                writer.write("Card Type,Annual Fee,Bank Name,Interest Rate,Frequency\n");
+                writer.write("Bank Name,Card Type,Annual Fee,Bank Name,Interest Rate,Frequency\n");
             } catch (IOException e) {
                 System.out.println("Error creating CSV file: " + e.getMessage());
                 return;
@@ -55,7 +55,6 @@ public class SearchFrequency {
             System.out.println("2. Card Name");
             System.out.println("3. Card Type");
             System.out.println("4. Annual Fee");
-            
             System.out.println("5. Interest Rate");
             System.out.println("6. View popular search terms");
             System.out.println("7. Exit");
@@ -65,30 +64,38 @@ public class SearchFrequency {
 
             switch (choice) {
                 case "1":
+                System.out.print("Enter Bank Name (e.g., 'Chase', 'Bank of America'): ");
+                String bankName = scanner.nextLine().toLowerCase();
+                saveToCSV(csvFile, null, null, bankName, null);
+                break;
+                case "2":
+                System.out.print("Enter Card Type (e.g., 'Visa', 'MasterCard'): ");
+                String cardName = scanner.nextLine().toLowerCase();
+                saveToCSV(csvFile, cardName, null, null, null);
+                break;
+
+                case "10":
                     System.out.print("Enter Card Type (e.g., 'Visa', 'MasterCard'): ");
                     String cardType = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, cardType, null, null, null);
                     break;
+                case "20":
+                break;
 
-                case "2":
+                case "4":
                     System.out.print("Enter Annual Fee (e.g., '99', '199'): ");
                     String annualFee = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, null, annualFee, null, null);
                     break;
 
-                case "3":
-                    System.out.print("Enter Bank Name (e.g., 'Chase', 'Bank of America'): ");
-                    String bankName = scanner.nextLine().toLowerCase();
-                    saveToCSV(csvFile, null, null, bankName, null);
-                    break;
-
-                case "4":
+             
+                case "5":
                     System.out.print("Enter Interest Rate (e.g., '3.5', '5.0'): ");
                     String interestRate = scanner.nextLine().toLowerCase();
                     saveToCSV(csvFile, null, null, null, interestRate);
                     break;
 
-                case "5":
+                case "6":
                     // Step 1: Ask user for the field they want popular terms from
                     System.out.println("Choose a field to view popular search terms:");
                     System.out.println("1. Card Type");
@@ -101,7 +108,7 @@ public class SearchFrequency {
                     viewPopularSearchTerms(csvFile, fieldChoice, scanner);
                     break;
 
-                case "6":
+                case "7":
                     System.out.println("Thank you for using the tool. Goodbye!");
                     continueSearching = false;
                     break;
