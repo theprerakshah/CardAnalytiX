@@ -1,25 +1,26 @@
-Card Name	Cardtype	Annual Fee	Purchase Interest Rate	Additional Feature
-CIBC Aventura® Visa Infinite* Card	Visa Card	$139	No Interest Rates	2 points per $1 on travel booked through the CIBC Rewards Centre4
-CIBC Aeroplan® Visa Infinite* Card	Visa Card	$139	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases5
-CIBC Aventura® Visa Infinite Privilege* Card	Visa Card	$499	No Interest Rates	1.5 points per $1 directly with Air Canada® and Air Canada Vacations®, 3
-CIBC Aeroplan® Visa Infinite Privilege* Card	Visa Card	$599	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging and groceries3
-CIBC Aventura® Gold Visa* Card	Visa Card	$139	No Interest Rates	3 points per $1 on travel booked through the CIBC Rewards Centre7
-CIBC Aventura® Visa* Card	Visa Card	$0	No Interest Rates	2 points on eligible dining, transportation, gas, electric vehicle charging and groceries8
-CIBC Aeroplan® Visa* Card	Visa Card	$0	No Interest Rates	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 4
-CIBC Aventura® Visa* Card for Students	Visa Card	$0	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging, groceries, travel and dining4
-CIBC Aeroplan® Visa* Card for Students	Visa Card	$0	No Interest Rates	2 points per $1 on travel booked through the CIBC Rewards Centre5
-CIBC Dividend® Visa Infinite* Card	Visa Card	$120	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases6
-CIBC Dividend Platinum® Visa* Card	Visa Card	$99	No Interest Rates	Preferred pricing4 | Earn points twice at over 170 retailers3
-CIBC Dividend® Visa* Card	Visa Card	$0	No Interest Rates	Preferred pricing4 | Earn points twice at over 170 retailers3
-CIBC Dividend® Visa* Card for Students	Visa Card	$0	No Interest Rates	2 points per $1 on travel booked through the CIBC Rewards Centre3
-CIBC Costco Mastercard®	MasterCard	$0	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging, flights, hotels and other travel4
-CIBC U.S. Dollar Aventura® Gold Visa* Card	Visa Card	$35 US	No Interest Rates	Transfer Aventura points between accounts9
-CIBC Select Visa* Card	Visa Card	$29	No Interest Rates	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 2
-CIBC Aventura® Visa* Card for Business	Visa Card	$180	No Interest Rates	1.5 points per $1 on internet, cable, travel, dining and more2
-CIBC Aeroplan® Visa* Business Card	Visa Card	$180	No Interest Rates	2 points per $1 on travel booked through the CIBC Rewards Centre5
-CIBC Costco Business Mastercard®	MasterCard	$0	No Interest Rates	1.5 points per $1 on eligible gas, electric vehicle charging and travel purchases6
-CIBC Aventura® Visa* Card for Business Plus	Visa Card	$1202, 3	No Interest Rates	Transfer Aventura points between accounts12
-CIBC Aeroplan® Visa* Business Plus Card	Visa Card	$120	No Interest Rates	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 3
-CIBC bizline® Visa* Card	Visa Card	$0	No Interest Rates	1.5 points per $1 on internet, cable, travel, dining and more3
-CIBC Corporate Classic Plus Visa* Card	Visa Card	$202	No Interest Rates	No Additional Features
-CIBC Classic Visa* Card	Visa Card	$0	No Interest Rates	No Additional Features
+Card Names	Cardtype	Annual Fee	Purchase Interest Rate	Additional Feature
+CIBC Aventura® Visa Infinite* Card	TRAVEL REWARDS CARDS	$139	20.99%	2 points per $1 on travel booked through the CIBC Rewards Centre4 1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases5 Lounge access2 | NEXUSTM application fee rebate† | Visa* concierge service2
+CIBC Aeroplan® Visa Infinite* Card	TRAVEL REWARDS CARDS	$139	20.99%	1.5 points per $1 directly with Air Canada® and Air Canada Vacations®, 3 1.5 points per $1 on eligible gas, electric vehicle charging and groceries3 First bag free1, 6 | Visa* concierge service7, 8 | Preferred pricing9
+CIBC Aventura® Visa Infinite Privilege* Card	TRAVEL REWARDS CARDS	$499	20.99%	3 points per $1 on travel booked through the CIBC Rewards Centre7 2 points on eligible dining, transportation, gas, electric vehicle charging and groceries8 Annual travel credit3 | Lounge access2 | NEXUSTM, † fee rebate5 and more
+CIBC Aeroplan® Visa Infinite Privilege* Card 	TRAVEL REWARDS CARDS	$599	20.99%	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 4 1.5 points per $1 on eligible gas, electric vehicle charging, groceries, travel and dining4 Lounge access6, 8 | First bag free† | Priority Airport Services6, 11
+CIBC Aventura® Gold Visa* Card	TRAVEL REWARDS CARDS	$139	20.99%	2 points per $1 on travel booked through the CIBC Rewards Centre5 1.5 points per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases6 Lounge access3 | NEXUSTM, † fee rebate8
+CIBC Aventura® Visa* Card	TRAVEL REWARDS CARDS	$0	20.99%	1 point per $1 on travel booked through the CIBC Rewards Centre4 1 point per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases3 Book travel with personalized assistance6
+CIBC Aeroplan® Visa* Card	TRAVEL REWARDS CARDS	$0	20.99%	1 point per $1 directly with Air Canada® and Air Canada Vacations®, 2 1 point per $1 on eligible gas, electric vehicle charging and groceries2 Preferred pricing4 | Earn points twice at over 170 retailers3
+CIBC Aventura® Visa* Card for Students	STUDENT CARDS	$0  	20.99%	1 point per $1 on travel booked through the CIBC Rewards Centre4 1 point per $1 on eligible gas, electric vehicle charging, grocery and drugstore purchases3 Free SPC+ membership◇ | CIBC Pace ItTM Installment Plans♢♢
+CIBC Aeroplan® Visa* Card for Students	STUDENT CARDS	$0	20.99%	1 point per $1 directly with Air Canada and Air Canada Vacations®, 2 1 point per $1 on eligible gas, electric vehicle charging and groceries2 Preferred pricing4 | Earn points twice at over 170 retailers3
+CIBC Dividend® Visa Infinite* Card	CASH BACK CARDS	$120	20.99%	4% cash back on eligible gas, electric vehicle charging and groceries3 2% cash back on eligible transportation, dining and recurring payments3 Mobile Device Insurance5 | Save on gas | Visa* concierge services6
+CIBC Dividend Platinum® Visa* Card	CASH BACK CARDS	$99	20.99%	3% cash back on eligible gas, electric vehicle charging and groceries3 2% cash back on eligible transportation, dining and recurring payments3 Save on gas | Auto Rental Collision Insurance5 | Pay in installments◊
+CIBC Dividend® Visa* Card	CASH BACK CARDS	$0	20.99%	2% cash back on eligible groceries3 1% cash back on eligible gas, electric vehicle charging, transportation, dining and recurring payments3 Save on gas | Extended warranty5 | CIBC Pace ItTM Installment Plans◊
+CIBC Dividend® Visa* Card for Students	STUDENT CARDS	$0	20.99%	2% cash back on eligible groceries3 1% cash back on eligible gas, electric vehicle charging, transportation and recurring payments3 Free SPC+ membership◇ | Extended warranty5 | Pay in installments††
+CIBC Costco Mastercard®	COSTCO CARDS	$0	20.75%	3% cash back at restaurants and Costco gas2 2% cash back at other gas stations, electric vehicle charging stations and at Costco.ca2 CIBC Pace It™ Installment Plans: Special rates on eligible Costco purchases†
+CIBC U.S. Dollar Aventura® Gold Visa* Card	TRAVEL REWARDS CARDS	$35 US	20.99%	1 point per $1 on travel booked through the CIBC Rewards Centre3 1 point for every $2 spent on all other purchases3 No currency conversion fees for USD purchases4
+CIBC Select Visa* Card	LOW INTEREST CARDS	$29	13.99%	Get a first year annual fee rebate‡ Save up to 10 cents per litre on gas with CIBC and Journie Rewards◊ Send money abroad with $0 transfer fee with CIBC Global Money Transfer™.3
+CIBC Aventura® Visa* Card for Business		$180	As low as 12.99%	2 points per $1 on travel booked through the CIBC Rewards Centre3 1.5 points per $1 on eligible gas, electric vehicle charging, flights, hotels and other travel4 Transfer Aventura points between accounts9
+CIBC Aeroplan® Visa* Business Card	BUSINESS CREDIT CARDS	$180	As low as 12.99%	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 2 1.5 points per $1 on internet, cable, travel, dining and more2 First bag free4, 5 | Lounge access4, 6 | Preferred pricing7
+CIBC Costco Business Mastercard®	BUSINESS CREDIT CARDS	$0	20.75%	3% cash back at Costco gas and restaurants4 2% cash back at Costcobusinesscentre.ca, at Costco.ca, on shipping, on insurance services, at other gas stations and at electric vehicle charging stations4 CIBC Pace It™ Installment Plans: Special rates on eligible Costco purchases‡
+CIBC Aventura® Visa* Card for Business Plus	BUSINESS CREDIT CARDS	$1202, 3	19.99%	2 points per $1 on travel booked through the CIBC Rewards Centre5 1.5 points per $1 on eligible gas, electric vehicle charging and travel purchases6 Transfer Aventura points between accounts12
+CIBC Aeroplan® Visa* Business Plus Card	BUSINESS CREDIT CARDS	$120	19.99%	2 points per $1 directly with Air Canada® and Air Canada Vacations®, 3 1.5 points per $1 on internet, cable, travel, dining and more3 First bag free1, 5 | Lounge access | Preferred pricing8
+CIBC bizline® Visa* Card	BUSINESS CREDIT CARDS	$0	As low as CIBC Prime plus 1.5%	Access high credit limit — up to $50,0001 Add up to 9 cardholders under one account CIBC CreditSmart ® helps you track your credit card activity
+CIBC Corporate Classic Plus Visa* Card	BUSINESS CREDIT CARDS	Each card $202	19.99%	Enjoy automatic savings with Visa SavingsEdge*, 6 Securely access all account information for your business Up to 25% off car rentals at participating Avis® and Budget® locations7
+CIBC Classic Visa* Card		$0	20.99%	Send money abroad with $0 transfer fee with CIBC Global Money Transfer™.3  Pay off large purchases with CIBC Pace It™ low rate Installment Plans‡ Save up to 10 cents per litre on gas with CIBC and Journie Rewards†
+CIBC Classic Visa* Card for Students	STUDENT CARDS	$0	20.99%	Free SPC+ membership‡ | CIBC Pace It™ Installment Plans†† Save up to 10 cents per litre on gas with CIBC and Journie Rewards†
