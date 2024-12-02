@@ -1,7 +1,11 @@
 package com.creditWise.CardAnalytiX;
 
+import com.creditWise.Mahzabin.SpellCheck;
+import com.creditWise.Mahzabin.WordCompletion;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -92,26 +96,28 @@ public class Executer
 			case 1:
 				System.out.println("Select card type from this Options: [MasterCard, Visa]");
 				System.out.println("Input:");
-				userInput = sc.nextLine();
+				userInput = sc.next();
+				userInput=spellCheckAndWordComplete(userInput);
 				resultCardList = basedOnCardType(userInput, cardList);
 
 				break;
 
 			case 2:
 				System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
-				userInput = sc.nextLine();
+				userInput = sc.next();
 				resultCardList = basedOnAnnualFee(userInput, cardList);
 
 				break;
 			case 3:
 				System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Soctia Bank, CIBC, TD Bank]");
-				userInput = sc.nextLine();
+				userInput = sc.next();
+				userInput=spellCheckAndWordComplete(userInput);
 				resultCardList = basedOnBankName(userInput, cardList);
 
 				break;
 			case 4:
-				System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
-				userInput = sc.nextLine();
+				System.out.println("Select card based on Interest Rate, Enter Your preferd Interest Rate:");
+				userInput = sc.next();
 				resultCardList = basedOnInterestRate(userInput, cardList);
 
 				break;
@@ -122,6 +128,57 @@ public class Executer
 		}
 
 	}
+
+	private static WordCompletion wordCompletion = new WordCompletion();
+	private static SpellCheck spellCheck = new SpellCheck();
+
+
+	//Spell checking and word completion implementation.
+	private static String spellCheckAndWordComplete(String userInput){
+		Scanner scanner = new Scanner(System.in);
+		String correctspelledWord;
+		if (spellCheck.search(userInput)) {
+			//Spelled Correctly
+			correctspelledWord=userInput;
+		}
+		else {
+			System.out.println(userInput + " might be spelled incorrectly.");
+			List<String> correctSpell = spellCheck.suggestAlternatives(userInput);
+			if(!correctSpell.isEmpty()){
+				System.out.println("Did you mean these?");
+				for (int i=0;i<correctSpell.size();i++) {
+					System.out.println((i+1)+" " + correctSpell.get(i));
+				}
+				System.out.println("To choose a suggested spelling type the number associated with it. Type 0 to not choose any.");
+				int input = Integer.parseInt(scanner.nextLine());
+				if(input==0){
+					correctspelledWord=userInput;
+				}
+				else{
+					correctspelledWord= correctSpell.get(input-1);
+				}
+			}
+			else{
+				correctspelledWord=userInput;
+			}
+		}
+
+		System.out.println("Suggested Autocomplete words: ");
+		// Generating list of word complete suggestions based on user's input.
+		List<String> suggestions = wordCompletion.autocomplete(correctspelledWord,3);
+		for (int i=0;i<suggestions.size();i++) {
+			System.out.println((i+1)+" " + suggestions.get(i));
+		}
+		System.out.println("To choose a suggested word type the number associated with it. or Type 0 to not choose any of the suggestions.");
+		int input = Integer.parseInt(scanner.nextLine());
+		if(input==0){
+			return correctspelledWord;
+		}
+		else{
+			return suggestions.get(input-1);
+		}
+	}
+
 
 	// implement Validation
 	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList)
@@ -134,6 +191,7 @@ public class Executer
 	private static ArrayList<CreditCard> basedOnBankName(String userInput, ArrayList<CreditCard> cardList)
 	{
 		// TODO Auto-generated method stub
+
 		return null;
 	}
 
