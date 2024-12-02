@@ -44,19 +44,6 @@ public class Validation
         }
     }
 
-	// Method to validate interest rate input
-    public static boolean isValidInterestRate(String input) {
-        try {
-            // Parse the input to a double
-            double interestRate = Double.parseDouble(input);
- 
-            // Check if the value is non-negative
-            return interestRate >= 0;
-        } catch (NumberFormatException e) {
-            // Input is not a valid number
-            return false;
-        }
-    }
 	// Validation method for bank names
     public static boolean isValidBankName(String userInput, List<String> validBankNames) {
         // Check if the input matches any valid bank name (case-insensitive)
