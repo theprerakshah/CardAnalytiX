@@ -29,6 +29,20 @@ public class Validation
 	{
 		return validWords.contains(input.toLowerCase());
 	}
+	
+	// Method to validate interest rate input
+    public static boolean isValidInterestRate(String input) {
+        try {
+            // Parse the input to a double
+            double interestRate = Double.parseDouble(input);
+
+            // Check if the value is non-negative
+            return interestRate >= 0;
+        } catch (NumberFormatException e) {
+            // Input is not a valid number
+            return false;
+        }
+    }
 
 	// Method to validate interest rate input
     public static boolean isValidInterestRate(String input) {

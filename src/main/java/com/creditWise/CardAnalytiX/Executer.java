@@ -2,6 +2,7 @@ package com.creditWise.CardAnalytiX;
 
 import com.creditWise.Mahzabin.SpellCheck;
 import com.creditWise.Mahzabin.WordCompletion;
+import com.creditWise.Sagar.Validation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -183,8 +184,23 @@ public class Executer
 	// implement Validation
 	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CreditCard> resultCardList = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
+
+    // Validate input
+    while (!Validation.isValidInterestRate(userInput)) {
+        System.out.println("Invalid Interest Rate. Please enter a valid non-negative number:");
+        userInput = scanner.nextLine();
+    }
+
+    // Convert the validated input to a double
+    double userInterestRate = Double.parseDouble(userInput);
+
+    if (resultCardList.isEmpty()) {
+        System.out.println("No credit cards found with an Interest Rate of " + userInterestRate + " or less.");
+    }
+
+    return resultCardList;
 	}
 
 	// Implement word Completion, spell checking , validation
@@ -198,9 +214,23 @@ public class Executer
 	// implement  validation.
 	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList)
 	{
-		ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
+		ArrayList<CreditCard> resultCardList = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
 
-		return resultCardList;
+    // Validate input
+    while (!Validation.isValidInterestRate(userInput)) {
+        System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
+        userInput = scanner.nextLine();
+    }
+
+    // Convert the validated input to a double
+    double userAnnualFee = Double.parseDouble(userInput);
+
+    if (resultCardList.isEmpty()) {
+        System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
+    }
+
+    return resultCardList;
 	}
 
 	// implement word completion, spell checking and validation.
