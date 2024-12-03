@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.creditWise.DataHandler.BankNameMap;
+import com.creditWise.DataHandler.HtmlToText;
+import com.creditWise.DataHandler.Webcrawler;
 import com.creditWise.Mahzabin.SpellCheck;
 import com.creditWise.Mahzabin.WordCompletion;
 import com.creditWise.Prerak.WordFrequency;
@@ -25,6 +27,7 @@ public class Executer
 	private static WordCompletion wordCompletion = new WordCompletion();
 	private static SpellCheck spellCheck = new SpellCheck();
 	private static BankNameMap bankNameMap =new BankNameMap();
+	private static Webcrawler Webcrawler = new Webcrawler();
 
 	public static void main(String[] args) throws IOException
 	{
@@ -46,10 +49,11 @@ public class Executer
 				case 1:
 					System.out.println("\nYou chose to crawl the website.");
 					System.out.println("Initializing web crawler...");
-					// WebCrawler webCrawler = new WebCrawler();
-					// webCrawler.startCrawling();
+				    Webcrawler.main(args);
+					HtmlToText.main(args);
+					
 					case2Handler();
-					break;
+					return;
 
 				case 2:
 					case2Handler();
