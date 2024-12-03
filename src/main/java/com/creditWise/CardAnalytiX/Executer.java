@@ -5,17 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import com.creditWise.DataHandler.BankNameMap;
-import com.creditWise.DataHandler.CardTypeMap;
-import com.creditWise.DataHandler.HtmlToText;
-import com.creditWise.DataHandler.Webcrawler;
-import com.creditWise.Mahzabin.SpellCheck;
-import com.creditWise.Mahzabin.WordCompletion;
-import com.creditWise.Prerak.WordFrequency;
-import com.creditWise.Prerak.WordSearcher;
-import com.creditWise.Sagar.Validation;
-import com.creditWise.Sagar.mergeSort;
-import com.creditWise.Sakshi.SearchFrequencyRBTree;
+import com.creditWise.DataHandler.*;
+import com.creditWise.Mahzabin.*;
+import com.creditWise.Prerak.*;
+import com.creditWise.Sagar.*;
+import com.creditWise.Sakshi.*;
 
 /**
  * Credit Card Suggestion Tool
@@ -105,10 +99,10 @@ public class Executer
 					break;
 				case 4:
                     SearchFrequencyRBTree.SearchInputs();
-				return;
+				    break;
 				case 5:
 				    viewPopularSearchTerms();
-				    return;
+				    break;
 				
 				case 6:
 				System.out.println("Going back to the main menu...");

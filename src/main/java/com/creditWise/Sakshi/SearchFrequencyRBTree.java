@@ -113,14 +113,13 @@ private static void saveSearchTermToCSV(String term, String field) {
         switch (field) {
             case "Bank Name":
                 updatedValues[0] = term;
-                return;
+                break; // No return, just break
             case "Card Name":
                 updatedValues[1] = term;
-                return;
+                break; // No return, just break
             case "Card Type":
                 updatedValues[2] = term;
-                return;
-            
+                break; // No return, just break
         }
         updatedValues[3] = String.valueOf(Integer.parseInt(updatedValues[3]) + 1); // Increment frequency
         data.put(term, updatedValues);
@@ -137,6 +136,7 @@ private static void saveSearchTermToCSV(String term, String field) {
         e.printStackTrace();
     }
 }
+
     
 
    
