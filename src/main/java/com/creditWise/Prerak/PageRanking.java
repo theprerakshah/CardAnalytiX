@@ -14,17 +14,13 @@ public class PageRanking
 	public static Map<String, Integer> rankBanksByKeywordFrequency(List<CreditCard> creditCards, String keywords)
 	{
 		Map<String, Integer> bankScores = new HashMap<>();
-
-		// Calculate scores for each bank
 		for(CreditCard card : creditCards)
 		{
 			int score = calculateKeywordScore(card, keywords);
 
-			// Add score to the bank's total
 			bankScores.put(card.getBank(), bankScores.getOrDefault(card.getBank(), 0) + score);
 		}
 
-		// Sort banks by scores in descending order
 		return sortByValue(bankScores);
 	}
 
@@ -32,10 +28,8 @@ public class PageRanking
 	{
 		int score = 0;
 
-		// Combine relevant text fields for keyword matching
 		String content = card.getCardName() + " " + card.getCardType() + " " + card.getAdditionalFeatures();
 
-		// Count keyword occurrences
 		score += countOccurrences(content.toLowerCase(), keyword.toLowerCase());
 
 		return score;
@@ -71,7 +65,6 @@ public class PageRanking
 	public static Map<String, Integer> RankBankBasedOnWordFrequency(String wordSearch, ArrayList<CreditCard> cardList) throws IOException
 	{
 		String userInput = "master card";
-		// Rank banks based on keyword frequency
 		Map<String, Integer> rankedBanks = rankBanksByKeywordFrequency(cardList, userInput);
 		return rankedBanks;
 	}
