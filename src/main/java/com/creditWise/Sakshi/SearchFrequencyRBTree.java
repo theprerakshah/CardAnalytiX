@@ -6,20 +6,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class SearchFrequencyRBTree {
+    private static final String RESOURCE_PATH = "src/main/resources/";
+    private static final String SEARCHES_CSV = "src/main/resources/search_terms.csv"; // Path to the CSV file
+
     private static RedBlackTree<String> bankNamesTree = new RedBlackTree<>();
     private static RedBlackTree<String> cardNamesTree = new RedBlackTree<>();
     private static RedBlackTree<String> cardTypesTree = new RedBlackTree<>();
     private static RedBlackTree<String> annualFeesTree = new RedBlackTree<>();
     private static RedBlackTree<String> interestRatesTree = new RedBlackTree<>();
-
-    private static final String RESOURCE_PATH = "src/main/resources/";
-    private static final String SEARCHES_CSV = "src/main/resources/searches.csv"; // Path to the CSV file
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -46,40 +46,16 @@ public class SearchFrequencyRBTree {
                     String bankName = scanner.nextLine().toLowerCase();
                     addSearchTerm(bankName, "Bank Name");
                     break;
-
                 case "2":
                     System.out.print("Enter Card Name: ");
                     String cardName = scanner.nextLine().toLowerCase();
                     addSearchTerm(cardName, "Card Name");
                     break;
-
                 case "3":
                     System.out.print("Enter Card Type: ");
                     String cardType = scanner.nextLine().toLowerCase();
                     addSearchTerm(cardType, "Card Type");
                     break;
-
-                case "4":
-                    System.out.print("Enter Annual Fee: ");
-                    String annualFee = scanner.nextLine();
-                    addSearchTerm(annualFee, "Annual Fee");
-                    break;
-
-                case "5":
-                    System.out.print("Enter Interest Rate: ");
-                    String interestRate = scanner.nextLine();
-                    addSearchTerm(interestRate, "Interest Rate");
-                    break;
-
-                case "6":
-                    viewPopularSearchTerms(scanner);
-                    break;
-
-                case "7":
-                    System.out.println("Thank you for using the tool. Goodbye!");
-                    continueSearching = false;
-                    break;
-
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -87,6 +63,49 @@ public class SearchFrequencyRBTree {
 
         scanner.close();
     }
+
+     public static void SearchInputs() {
+        try {
+            // Initialize BufferedReader with System.in
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Bank Name");
+            System.out.println("2. Card Name");
+            System.out.println("3. Card Type");
+          
+            System.out.print("Enter your choice (1-3): ");
+            String choice = reader.readLine(); // Read input using BufferedReader
+
+            switch (choice) {
+                case "1":
+                    System.out.print("Enter Bank Name: ");
+                    String bankName = reader.readLine().toLowerCase(); // Get user input for Bank Name
+                    addSearchTerm(bankName, "Bank Name");
+                    break;
+                case "2":
+                    System.out.print("Enter Card Name: ");
+                    String cardName = reader.readLine().toLowerCase(); // Get user input for Card Name
+                    addSearchTerm(cardName, "Card Name");
+                    break;
+                case "3":
+                    System.out.print("Enter Card Type: ");
+                    String cardType = reader.readLine().toLowerCase(); // Get user input for Card Type
+                    addSearchTerm(cardType, "Card Type");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+
+            reader.close(); // Close the reader after use
+
+        } catch (IOException e) {
+            System.out.println("Error with reading input: " + e.getMessage());
+        }
+    }
+
+    
+    
 
     private static void addSearchTerm(String term, String field) {
         switch (field) {
@@ -99,58 +118,47 @@ public class SearchFrequencyRBTree {
             case "Card Type":
                 cardTypesTree.insert(term);
                 break;
-            case "Annual Fee":
-                annualFeesTree.insert(term);
-                break;
-            case "Interest Rate":
-                interestRatesTree.insert(term);
-                break;
         }
         saveSearchTermToCSV(term, field);
     }
 
     private static void saveSearchTermToCSV(String term, String field) {
         File csvFile = new File(SEARCHES_CSV);
-        Map<String, String[]> data = new HashMap<>(); // Key: Term, Value: [Bank Name, Card Type, Annual Fee, Interest Rate, Frequency]
+        Map<String, String[]> data = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String line;
+
             // Read all existing records and store them
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 5) {
-                    String existingTerm = parts[0].trim(); // Assuming the first column is the term
-                    String[] values = new String[5];
-                    System.arraycopy(parts, 0, values, 0, 5);
-                    data.put(existingTerm, values);
+                if (parts.length == 4) { // Ensure correct column count
+                    String existingTerm = parts[0].trim();
+                    data.put(existingTerm, parts);
                 }
             }
 
-            // Update the record based on the field and term
-            String[] updatedValues = data.getOrDefault(term, new String[]{"", "", "", "", "0"});
-
+            // Update or add the record
+            String[] updatedValues = data.getOrDefault(term, new String[]{"", "", "", "0"});
             switch (field) {
                 case "Bank Name":
                     updatedValues[0] = term;
                     break;
-                case "Card Type":
+                case "Card Name":
                     updatedValues[1] = term;
                     break;
-                case "Annual Fee":
+                case "Card Type":
                     updatedValues[2] = term;
                     break;
-                case "Interest Rate":
-                    updatedValues[3] = term;
-                    break;
+            
+              
             }
-
-            // Update frequency (increment by 1)
-            updatedValues[4] = String.valueOf(Integer.parseInt(updatedValues[4]) + 1);
+            updatedValues[3] = String.valueOf(Integer.parseInt(updatedValues[3]) + 1); // Increment frequency
             data.put(term, updatedValues);
 
-            // Write updated data back to CSV
+            // Write back to CSV
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
-                writer.write("Bank Name,Card Type,Annual Fee,Interest Rate,Frequency\n");  // Header
+                writer.write("Bank Name,Card Name,Card Type,Frequency\n"); // Header
                 for (String[] values : data.values()) {
                     writer.write(String.join(",", values) + "\n");
                 }
@@ -161,92 +169,49 @@ public class SearchFrequencyRBTree {
         }
     }
 
-    private static void viewPopularSearchTerms(Scanner scanner) {
-        System.out.println("\nChoose a field to view popular search terms:");
-        System.out.println("1. Bank Name");
-        System.out.println("2. Card Name");
-        System.out.println("3. Card Type");
-        System.out.println("4. Annual Fee");
-        System.out.println("5. Interest Rate");
+   
 
-        System.out.print("Enter your choice (1-5): ");
-        String fieldChoice = scanner.nextLine();
-
-        switch (fieldChoice) {
-            case "1":
-                displaySearchTerms(bankNamesTree, "Bank Name", scanner);
-                break;
-            case "2":
-                displaySearchTerms(cardNamesTree, "Card Name", scanner);
-                break;
-            case "3":
-                displaySearchTerms(cardTypesTree, "Card Type", scanner);
-                break;
-            case "4":
-                displaySearchTerms(annualFeesTree, "Annual Fee", scanner);
-                break;
-            case "5":
-                displaySearchTerms(interestRatesTree, "Interest Rate", scanner);
-                break;
-            default:
-                System.out.println("Invalid choice.");
-        }
-    }
-
-    private static void displaySearchTerms(RedBlackTree<String> tree, String field, Scanner scanner) {
+    public static void displaySearchTerms(String field) {
+        File csvFile = new File(SEARCHES_CSV);
         Map<String, Integer> termFrequencyMap = new HashMap<>();
-
-        // Perform in-order traversal iteratively and count frequencies
-        RedBlackTree.Node current = tree.getRoot();
-        Stack<RedBlackTree.Node> stack = new Stack<>();
-
-        while (current != tree.NIL || !stack.isEmpty()) {
-            if (current != tree.NIL) {
-                stack.push(current);
-                current = current.left;
-            } else {
-                current = stack.pop();
-                termFrequencyMap.put((String) current.value, termFrequencyMap.getOrDefault((String) current.value, 0) + 1);
-                current = current.right;
-            }
-        }
-
-        // Display terms sorted by frequency
-        System.out.println("Here is a list of popular " + field.toLowerCase() + "s based on user search frequency:");
-
-        // Sort terms by frequency (descending)
-        termFrequencyMap.entrySet().stream()
-                .sorted((entry1, entry2) -> entry2.getValue() - entry1.getValue())
-                .forEach(entry -> System.out.println(entry.getKey() + " with " + entry.getValue() + " searches"));
-
-        // Allow the user to select a term by number
-        System.out.print("\nSelect which " + field + " you want to see: ");
-        int selectedIndex = Integer.parseInt(scanner.nextLine()) - 1;
-
-        // Get the selected term from the list
-        String selectedTerm = (String) termFrequencyMap.keySet().toArray()[selectedIndex];
-
-        // Fetch and display the card details from file
-        displayCardDetailsForSelectedTerm(selectedTerm);
-    }
-
-    private static void displayCardDetailsForSelectedTerm(String selectedTerm) {
-        // Convert the selected term to lowercase to match the file names
-        String fileName = selectedTerm.toLowerCase() + ".txt";
-        File cardFile = new File(RESOURCE_PATH + fileName);
-
-        if (cardFile.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(cardFile))) {
-                String line;
-                System.out.println("\nDetails for " + selectedTerm + ":");
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+            String line;
+            boolean isFirstLine = true; // Flag to skip the header row
+    
+            while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false; // Skip the first line
+                    continue;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+    
+                String[] parts = line.split(",");
+                if (parts.length == 4) { // Validate column count
+                    try {
+                        String term = parts[0].trim(); // Bank Name is assumed to be the first column
+                        int frequency = Integer.parseInt(parts[3].trim()); // Frequency column
+    
+                        if (!term.isEmpty()) {
+                            termFrequencyMap.put(term, termFrequencyMap.getOrDefault(term, 0) + frequency);
+                        }
+                    } catch (NumberFormatException e) {
+                        // Skip rows with invalid frequency values
+                        System.out.println("Skipping invalid row: " + line);
+                    }
+                }
             }
-        } else {
-            System.out.println("No details available for the selected term.");
+    
+            // Display sorted terms
+            System.out.println("Popular " + field + "s based on user search frequency:");
+            termFrequencyMap.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue() - e1.getValue())
+                .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue() + " searches"));
+    
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+    
+    
+   
 }
