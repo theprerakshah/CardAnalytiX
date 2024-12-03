@@ -27,7 +27,7 @@ public class WordCompletion
 		// Load vocabulary from vocabulary.txt
 		try
 		{
-			loadVocabulary("vocabulary.txt");
+			loadVocabulary("src/main/resources/vocabulary.txt");
 		}
 		catch(IOException e)
 		{
