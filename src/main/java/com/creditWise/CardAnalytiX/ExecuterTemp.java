@@ -13,6 +13,7 @@ import com.creditWise.Sagar.BankNameExtractor;
 import com.creditWise.Sagar.CardTypeExtractor;
 import com.creditWise.Sagar.SpellChecker;
 import com.creditWise.Sagar.Validation;
+import com.creditWise.Sagar.mergeSort;
  
 /**
  * Credit Card Suggestion Tool
@@ -236,28 +237,86 @@ private static List<String> extractBankNames(ArrayList<CreditCard> cardList) {
     return bankNames;
     }*/
  
-    // implement  validation.
     private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList) {
-    ArrayList<CreditCard> resultCardList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
- 
-    // Validate input
-    while (!Validation.isValidInterestRate(userInput)) {
-        System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
-        userInput = scanner.nextLine();
+        ArrayList<CreditCard> resultCardList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+    
+        // Validate input
+        while (!Validation.isValidInterestRate(userInput)) {
+            System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
+            userInput = scanner.nextLine();
+        }
+    
+        // Convert the validated input to a double
+        double userAnnualFee = -1;
+        try {
+            userAnnualFee = Double.parseDouble(userInput); // Convert String to double
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid number format.");
+            return resultCardList; // Return empty list if input is invalid
+        }
+    
+        // Filter the cards based on annual fee
+        for (CreditCard card : cardList) {
+            try {
+                // Extract numeric part from the annual fee string (remove non-numeric characters)
+                String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "");
+    
+                // If the string is not empty after removing non-numeric characters
+                if (!annualFeeString.isEmpty()) {
+                    double cardAnnualFee = Double.parseDouble(annualFeeString);
+    
+                    // Now compare the annual fee
+                    if (cardAnnualFee <= userAnnualFee) {
+                        resultCardList.add(card);
+                    }
+                } else {
+                    // Handle case where annual fee is not a valid number
+                    //System.out.println("Invalid annual fee for card: " + card.getCardName());
+                }
+            } catch (NumberFormatException e) {
+                // In case parsing still fails
+                System.out.println("Error parsing the annual fee for card: " + card.getCardName());
+            }
+        }
+    
+        // Ask the user for sorting preference: 1 for Ascending, 2 for Descending
+        String orderChoice = "";
+        while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+            System.out.println("Do you want to sort the results in ascending (1) or descending (2) order?");
+            orderChoice = scanner.nextLine();
+            
+            if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+                System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
+            }
+        }
+    
+        // Check if user chose ascending or descending
+        boolean isAscending = true; // Default is ascending
+        if (orderChoice.equals("2")) {
+            isAscending = false;
+        }
+    
+        // Sort the result list using MergeSort
+        resultCardList = mergeSort.sort(resultCardList, isAscending);  // Corrected method call
+    
+        // Handle the result and display
+        if (resultCardList.isEmpty()) {
+            System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
+        } else {
+            System.out.println("Credit cards found with an annual fee of " + userAnnualFee + " or less:");
+            for (CreditCard card : resultCardList) {
+                System.out.println("Card Name: " + card.getCardName() + ", Annual Fee: " + card.getAnnualFee());
+            }
+        }
+    
+        return resultCardList;
     }
- 
-    // Convert the validated input to a double
-    double userAnnualFee = Double.parseDouble(userInput);
- 
-    if (resultCardList.isEmpty()) {
-        System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
-    }
- 
-    return resultCardList;
-}
- 
- 
+    
+    
+    
+    
+    
     // implement word completion, spell checking and validation.
     private static ArrayList<CreditCard> basedOnCardType(String userInputCardType, ArrayList<CreditCard> cardList)
     {
