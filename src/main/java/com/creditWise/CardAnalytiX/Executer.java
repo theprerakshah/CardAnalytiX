@@ -15,6 +15,7 @@ import com.creditWise.Prerak.WordFrequency;
 import com.creditWise.Prerak.WordSearcher;
 import com.creditWise.Sagar.Validation;
 import com.creditWise.Sagar.mergeSort;
+import com.creditWise.Sakshi.SearchFrequencyRBTree;
 
 /**
  * Credit Card Suggestion Tool
@@ -75,8 +76,11 @@ public class Executer
 			System.out.println("\n1. Show all Credit card Data");
 			System.out.println("2. Fetch credit card according to this preferences: Card Type, Annual Fee, Bank Name, Interest Rate");
 			System.out.println("3. Fetch data according to word Frequency");
-			System.out.println("4. Go Back to Main Menu");
-			System.out.print("Enter your choice (1, 2, 3, or 4): ");
+			System.out.println("4. Search");
+			System.out.println("5. Most Popular Suggetions");
+			System.out.println("6. Go Back to Main Menu");
+		
+			System.out.print("Enter your choice (1, 2, 3, 4, 5 or 6): ");
 
 			ArrayList<CreditCard> cardList = Engine.Engine1();
 			int choice = scanner.nextInt();
@@ -96,8 +100,16 @@ public class Executer
 
 					break;
 				case 4:
-					System.out.println("Going back to the main menu...");
-					return;
+                    SearchFrequencyRBTree.SearchInputs();
+				return;
+				case 5:
+				    viewPopularSearchTerms();
+				    return;
+				
+				case 6:
+				System.out.println("Going back to the main menu...");
+				return;
+				
 
 				default:
 					System.out.println("Invalid choice. Please restart the tool and enter 1, 2, 3, or 4:");
@@ -470,5 +482,38 @@ public class Executer
 		ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
 		return resultCardList;
 	}
+
+
+	//Case 4 Popular Search 
+	  public static void viewPopularSearchTerms() {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("\nChoose a field to view popular search terms:");
+            System.out.println("1. Bank Name");
+            System.out.println("2. Card Name");
+            System.out.println("3. Card Type");
+        
+    
+            System.out.print("Enter your choice (1-3): ");
+            String fieldChoice = reader.readLine(); // Read input
+    
+            switch (fieldChoice) {
+                case "1":
+                    SearchFrequencyRBTree.displaySearchTerms("Bank Name");
+                    break;
+                case "2":
+                    SearchFrequencyRBTree.displaySearchTerms("Card Name");
+                    break;
+                case "3":
+                    SearchFrequencyRBTree.displaySearchTerms("Card Type");
+                    break;
+            
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
