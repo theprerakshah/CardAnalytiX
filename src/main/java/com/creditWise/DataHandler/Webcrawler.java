@@ -105,7 +105,7 @@ public class Webcrawler
 	public static void main(String[] args)
 	{
 		Webcrawler crawler = new Webcrawler();
-		List<String> urls = crawler.readUrlsFromFile("src/urls.txt");
+		List<String> urls = crawler.readUrlsFromFile("src/main/resources/urls.txt");
 
 		for(String baseUrl : urls)
 		{

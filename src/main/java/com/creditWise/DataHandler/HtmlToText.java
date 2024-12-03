@@ -24,13 +24,11 @@ public class HtmlToText
 		// Parse the JSON content
 		JSONObject jsonObject = new JSONObject(jsonContent);
 
-		// Get the selectors for 'td', 'scotiabank', 'greatCanadianRebates', 'cibc', and
-		// 'nationalBank'
+		// Get the selectors for 'td', 'scotiabank', 'cibc', and
 		JSONObject tdSelectors = jsonObject.getJSONObject("selectors").getJSONObject("td");
 		JSONObject scotiaSelectors = jsonObject.getJSONObject("selectors").getJSONObject("scotiabank");
-		JSONObject canadianRebatesSelectors = jsonObject.getJSONObject("selectors").getJSONObject("greatCanadianRebates");
 		JSONObject cibcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("cibc");
-		JSONObject nationalBankSelectors = jsonObject.getJSONObject("selectors").getJSONObject("nationalBank");
+		
 		JSONObject rbcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("rbc");
 
 		// Extract the selectors
@@ -42,10 +40,6 @@ public class HtmlToText
 		String scotiaAnnualFeeSelector = scotiaSelectors.getString("annualFee");
 		String scotiaPurchaseRate = scotiaSelectors.getString("purchaseInterestRate");
 		String scotiaAdditionalFeature = scotiaSelectors.getString("additionalFeatures");
-		String rebateCardNameSelector = canadianRebatesSelectors.getString("cardName");
-		String rebateAnnualFeeSelector = canadianRebatesSelectors.getString("annualFee");
-		String rebateInterestRateSelector = canadianRebatesSelectors.getString("interestRates");
-		String rebateAdditionalFeaturesSelector = canadianRebatesSelectors.getString("additionalFeatures");
 		String rbcCardName = rbcSelectors.getString("cardName");
 
 		// CIBC Selectors (fixed key names)
@@ -53,13 +47,6 @@ public class HtmlToText
 		String cibcAnnualFeeSelector = cibcSelectors.getString("annual_fee"); // Use "annual_fee"
 		String cibcInterestRateSelector = cibcSelectors.getString("purchase_rate"); // Use "purchase_rate"
 		String cibcAdditionalFeaturesSelector = cibcSelectors.getString("advatnages"); // Use "benefits"
-
-		// National Bank Selectors
-		String nationalBankCardNameSelector = nationalBankSelectors.getString("cardName");
-		String nationalBankAnnualFeeSelector = nationalBankSelectors.getString("annualFee");
-		String nationalBankPurchaseInterestRateSelector = nationalBankSelectors.getString("purchaseInterestRate");
-		String nationalBankCardTypeSelector = nationalBankSelectors.getString("cardType");
-		String nationalBankAdditionalFeaturesSelector = nationalBankSelectors.getString("additionalFeatures");
 
 		// Directory paths for saved HTML pages and output txt file
 		String inputDirectory = "saved_pages/"; // Directory containing crawled HTML pages
@@ -75,9 +62,7 @@ public class HtmlToText
 
 			StringBuilder tdExtractedText = new StringBuilder();
 			StringBuilder scotiaExtractedText = new StringBuilder();
-			StringBuilder rebateExtractedText = new StringBuilder();
 			StringBuilder cibcExtractedText = new StringBuilder();
-			StringBuilder nationalBankExtractedText = new StringBuilder();
 			StringBuilder rbcExtractedText = new StringBuilder();
 
 			for(Path htmlFile : htmlFiles)
@@ -143,14 +128,7 @@ public class HtmlToText
 					{
 						cardType = "MasterCard";
 					}
-
-					//					// Append extracted data
-					//					tdExtractedText.append("Card Name: ").append(cleanText(cardName)).append("\n");
-					//					tdExtractedText.append("Card Type: ").append(cardType).append("\n"); // Add card type to the output
-					//					tdExtractedText.append("Purchase Interest Rate: ").append(cleanText(purchaseInterestRate)).append("\n");
-					//					tdExtractedText.append("Annual Fee: ").append(cleanText(annualFee)).append("\n");
-					//					tdExtractedText.append("Advantages: ").append(cleanText(additionalFeature)).append("\n\n");
-
+					
 					if(flag)
 					{
 						tdExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
@@ -199,34 +177,7 @@ public class HtmlToText
 					scotiaExtractedText.append(cardName.trim() + "\t" + cardType.trim() + "\t" + annualFee.trim() + "\t" + purchaseInterestRate.trim() + "\t" + additionalFeature.trim() + "\n");
 				}
 
-				// --- Great Canadian Rebates Data Extraction ---
-				Elements rebateCardNameElements = doc.select(rebateCardNameSelector);
-				Elements rebateAnnualFeeElements = doc.select(rebateAnnualFeeSelector);
-				Elements rebateInterestRateElements = doc.select(rebateInterestRateSelector);
-				Elements rebateAdditionalFeaturesElements = doc.select(rebateAdditionalFeaturesSelector);
-
-				for(int i = 0; i < rebateCardNameElements.size(); i++)
-				{
-					String cardName = rebateCardNameElements.size() > i ? rebateCardNameElements.get(i).text() : "No Card Name";
-					String annualFee = rebateAnnualFeeElements.size() > i ? rebateAnnualFeeElements.get(i).text() : "No Annual Fee";
-					String interestRates = rebateInterestRateElements.size() > i ? rebateInterestRateElements.get(i).text() : "No Interest Rates";
-					String additionalFeatures = rebateAdditionalFeaturesElements.size() > i ? rebateAdditionalFeaturesElements.get(i).text() : "No Additional Features";
-
-					rebateExtractedText.append("Card Name: ").append(cardName).append(" | ");
-					rebateExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
-					rebateExtractedText.append("Interest Rates: ").append(interestRates).append(" | ");
-					rebateExtractedText.append("Advantages ").append(additionalFeatures).append("\n");
-
-					//					if(flag)
-					//					{
-					//						tdExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
-					//						flag = false;
-					//					}
-					//
-					//					tdExtractedText.append(cleanText(cardName).trim() + "\t" + cardType.trim() + "\t" + cleanText(annualFee).trim() + "\t" + cleanText(purchaseInterestRate).trim() + "\t"
-					//							+ cleanText(additionalFeature).trim() + "\n");
-
-				}
+				// --- CIBC Bank Data Extraction ---
 				Elements cibcCardNameElements = doc.select(cibcCardNameSelector);
 				Elements cibcAnnualFeeElements = doc.select(cibcAnnualFeeSelector);
 				Elements cibcInterestRateElements = doc.select(cibcInterestRateSelector);
@@ -261,12 +212,7 @@ public class HtmlToText
 						interestRates = "No Interest Rates";
 					}
 
-					// Append the results to the output
-					//					cibcExtractedText.append("Card Name: ").append(cardName).append(" \n ");
-					//					cibcExtractedText.append("Card Type: ").append(cardType).append(" \n "); // Include card type
-					//					cibcExtractedText.append("Annual Fee: ").append(annualFee).append(" \n ");
-					//					cibcExtractedText.append("Interest Rates: ").append(interestRates).append(" \n ");
-					//					cibcExtractedText.append("Additional Features: ").append(additionalFeatures).append("\n\n");
+					
 					if(flag)
 					{
 						cibcExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
@@ -299,32 +245,13 @@ public class HtmlToText
 					rbcExtractedText.append("Card Type: ").append(cardType).append("\n");
 				}
 
-				// --- National Bank Data Extraction ---
-				Elements nationalBankCardNameElements = doc.select(nationalBankCardNameSelector);
-				Elements nationalBankAnnualFeeElements = doc.select(".text-image-text-container b");
-				Elements nationalBankInterestRateElements = doc.select(nationalBankPurchaseInterestRateSelector);
-				Elements nationalBankCardTypeElements = doc.select(nationalBankCardTypeSelector);
-				Elements nationalBankAdditionalFeaturesElements = doc.select(nationalBankAdditionalFeaturesSelector);
-
-				for(int i = 0; i < nationalBankCardNameElements.size(); i++)
-				{
-					String cardName = nationalBankCardNameElements.size() > i ? nationalBankCardNameElements.get(i).text() : "No Card Name";
-					String annualFee = nationalBankAnnualFeeElements.size() > i ? nationalBankAnnualFeeElements.get(i).text() : "No Annual Fee";
-					String purchaseInterestRate = nationalBankInterestRateElements.size() > i ? nationalBankInterestRateElements.get(i).text() : "No Purchase Interest Rate";
-					String cardType = nationalBankCardTypeElements.size() > i ? nationalBankCardTypeElements.get(i).text() : "No Card Type";
-					String additionalFeatures = nationalBankAdditionalFeaturesElements.size() > i ? nationalBankAdditionalFeaturesElements.get(i).text() : "No Additional Features";
-
-					nationalBankExtractedText.append("Annual Fee: ").append(annualFee).append(" | ");
-
-				}
+				
 			}
 
 			// Save the extracted data to output files
 			saveToFile(outputDirectory + "td_cards.txt", tdExtractedText.toString());
 			saveToFile(outputDirectory + "scotiabank_cards.tsv", scotiaExtractedText.toString());
-			saveToFile(outputDirectory + "rebate_cards.txt", rebateExtractedText.toString());
 			saveToFile(outputDirectory + "cibc_cards.txt", cibcExtractedText.toString());
-			saveToFile(outputDirectory + "national_bank_cards.txt", nationalBankExtractedText.toString());
 			saveToFile(outputDirectory + "rbc_cards.txt", rbcExtractedText.toString());
 
 			System.out.println("Data extraction complete! Check the output files.");
