@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import com.creditWise.DataHandler.BankNameMap;
 import com.creditWise.Mahzabin.SpellCheck;
 import com.creditWise.Mahzabin.WordCompletion;
 import com.creditWise.Prerak.WordFrequency;
@@ -19,6 +20,9 @@ import com.creditWise.Sagar.Validation;
  */
 public class Executer
 {
+	private static WordCompletion wordCompletion = new WordCompletion();
+	private static SpellCheck spellCheck = new SpellCheck();
+	private static BankNameMap bankNameMap =new BankNameMap();
 
 	public static void main(String[] args) throws IOException
 	{
@@ -129,7 +133,12 @@ public class Executer
 						userInput = sc.next();
 					}
 
-					userInput = spellCheckAndWordComplete(userInput);
+					userInput=spellCheckAndWordComplete(userInput);
+					while(userInput.equalsIgnoreCase("Try Again")){
+						System.out.println("No suggested Spelling or Word Completion Found for this input. Try Again.");
+						userInput = sc.next();
+						userInput=spellCheckAndWordComplete(userInput);
+					}
 					resultCardList = basedOnCardType(userInput, cardList);
 
 					break;
@@ -155,7 +164,20 @@ public class Executer
 						System.out.println("Enter a Correct Bank Name ");
 						userInput = sc.next();
 					}
-					userInput = spellCheckAndWordComplete(userInput);
+					userInput=spellCheckAndWordComplete(userInput);
+					while(userInput.equalsIgnoreCase("Try Again")){
+						System.out.println("No suggested Spelling or Word Completion Found for this input. Try Again.");
+						userInput = sc.next();
+						userInput=spellCheckAndWordComplete(userInput);
+					}
+
+
+					String bankName = bankNameMap.getBankName(userInput);
+					while (bankName.equalsIgnoreCase("Null")){
+						System.out.println("Please Enter a Valid Bank Name. [Like- TD bank/ CIBC/ RBC/ Scotia Bank]");
+						userInput = sc.next();
+						bankName =bankNameMap.getBankName(userInput);
+					}
 					resultCardList = basedOnBankName(userInput, cardList);
 
 					break;
@@ -183,8 +205,6 @@ public class Executer
 		}
 	}
 
-	private static WordCompletion	wordCompletion	= new WordCompletion();
-	private static SpellCheck		spellCheck		= new SpellCheck();
 
 	//Spell checking and word completion implementation.
 	private static String spellCheckAndWordComplete(String userInput)
