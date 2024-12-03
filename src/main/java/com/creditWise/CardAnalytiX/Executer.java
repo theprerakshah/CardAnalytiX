@@ -320,7 +320,6 @@ public class Executer
 	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList) {
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
-<<<<<<< HEAD
 	
 		// Validate input
 		while (!Validation.isValidInterestRate(userInput)) {
@@ -371,24 +370,6 @@ public class Executer
 			}
 		}
 	
-=======
-
-		// Validate input
-		while(!Validation.isValidInterestRate(userInput))
-		{
-			System.out.println("Invalid Interest Rate. Please enter a valid non-negative number:");
-			userInput = scanner.nextLine();
-		}
-
-		// Convert the validated input to a double
-		double userInterestRate = Double.parseDouble(userInput);
-
-		if(resultCardList.isEmpty())
-		{
-			System.out.println("No credit cards found with an Interest Rate of " + userInterestRate + " or less.");
-		}
-
->>>>>>> 077da0a6a0fb9558bdfa5c9aeaa26e6f16aabbc5
 		return resultCardList;
 	}
 
@@ -404,7 +385,6 @@ public class Executer
 	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList) {
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
-<<<<<<< HEAD
 	
 		// Validate input
 		while (!Validation.isValidInterestRate(userInput)) {
@@ -456,24 +436,6 @@ public class Executer
 			}
 		}
 	
-=======
-
-		// Validate input
-		while(!Validation.isValidInterestRate(userInput))
-		{
-			System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
-			userInput = scanner.nextLine();
-		}
-
-		// Convert the validated input to a double
-		double userAnnualFee = Double.parseDouble(userInput);
-
-		if(resultCardList.isEmpty())
-		{
-			System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
-		}
-
->>>>>>> 077da0a6a0fb9558bdfa5c9aeaa26e6f16aabbc5
 		return resultCardList;
 	}
 	
