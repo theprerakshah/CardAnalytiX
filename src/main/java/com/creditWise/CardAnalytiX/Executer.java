@@ -93,6 +93,8 @@ public class Executer
 				case 1:
 					System.out.println("Fetching all Credit card Data");
 					System.out.println("Showing all Credit card Data");
+					printCreditCardData(cardList);
+
 					break;
 
 				case 2:
@@ -121,6 +123,7 @@ public class Executer
 			}
 		}
 	}
+
 
 	private static void prefernceBaseCaseHandler(ArrayList<CreditCard> cardList)
 	{
@@ -173,18 +176,19 @@ public class Executer
 
 					break;
 				case 3:
+					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
 					System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Scotia Bank, CIBC, TD Bank]");
-					userInput = sc.next();
+					userInput = sc.nextLine();
 
 					while(!Validation.ValidationBankName(userInput))
 					{
 						System.out.println("Enter a Correct Bank Name ");
-						userInput = sc.next();
+						userInput = sc.nextLine();
 					}
 					userInput=spellCheckAndWordComplete(userInput);
 					while(userInput.equalsIgnoreCase("Try Again")){
 						System.out.println("Enter a Bank Name");
-						userInput = sc.next();
+						userInput = sc.nextLine();
 						userInput=spellCheckAndWordComplete(userInput);
 					}
 
@@ -192,7 +196,7 @@ public class Executer
 					String bankName = bankNameMap.getBankName(userInput);
 					while (bankName.equalsIgnoreCase("Null")){
 						System.out.println("Please Enter a Valid Bank Name. [Like- TD bank/ CIBC/ RBC/ Scotia Bank]");
-						userInput = sc.next();
+						userInput = sc.nextLine();
 						bankName =bankNameMap.getBankName(userInput);
 					}
 					resultCardList = basedOnBankName(userInput, cardList);
@@ -303,6 +307,25 @@ public class Executer
 
 		}
 
+	}
+	// Method to print all credit card data
+	private static void printCreditCardData(ArrayList<CreditCard> cardList) {
+		if (cardList.isEmpty()) {
+			System.out.println("No credit card data available.");
+			return;
+		}
+
+		System.out.println("Credit Card Details:");
+		for (CreditCard card : cardList) {
+			System.out.println("-----------------------------------------");
+			System.out.println("Bank Name: " + card.getBank());
+			System.out.println("Card Name: " + card.getCardName());
+			System.out.println("Card Type: " + card.getCardType());
+			System.out.println("Annual Fee: " + card.getAnnualFee());
+			System.out.println("Purchase Interest Rate: " + card.getPurchaseInterestRate());
+			System.out.println("Additional Features: " + card.getAdditionalFeatures());
+
+		}
 	}
 
 	private static void documentWordSearchAndFrequency(ArrayList<CreditCard> cardList) throws IOException {
