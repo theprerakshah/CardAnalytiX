@@ -317,10 +317,61 @@ public class Executer
 	}
 
 	// implement Validation
-	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList)
-	{
+	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList) {
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
+<<<<<<< HEAD
+	
+		// Validate input
+		while (!Validation.isValidInterestRate(userInput)) {
+			System.out.println("Invalid Interest Rate. Please enter a valid non-negative number:");
+			userInput = scanner.nextLine();
+		}
+	
+		// Convert the validated input to a double
+		double userInterestRate = -1;
+		try {
+			userInterestRate = Double.parseDouble(userInput); // Convert String to double
+		} catch (NumberFormatException e) {
+			System.out.println("Error: Invalid number format.");
+			return resultCardList; // Return empty list if input is invalid
+		}
+	
+		// Filter the cards based on interest rate
+		for (CreditCard card : cardList) {
+			try {
+				// Extract numeric part from the interest rate string (remove non-numeric characters)
+				String interestRateString = card.getPurchaseInterestRate().replaceAll("[^0-9.]", "");
+	
+				// If the string is not empty after removing non-numeric characters
+				if (!interestRateString.isEmpty()) {
+					double cardInterestRate = Double.parseDouble(interestRateString);
+	
+					// Now compare the interest rate
+					if (cardInterestRate <= userInterestRate) {
+						resultCardList.add(card);
+					}
+				} else {
+					// Handle case where interest rate is not a valid number
+					System.out.println("Invalid interest rate for card: " + card.getCardName());
+				}
+			} catch (NumberFormatException e) {
+				// In case parsing still fails
+				System.out.println("Error parsing the interest rate for card: " + card.getCardName());
+			}
+		}
+	
+		// Handle the result and display
+		if (resultCardList.isEmpty()) {
+			System.out.println("No credit cards found with an interest rate of " + userInterestRate + " or less.");
+		} else {
+			System.out.println("Credit cards found with an interest rate of " + userInterestRate + " or less:");
+			for (CreditCard card : resultCardList) {
+				System.out.println("Card Name: " + card.getCardName() + ", Interest Rate: " + card.getPurchaseInterestRate());
+			}
+		}
+	
+=======
 
 		// Validate input
 		while(!Validation.isValidInterestRate(userInput))
@@ -337,6 +388,7 @@ public class Executer
 			System.out.println("No credit cards found with an Interest Rate of " + userInterestRate + " or less.");
 		}
 
+>>>>>>> 077da0a6a0fb9558bdfa5c9aeaa26e6f16aabbc5
 		return resultCardList;
 	}
 
@@ -349,10 +401,62 @@ public class Executer
 	}
 
 	// implement  validation.
-	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList)
-	{
+	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList) {
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
+<<<<<<< HEAD
+	
+		// Validate input
+		while (!Validation.isValidInterestRate(userInput)) {
+			System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
+			userInput = scanner.nextLine();
+		}
+	
+		// Convert the validated input to a double
+		double userAnnualFee = -1;
+		try {
+			userAnnualFee = Double.parseDouble(userInput); // Convert String to double
+		} catch (NumberFormatException e) {
+			System.out.println("Error: Invalid number format.");
+			return resultCardList; // Return empty list if input is invalid
+		}
+	
+		// Filter the cards based on annual fee
+		for (CreditCard card : cardList) {
+			try {
+				// Extract numeric part from the annual fee string (remove non-numeric characters)
+				String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "");
+				
+				// If the string is not empty after removing non-numeric characters
+				if (!annualFeeString.isEmpty()) {
+					double cardAnnualFee = Double.parseDouble(annualFeeString);
+					
+					// Now compare the annual fee
+					if (cardAnnualFee <= userAnnualFee) {
+						resultCardList.add(card);
+					}
+				} else {
+					// Handle case where annual fee is not a valid number
+					System.out.println("Invalid annual fee for card: " + card.getCardName());
+				}
+			} catch (NumberFormatException e) {
+				// In case parsing still fails
+				System.out.println("Error parsing the annual fee for card: " + card.getCardName());
+			}
+		}
+		
+	
+		// Handle the result and display
+		if (resultCardList.isEmpty()) {
+			System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
+		} else {
+			System.out.println("Credit cards found with an annual fee of " + userAnnualFee + " or less:");
+			for (CreditCard card : resultCardList) {
+				System.out.println("Card Name: " + card.getCardName() + ", Annual Fee: " + card.getAnnualFee());
+			}
+		}
+	
+=======
 
 		// Validate input
 		while(!Validation.isValidInterestRate(userInput))
@@ -369,8 +473,11 @@ public class Executer
 			System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
 		}
 
+>>>>>>> 077da0a6a0fb9558bdfa5c9aeaa26e6f16aabbc5
 		return resultCardList;
 	}
+	
+	
 
 	// implement word completion, spell checking and validation.
 	private static ArrayList<CreditCard> basedOnCardType(String userInputCardType, ArrayList<CreditCard> cardList)
