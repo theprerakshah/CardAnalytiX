@@ -54,6 +54,18 @@ public class Validation
 		return input.trim().matches(regex);
 	}
 
+	public static boolean documentWordSearchAndFrequency(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false; // input can't be null or empty
+        }
+
+        // Regular expression pattern to match card types with only letters and spaces (no digits or special characters)
+        String regex = "^[a-zA-Z]+( [a-zA-Z]+)*$"; 
+
+        // Check if input matches the pattern
+        return input.trim().matches(regex);
+    }
+
 	public static boolean ValidationBankName(String input) {
         if (input == null || input.trim().isEmpty()) {
             return false; // input can't be null or empty

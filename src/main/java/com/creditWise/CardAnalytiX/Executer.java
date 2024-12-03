@@ -59,7 +59,7 @@ public class Executer
 					return; // Exit the program
 
 				default:
-					System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
+					System.out.println("Invalid choice. Please restart the tool and enter 1, 2 or 3.");
 					break;
 			}
 
@@ -99,7 +99,7 @@ public class Executer
 					return;
 
 				default:
-					System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
+					System.out.println("Invalid choice. Please restart the tool and enter 1, 2, 3, or 4:");
 					break;
 			}
 		}
@@ -156,7 +156,7 @@ public class Executer
 
 					break;
 				case 3:
-					System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Soctia Bank, CIBC, TD Bank]");
+					System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Scotia Bank, CIBC, TD Bank]");
 					userInput = sc.next();
 
 					while(!Validation.ValidationBankName(userInput))
@@ -288,32 +288,37 @@ public class Executer
 
 	}
 
-	private static void documentWordSearchAndFrequency(ArrayList<CreditCard> cardList) throws IOException
-	{
+	private static void documentWordSearchAndFrequency(ArrayList<CreditCard> cardList) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter the word you want to look for in bank website:");
-		String word = reader.readLine();
-		HashMap<String, HashMap<String, ArrayList<String>>> dataForFrequecy = WordSearcher.invertedIndexing(cardList, word.trim().toLowerCase());
-		if(dataForFrequecy != null)
-		{
+		String word;
+	
+		// Loop until valid input is provided
+		while (true) {
+			System.out.println("Enter the word you want to look for in the bank website:");
+			word = reader.readLine();
+	
+			// Validate input using the regex
+			if (Validation.documentWordSearchAndFrequency(word)) {
+				break; // Exit loop if input is valid
+			} else {
+				System.out.println("Invalid input. Please enter a valid word.");
+			}
+		}
+	
+		HashMap<String, HashMap<String, ArrayList<String>>> dataForFrequency = WordSearcher.invertedIndexing(cardList, word.trim().toLowerCase());
+		if (dataForFrequency != null) {
 			System.out.println("Do you want word count from this bankWebsite? (Y | N):");
 			String freqInput = reader.readLine();
 			freqInput = freqInput.trim();
-
-			if(freqInput.equalsIgnoreCase("Y"))
-			{
-				WordFrequency.countFrequency(dataForFrequecy);
-			}
-			else if(freqInput.equalsIgnoreCase("N"))
-			{
+	
+			if (freqInput.equalsIgnoreCase("Y")) {
+				WordFrequency.countFrequency(dataForFrequency);
+			} else if (freqInput.equalsIgnoreCase("N")) {
 				System.out.println("Skipping word count...");
-			}
-			else
-			{
+			} else {
 				System.out.println("Invalid input. Please enter 'Y' or 'N'.");
 			}
 		}
-
 	}
 
 	// implement Validation
