@@ -143,20 +143,22 @@ public class Executer
 			switch(choice)
 			{
 				case 1:
+
+					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
 					System.out.println("Select card type from this Options: [MasterCard, Visa]");
 					System.out.println("Input:");
-					userInput = sc.next();
+					userInput = sc.nextLine();
 
 					while(!Validation.ValidationCardType(userInput))
 					{
 						System.out.println("Enter a correct Card Type");
-						userInput = sc.next();
+						userInput = sc.nextLine();
 					}
 
 					userInput=spellCheckAndWordComplete(userInput);
 					while(userInput.equalsIgnoreCase("Try Again")){
 						System.out.println("No suggested Spelling or Word Completion Found for this input. Try Again.");
-						userInput = sc.next();
+						userInput = sc.nextLine();
 						userInput=spellCheckAndWordComplete(userInput);
 					}
 					resultCardList = basedOnCardType(userInput, cardList);
@@ -176,6 +178,7 @@ public class Executer
 
 					break;
 				case 3:
+
 					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
 					System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Scotia Bank, CIBC, TD Bank]");
 					userInput = sc.nextLine();

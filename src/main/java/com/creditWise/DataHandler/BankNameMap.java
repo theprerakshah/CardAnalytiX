@@ -21,6 +21,7 @@ public class BankNameMap {
 
         bankMap.put("scotiabank", "scotia bank");
         bankMap.put("scotia bank", "scotia bank");
+        bankMap.put("scotia", "scotia bank");
         bankMap.put("the bank of nova scotia", "scotia bank");
     }
 
