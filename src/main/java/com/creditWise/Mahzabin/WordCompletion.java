@@ -51,7 +51,10 @@ public class WordCompletion
 			if(skipWords(line)){
 			}
 			else{
-				avlTree.insert(line.trim());
+				line = line.replaceAll("[^a-zA-Z ]", "").trim();  // Normalize data
+				if (!line.isEmpty()) {
+					avlTree.insert(line);
+				}
 			}
 		}
 		reader.close();

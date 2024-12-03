@@ -82,10 +82,7 @@ class AVLTree {
         if(node.word.toLowerCase().startsWith(prefix.toLowerCase())){
             return true;
         }
-        if (prefix.toLowerCase().compareTo(node.word.toLowerCase()) < 0) {
-            return doesPrefixExist(node.left, prefix);
-        }
-        return doesPrefixExist(node.right,prefix);
+        return doesPrefixExist(node.left, prefix) || doesPrefixExist(node.right, prefix);
 
     }
     public boolean doesPrefixExist(String prefix){

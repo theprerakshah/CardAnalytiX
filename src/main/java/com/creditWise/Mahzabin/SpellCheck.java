@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.creditWise.Mahzabin.WordCompletion.skipWords;
+
 public class SpellCheck {
 
     private final Trie root;
@@ -26,7 +28,14 @@ public class SpellCheck {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String word;
         while ((word = reader.readLine()) != null) {
-            root.insertKey(root,word);
+            if(skipWords(word)){
+            }
+            else {
+                word = word.replaceAll("[^a-zA-Z ]", "").trim();  // Normalize data
+                if (!word.isEmpty()) {
+                    root.insertKey(root, word);
+                }
+            }
         }
         reader.close();
     }
