@@ -166,7 +166,7 @@ public class Executer
 					}
 					userInput=spellCheckAndWordComplete(userInput);
 					while(userInput.equalsIgnoreCase("Try Again")){
-						System.out.println("No suggested Spelling or Word Completion Found for this input. Try Again.");
+						System.out.println("Enter a Bank Name");
 						userInput = sc.next();
 						userInput=spellCheckAndWordComplete(userInput);
 					}
@@ -245,11 +245,11 @@ public class Executer
 				{
 					System.out.println((i + 1) + " " + suggestions.get(i));
 				}
-				System.out.println("To choose a suggested word type the number associated with it. or Type 0 to not choose any of the suggestions.");
+				System.out.println("To choose a suggested word type the number associated with it. or Type 0 to not choose any and type again.");
 				int input = Integer.parseInt(scanner.nextLine());
 				if(input == 0)
 				{
-					return userInput;
+					return "Try Again";
 				}
 				else
 				{
@@ -267,11 +267,11 @@ public class Executer
 					{
 						System.out.println((i + 1) + " " + correctSpell.get(i));
 					}
-					System.out.println("To choose a suggested spelling type the number associated with it. Type 0 to not choose any.");
+					System.out.println("To choose a suggested spelling type the number associated with it. Type 0 if none matches and you want to Type again.");
 					int input = Integer.parseInt(scanner.nextLine());
 					if(input == 0)
 					{
-						return userInput;
+						return "Try Again";
 					}
 					else
 					{
@@ -280,8 +280,7 @@ public class Executer
 				}
 				else
 				{
-					System.out.println("No suggested Spelling or Word Completion Found for this input");
-					return userInput;
+					return "Try Again";
 				}
 			}
 
