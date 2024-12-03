@@ -382,7 +382,7 @@ public class Executer
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
 		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-			System.out.println("Do you want to sort the results in ascending (1) or descending (2) order?");
+			System.out.println("Do you want to sort the results by Interest Rate in : \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
 	
 			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
@@ -434,7 +434,7 @@ public class Executer
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
 		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-			System.out.println("Do you want to sort the results by Annual Fee in ascending (1) or descending (2) order?");
+			System.out.println("Do you want to sort the results in : \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
 	
 			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
@@ -511,7 +511,7 @@ public class Executer
         // Ask the user for sorting preference: 1 for Ascending, 2 for Descending
         String orderChoice = "";
         while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-            System.out.println("Do you want to sort the results in ascending (1) or descending (2) order?");
+            System.out.println("Do you want to sort the results in Annual Fee by: \n 1. Ascending order\n 2. Descending order");
             orderChoice = scanner.nextLine();
             
             if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
@@ -563,7 +563,7 @@ public class Executer
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
 		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-			System.out.println("Do you want to sort the results by Annual Fee in ascending (1) or descending (2) order?");
+			System.out.println("Do you want to sort the results by Annual Fee in \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
 	
 			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
