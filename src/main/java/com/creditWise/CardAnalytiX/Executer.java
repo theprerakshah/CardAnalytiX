@@ -3,12 +3,10 @@ package com.creditWise.CardAnalytiX;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import com.creditWise.DataHandler.BankNameMap;
+import com.creditWise.DataHandler.CardTypeMap;
 import com.creditWise.DataHandler.HtmlToText;
 import com.creditWise.DataHandler.Webcrawler;
 import com.creditWise.Mahzabin.SpellCheck;
@@ -161,6 +159,21 @@ public class Executer
 						userInput = sc.nextLine();
 						userInput=spellCheckAndWordComplete(userInput);
 					}
+
+					String cardType = CardTypeMap.getCardType(userInput);
+					while (cardType.equalsIgnoreCase("Null")){
+						System.out.println("Please Enter a Valid Card Type. [Like- Visa Card\n" +
+								"    American Express\n" +
+								"    COSTCO CARDS\n" +
+								"    STUDENT CARDS\n" +
+								"    CASH BACK CARDS\n" +
+								"    TRAVEL REWARDS CARDS\n" +
+								"    BUSINESS CREDIT CARDS\n" +
+								"    LOW INTEREST CARDS\n" +
+								"    Mastercard]");
+						userInput = sc.nextLine();
+						cardType =CardTypeMap.getCardType(userInput);
+					}
 					resultCardList = basedOnCardType(userInput, cardList);
 
 					break;
@@ -311,6 +324,22 @@ public class Executer
 		}
 
 	}
+////Test remove later
+//	private static void printCreditCardType(ArrayList<CreditCard> cardList) {
+//		// Use a HashSet to store unique card types
+//		HashSet<String> uniqueCardTypes = new HashSet<>();
+//
+//		// Add each card type to the HashSet
+//		for (CreditCard card : cardList) {
+//			uniqueCardTypes.add(card.getCardType());
+//		}
+//
+//		// Print the unique card types
+//		System.out.println("Unique Credit Card Types:");
+//		for (String cardType : uniqueCardTypes) {
+//			System.out.println(cardType);
+//		}
+//	}
 	// Method to print all credit card data
 	private static void printCreditCardData(ArrayList<CreditCard> cardList) {
 		if (cardList.isEmpty()) {

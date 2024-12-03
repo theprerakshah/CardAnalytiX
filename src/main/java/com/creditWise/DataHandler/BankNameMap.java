@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BankNameMap {
     private static final HashMap<String, String> bankMap = new HashMap<>();
 
-    // Populate the HashMap with possible inputs and their canonical forms
+    // Populating the HashMap
     static {
         bankMap.put("td", "td bank");
         bankMap.put("td bank", "td bank");
@@ -25,7 +25,7 @@ public class BankNameMap {
         bankMap.put("the bank of nova scotia", "scotia bank");
     }
 
-    // Method to get the canonical bank name
+    // Method to get the acceptable bank names
     public static String getBankName(String userInput) {
         // Normalize input (case-insensitive, trim spaces)
         userInput = userInput.toLowerCase().trim();
