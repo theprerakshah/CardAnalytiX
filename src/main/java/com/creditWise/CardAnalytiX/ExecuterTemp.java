@@ -23,115 +23,124 @@ public class ExecuterTemp
     public static void main(String[] args) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to the Credit Card Suggestion Tool!");
-        System.out.println("Please answer the following question to get your best credit card suggestion:");
-        System.out.println("1. Do you want to crawl the website?");
-        System.out.println("2. Or do you want to use existing data?");
-        System.out.print("Enter your choice (1 or 2): ");
- 
-        int choice = scanner.nextInt();
- 
-        switch(choice)
-        {
-            case 1:
-                System.out.println("\nYou chose to crawl the website.");
-                System.out.println("Initializing web crawler...");
-                // WebCrawler webCrawler = new WebCrawler();
-                // webCrawler.startCrawling();
-                case2Handler();
-                break;
- 
-            case 2:
-                case2Handler();
- 
-                break;
- 
-            default:
-                System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
-                break;
+        while (true) {  // Keeps the main menu alive until user chooses to exit
+            System.out.println("Welcome to the Credit Card Suggestion Tool!");
+            System.out.println("Please answer the following question to get your best credit card suggestion:");
+            System.out.println("1. Do you want to crawl the website?");
+            System.out.println("2. Or do you want to use existing data?");
+            System.out.println("3. Do you want to Exit the Tool");
+            System.out.print("Enter your choice (1, 2, or 3): ");
+    
+            int choice = scanner.nextInt();
+    
+            switch(choice) {
+                case 1:
+                    System.out.println("\nYou chose to crawl the website.");
+                    System.out.println("Initializing web crawler...");
+                    // WebCrawler webCrawler = new WebCrawler();
+                    // webCrawler.startCrawling();
+                    case2Handler(); // Go to case 2 handler
+                    break;
+    
+                case 2:
+                    case2Handler(); // Go to case 2 handler
+                    break;
+    
+                case 3:
+                    System.out.println("Exiting the tool...");
+                    scanner.close();
+                    return;  // Exit the program
+    
+                default:
+                    System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
+                    break;
+            }
         }
- 
-        scanner.close();
     }
  
     public static void case2Handler() throws IOException
     {
-        System.out.println("\n1. Show all Credit card Data");
-        System.out.println("2. Fetch credit card according to this preferences: Card Type, Annual Fee, Bank Name, Interest Rate");
-        System.out.println("Enter your choice (1 or 2): ");
         Scanner scanner = new Scanner(System.in);
-        ArrayList<CreditCard> cardList = Engine.Engine1();
-        //      for(CreditCard creditCard : cardList)
-        //      {
-        //          System.out.println(creditCard.cardType);
-        //      }
-        int choice = scanner.nextInt();
-        switch(choice)
-        {
-            case 1:
-                System.out.println("Fetching all Credit card Data");
-                System.out.println("Showing all Credit card Data");
-                break;
- 
-            case 2:
-                prefernceBaseCaseHandler(cardList);
- 
-                break;
- 
-            default:
-                System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
-                break;
+        while (true) {  // Keeps the case 2 menu alive until user chooses to go back
+            System.out.println("\n1. Show all Credit card Data");
+            System.out.println("2. Fetch credit card according to these preferences: Card Type, Annual Fee, Bank Name, Interest Rate");
+            System.out.println("3. Go Back to Main Menu");
+            System.out.print("Enter your choice (1, 2, or 3): ");
+            int choice = scanner.nextInt();
+    
+            switch(choice) {
+                case 1:
+                    System.out.println("Fetching all Credit card Data");
+                    System.out.println("Showing all Credit card Data");
+                    break;
+    
+                case 2:
+                    ArrayList<CreditCard> cardList = Engine.Engine1(); // Assuming Engine1 fetches the card list
+                    prefernceBaseCaseHandler(cardList); // Go to preference-based handler
+                    break;
+    
+                case 3:
+                    System.out.println("Going back to the main menu...");
+                    return; // Return to the main menu
+    
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+                    break;
+            }
         }
- 
-        scanner.close();
     }
  
     private static void prefernceBaseCaseHandler(ArrayList<CreditCard> cardList)
     {
-        System.out.println("\n1. for Searching card according to Card type ");
-        System.out.println("2. for Searching card according to Annual Fee");
-        System.out.println("3. for Searching card according to Bank Name");
-        System.out.println("4. for Searching card according to Interest Rate");
-        System.out.println("Enter your choice (1, 2, 3, or 4): ");
         Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        sc.nextLine();
-        String userInput = "";
-        ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
-        switch(choice)
-        {
-            case 1:
-                System.out.println("Select card type from this Options: [Master Card, Visa Card]");
-                System.out.println("Input:");
-                userInput = sc.nextLine();
-                resultCardList = basedOnCardType(userInput, cardList);
- 
-                break;
- 
-            case 2:
-                System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
-                userInput = sc.nextLine();
-                resultCardList = basedOnAnnualFee(userInput, cardList);
- 
-                break;
-            case 3:
-                System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Soctia Bank, CIBC, TD Bank]");
-                userInput = sc.nextLine();
-                resultCardList = basedOnBankName(userInput, cardList);
- 
-                break;
-            case 4:
-                System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
-                userInput = sc.nextLine();
-                resultCardList = basedOnInterestRate(userInput, cardList);
- 
-                break;
- 
-            default:
-                System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
-                break;
+        while (true) {  // Keeps the preference-based menu alive until user chooses to go back
+            System.out.println("\n1. Search card by Card type");
+            System.out.println("2. Search card by Annual Fee");
+            System.out.println("3. Search card by Bank Name");
+            System.out.println("4. Search card by Interest Rate");
+            System.out.println("5. Go Back to Previous Menu");
+            System.out.print("Enter your choice (1, 2, 3, 4, or 5): ");
+            int choice = sc.nextInt();
+            sc.nextLine();  // Consume newline
+            
+            String userInput = "";
+            ArrayList<CreditCard> resultCardList = new ArrayList<>();
+    
+            switch(choice) {
+                case 1:
+                    System.out.println("Select card type from this Options: [Master Card, Visa Card]");
+                    System.out.print("Input: ");
+                    userInput = sc.nextLine();
+                    resultCardList = basedOnCardType(userInput, cardList);
+                    break;
+    
+                case 2:
+                    System.out.println("Select card based on Annual Fee, Enter Your preferred annual fee:");
+                    userInput = sc.nextLine();
+                    resultCardList = basedOnAnnualFee(userInput, cardList);
+                    break;
+    
+                case 3:
+                    System.out.println("Select card based on Bank Name, Enter Your preferred Bank:[RBC, Scotia Bank, CIBC, TD Bank]");
+                    userInput = sc.nextLine();
+                    resultCardList = basedOnBankName(userInput, cardList);
+                    break;
+    
+                case 4:
+                    System.out.println("Select card based on Interest Rate, Enter Your preferred Interest rate:");
+                    userInput = sc.nextLine();
+                    resultCardList = basedOnInterestRate(userInput, cardList);
+                    break;
+    
+                case 5:
+                    System.out.println("Going back to the previous menu...");
+                    return; // Return to the previous menu (case2Handler)
+    
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3, 4, or 5.");
+                    break;
+            }
         }
- 
     }
  
     // implement Validation

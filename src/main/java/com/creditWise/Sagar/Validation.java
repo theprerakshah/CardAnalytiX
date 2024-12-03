@@ -30,12 +30,60 @@ public class Validation
 		return validWords.contains(input.toLowerCase());
 	}
 
+	public static boolean ValidationCardType(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false; // input can't be null or empty
+        }
+
+        // Regular expression pattern to match card types with only letters and spaces (no digits or special characters)
+        String regex = "^[a-zA-Z]+( [a-zA-Z]+)*$"; 
+
+        // Check if input matches the pattern
+        return input.trim().matches(regex);
+    }
+
+	public static boolean ValidationAnnualFee(String input) {
+		if (input == null || input.trim().isEmpty()) {
+			return false; // input can't be null or empty
+		}
+	
+		// Regular expression pattern to match positive annual fees, with optional decimal points
+		String regex = "^[0-9]+(\\.[0-9]+)?$"; 
+	
+		// Check if input matches the pattern
+		return input.trim().matches(regex);
+	}
+
+	public static boolean ValidationBankName(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false; // input can't be null or empty
+        }
+
+        // Regular expression pattern to match card types with only letters and spaces (no digits or special characters)
+        String regex = "^[a-zA-Z]+( [a-zA-Z]+)*$"; 
+
+        // Check if input matches the pattern
+        return input.trim().matches(regex);
+    }
+
+	public static boolean ValidationInterestRate(String input) {
+		if (input == null || input.trim().isEmpty()) {
+			return false; // input can't be null or empty
+		}
+	
+		// Regular expression pattern to match positive annual fees, with optional decimal points
+		String regex = "^[0-9]+(\\.[0-9]+)?$"; 
+	
+		// Check if input matches the pattern
+		return input.trim().matches(regex);
+	}
+	
 	// Method to validate interest rate input
     public static boolean isValidInterestRate(String input) {
         try {
             // Parse the input to a double
             double interestRate = Double.parseDouble(input);
- 
+
             // Check if the value is non-negative
             return interestRate >= 0;
         } catch (NumberFormatException e) {
@@ -43,6 +91,7 @@ public class Validation
             return false;
         }
     }
+
 	// Validation method for bank names
     public static boolean isValidBankName(String userInput, List<String> validBankNames) {
         // Check if the input matches any valid bank name (case-insensitive)

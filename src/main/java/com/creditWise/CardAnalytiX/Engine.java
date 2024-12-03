@@ -15,14 +15,14 @@ public class Engine
 	{
 		HashMap<String, String> bankToPath = new HashMap<String, String>();
 
-		String SoctiaBankData = "/scotiabank_cards.txt";
+		String ScotiaBankData = "/scotiabank_cards.txt";
 		String TDBankData = "/td_cards.txt";
 		String CIBCBankData = "/cibc_cards.txt";
 		String RBCBankData = "/rbc_cards.txt";
 		bankToPath.put("TD Bank", TDBankData);
-		bankToPath.put("Soctia Bank", SoctiaBankData);
+		bankToPath.put("Scotia Bank", ScotiaBankData);
 		bankToPath.put("CIBC", CIBCBankData);
-		//		bankToPath.put("RBC", RBCBankData);
+		bankToPath.put("RBC", RBCBankData);
 
 		ArrayList<CreditCard> cardList = cardObjectFiller(bankToPath);
 		return cardList;
