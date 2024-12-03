@@ -244,7 +244,7 @@ public class Executer
 
 
 	//Spell checking and word completion implementation.
-	private static String spellCheckAndWordComplete(String userInput)
+	public static String spellCheckAndWordComplete(String userInput)
 	{
 		Scanner scanner = new Scanner(System.in);
 		String correctspelledWord;
