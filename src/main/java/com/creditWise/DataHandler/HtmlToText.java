@@ -1,14 +1,18 @@
 package com.creditWise.DataHandler;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.json.JSONObject;
-
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.regex.*;
 
 public class HtmlToText
 {
@@ -250,10 +254,13 @@ public class HtmlToText
 
 			// Save the extracted data to output files
 			saveToFile(outputDirectory + "td_cards.txt", tdExtractedText.toString());
+			System.out.println("The data for TD Bank is stored in td_cards.txt");
 			saveToFile(outputDirectory + "scotiabank_cards.tsv", scotiaExtractedText.toString());
+			System.out.println("The data for Scotiabank is stored in scotiabank_cards.tsv");
 			saveToFile(outputDirectory + "cibc_cards.txt", cibcExtractedText.toString());
+			System.out.println("The data for CIBC is stored in cibc_cards.txt");
 			saveToFile(outputDirectory + "rbc_cards.txt", rbcExtractedText.toString());
-
+			System.out.println("The data for RBC is stored in rbc_cards.txt");
 			System.out.println("Data extraction complete! Check the output files.");
 
 		}
