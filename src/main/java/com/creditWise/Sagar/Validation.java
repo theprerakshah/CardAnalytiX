@@ -98,7 +98,7 @@ public class Validation
 		}
 	
 		// Regular expression pattern to match positive annual fees, with optional decimal points
-		String regex = "^[0-9]+(\\.[0-9]+)?$"; 
+		String regex = "^[0-9]+(\\.[0-9]+)?%?$"; 
 	
 		// Check if input matches the pattern
 		return input.trim().matches(regex);
