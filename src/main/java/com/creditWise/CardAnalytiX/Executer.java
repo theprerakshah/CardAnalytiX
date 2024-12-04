@@ -142,7 +142,7 @@ public class Executer
 
 					case 7:
 						System.out.println("Going back to the main menu...");
-						//						scanner.close();
+						
 						return;
 
 					default:
@@ -511,21 +511,20 @@ public class Executer
 		HashMap<String, HashMap<String, ArrayList<String>>> dataForFrequency = WordSearcher.invertedIndexing(cardList, word.trim().toLowerCase());
 		if(dataForFrequency != null)
 		{
-			System.out.println("Do you want word count from this bankWebsite? (Y | N):");
-			String freqInput = reader.readLine();
-			freqInput = freqInput.trim();
-
-			if(freqInput.equalsIgnoreCase("Y"))
-			{
-				WordFrequency.countFrequency(dataForFrequency);
-			}
-			else if(freqInput.equalsIgnoreCase("N"))
-			{
-				System.out.println("Skipping word count...");
-			}
-			else
-			{
-				System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+			while (true) {
+				System.out.println("Do you want word count from this bankWebsite? (Y | N):");
+				String freqInput = reader.readLine();
+				freqInput = freqInput.trim();
+			
+				if (freqInput.equalsIgnoreCase("Y")) {
+					WordFrequency.countFrequency(dataForFrequency);
+					break; // Exit the loop after valid input
+				} else if (freqInput.equalsIgnoreCase("N")) {
+					System.out.println("Skipping word count...");
+					break; // Exit the loop after valid input
+				} else {
+					System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+				}
 			}
 		}
 	}
@@ -832,53 +831,56 @@ public class Executer
 		return resultCardList;
 	}
 
-	private static void wordFrequencyRankBased(ArrayList<CreditCard> cardList) throws IOException
-	{
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter the word you want to look for in bank website:");
-		String word = reader.readLine();
-
+	private static void wordFrequencyRankBased(ArrayList<CreditCard> cardList) throws IOException {
+		Scanner scanner = new Scanner(System.in); // Use Scanner for user input
+		System.out.println("Enter the word you want to look for in the bank website:");
+	
+		// Get valid word input using the validation method
+		String word = Validation.getWordOnlyInput(scanner, "Enter only words: ");
+	
+		// Process the input and perform the ranking
 		Map<String, Integer> rankedWiseWebsite = PageRanking.RankBankBasedOnWordFrequency(word, cardList);
-		for(Entry<String, Integer> rankedData : rankedWiseWebsite.entrySet())
-		{
+	
+		// Display the ranking results
+		for (Map.Entry<String, Integer> rankedData : rankedWiseWebsite.entrySet()) {
 			System.out.println(rankedData.getKey() + " - Score: " + rankedData.getValue());
 		}
 	}
+	
 
 	//Case 4 Popular Search 
-	public static void viewPopularSearchTerms()
-	{
-		try
-		{
+	public static void viewPopularSearchTerms() {
+		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("\nChoose a field to view popular search terms:");
-			System.out.println("1. Bank Name");
-			System.out.println("2. Card Name");
-			System.out.println("3. Card Type");
-
-			System.out.print("Enter your choice (1-3): ");
-			String fieldChoice = reader.readLine(); // Read input
-
-			switch(fieldChoice)
-			{
-				case "1":
+			String fieldChoice;
+	
+			while (true) {
+				System.out.println("\nChoose a field to view popular search terms:");
+				System.out.println("1. Bank Name");
+				System.out.println("2. Card Name");
+				System.out.println("3. Card Type");
+				System.out.print("Enter your choice (1-3): ");
+				
+				fieldChoice = reader.readLine().trim(); // Read and trim input
+	
+				// Validate input
+				if (fieldChoice.equals("1")) {
 					SearchFrequencyRBTree.displaySearchTerms("Bank Name");
-					break;
-				case "2":
+					break; // Exit the loop after processing a valid choice
+				} else if (fieldChoice.equals("2")) {
 					SearchFrequencyRBTree.displaySearchTerms("Card Name");
 					break;
-				case "3":
+				} else if (fieldChoice.equals("3")) {
 					SearchFrequencyRBTree.displaySearchTerms("Card Type");
 					break;
-
-				default:
-					System.out.println("Invalid choice.");
+				} else {
+					System.out.println("Invalid choice. Please enter a valid option (1, 2, or 3).");
+				}
 			}
-		}
-		catch(IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

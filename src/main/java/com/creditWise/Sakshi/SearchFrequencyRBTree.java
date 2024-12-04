@@ -14,6 +14,7 @@ import java.util.Scanner;
 import com.creditWise.CardAnalytiX.CreditCard;
 import com.creditWise.CardAnalytiX.Engine;
 import com.creditWise.CardAnalytiX.Executer;
+import com.creditWise.Sagar.Validation;
 
 public class SearchFrequencyRBTree
 {
@@ -41,18 +42,15 @@ public class SearchFrequencyRBTree
 		switch(choice)
 		{
 			case "1":
-				System.out.print("Enter Bank Name: ");
-				String bankName = scanner.nextLine().toLowerCase(); // Get user input for Bank Name
+				String bankName = Validation.getWordOnlyInput(scanner, "Enter Bank Name: ").toLowerCase(); // Get user input for Bank Name
 				addSearchTerm(bankName, "Bank Name");
 				break;
 			case "2":
-				System.out.print("Enter Card Name: ");
-				String cardName = scanner.nextLine().toLowerCase(); // Get user input for Card Name
+				String cardName =  Validation.getWordOnlyInput(scanner, "Enter Card Name: ").toLowerCase(); // Get user input for Card Name
 				addSearchTerm(cardName, "Card Name");
 				break;
 			case "3":
-				System.out.print("Enter Card Type: ");
-				String cardType = scanner.nextLine().toLowerCase(); // Get user input for Card Type
+				String cardType = Validation.getWordOnlyInput(scanner, "Enter Card Type: ").toLowerCase(); // Get user input for Card Type
 				addSearchTerm(cardType, "Card Type");
 				break;
 			case "4":

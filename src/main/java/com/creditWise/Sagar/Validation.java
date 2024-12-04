@@ -1,6 +1,9 @@
 package com.creditWise.Sagar;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -15,6 +18,23 @@ public class Validation
 		return validWords.contains(input.toLowerCase());
 	}
 
+    
+    public static boolean isWordOnly(String input) {
+        return input.matches("[a-zA-Z\\s]+"); // Matches only letters and spaces
+    }
+
+     public static String getWordOnlyInput(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            String input = scanner.nextLine().trim();
+
+            if (isWordOnly(input)) {
+                return input; // Return valid input
+            } else {
+                System.out.println("Invalid input. Please enter valid words.");
+            }
+        }
+    }
 	
 	 //Validates that the card type input is in a valid format.	 
 	public static boolean isValidCardType(String input, Set<String> validWords)
@@ -95,6 +115,22 @@ public class Validation
         } catch (NumberFormatException e) {
             // Input is not a valid number
             return false;
+        }
+    }
+
+    public static String validateYesNoInput(BufferedReader reader) throws IOException {
+        String input;
+
+        while (true) {
+            System.out.println("Do you want word count from this bankWebsite? (Y | N):");
+            input = reader.readLine();
+            input = input.trim();
+
+            if (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("N")) {
+                return input; // Return valid input
+            } else {
+                System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+            }
         }
     }
 
