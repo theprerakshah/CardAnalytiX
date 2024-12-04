@@ -1,15 +1,15 @@
 Card Name	Cardtype	Annual Fee	Purchase Interest Rate	Additional Feature
-TD Cash Back Visa Infinite*	Visa Card	$139	20.99%%	Earn up to $500 in value, including 10% in Cash Back Dollars in the first 3 months on Bonus Eligible Purchases up to a total spend of $3,500. Conditions apply. Account must be approved by January 6, 2025.
-TD Cash Back Visa*	Visa Card	$0	22.99%%	Earn Cash Back Dollars. Redeem them to help pay down your Account balance.
-TD® Aeroplan® Visa Infinite*	Visa Card	$139	19.99%%	Earn up to $1,300 in value including up to 40,000 Aeroplan points and no Annual Fee for the first year.
-TD® Aeroplan® Visa Platinum* Credit	Visa Card	$89	22.99%%	Earn up to $500 in value, including up to 20,000 Aeroplan points and no Annual Fee for the first year.
-TD® Aeroplan® Visa Infinite Privilege* Credit	Visa Card	$599	20.99%%	Earn up to $2,900 in value including up to 80,000 Aeroplan points.
-TD First Class Travel® Visa Infinite*	Visa Card	$139	22.99%%	Earn up to $1,000 in value, including up to 135,000 TD Rewards Points and no Annual Fee for the first year.
-TD Platinum Travel Visa*	Visa Card	$89	20.99%%	Earn up to $370 in value, including up to 50,000 TD Rewards Points and no Annual Fee for the first year.
-TD Rewards Visa*	Visa Card	$0	22.99%%	Earn a value of $50 in TD Rewards Points to use on eligible Amazon.ca purchases plus, no Annual Fee.
-TD Low Rate Visa*	Visa Card	$25	20.99%%	Earn a value of up to $1,122 in TD Rewards Points (that's up to 175,000 TD Rewards Points) full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
-TD U.S. Dollar Visa*	Visa Card	$39 USD	22.99%%	Earn up to 50,000 Aeroplan points with full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
-TD Business Travel Visa*	Visa Card	$149	20.99%%	No Advantages
-TD® Aeroplan® Visa* Business	Visa Card	$149	22.99%%	No Advantages
-TD Business Cash Back Visa*	Visa Card	$0	20.99%%	No Advantages
-TD Business Select Rate Visa*	Visa Card	$0	22.99%%	No Advantages
+TD Cash Back Visa Infinite*	Visa Card	$139	20.99%	Earn up to $500 in value, including 10% in Cash Back Dollars in the first 3 months on Bonus Eligible Purchases up to a total spend of $3,500. Conditions apply. Account must be approved by January 6, 2025.
+TD Cash Back Visa*	Visa Card	$0	22.99%	Earn Cash Back Dollars. Redeem them to help pay down your Account balance.
+TD® Aeroplan® Visa Infinite*	Visa Card	$139	19.99%	Earn up to $1,300 in value including up to 40,000 Aeroplan points and no Annual Fee for the first year.
+TD® Aeroplan® Visa Platinum* Credit	Visa Card	$89	22.99%	Earn up to $500 in value, including up to 20,000 Aeroplan points and no Annual Fee for the first year.
+TD® Aeroplan® Visa Infinite Privilege* Credit	Visa Card	$599	20.99%	Earn up to $2,900 in value including up to 80,000 Aeroplan points.
+TD First Class Travel® Visa Infinite*	Visa Card	$139	22.99%	Earn up to $1,000 in value, including up to 135,000 TD Rewards Points and no Annual Fee for the first year.
+TD Platinum Travel Visa*	Visa Card	$89	20.99%	Earn up to $370 in value, including up to 50,000 TD Rewards Points and no Annual Fee for the first year.
+TD Rewards Visa*	Visa Card	$0	22.99%	Earn a value of $50 in TD Rewards Points to use on eligible Amazon.ca purchases plus, no Annual Fee.
+TD Low Rate Visa*	Visa Card	$25	20.99%	Earn a value of up to $1,122 in TD Rewards Points (that's up to 175,000 TD Rewards Points) full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
+TD U.S. Dollar Visa*	Visa Card	$39 USD	22.99%	Earn up to 50,000 Aeroplan points with full Annual Fee Rebates in the first year for the Primary Cardholder and first two Additional Cardholders.
+TD Business Travel Visa*	Visa Card	$149	20.99%	No Advantages
+TD® Aeroplan® Visa* Business	Visa Card	$149	22.99%	No Advantages
+TD Business Cash Back Visa*	Visa Card	$0	20.99%	No Advantages
+TD Business Select Rate Visa*	Visa Card	$0	22.99%	No Advantages

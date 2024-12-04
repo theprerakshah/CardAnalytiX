@@ -3,23 +3,35 @@ package com.creditWise.CardAnalytiX;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
 
-import com.creditWise.DataHandler.*;
-import com.creditWise.Mahzabin.*;
-import com.creditWise.Prerak.*;
-import com.creditWise.Sagar.*;
-import com.creditWise.Sakshi.*;
+import com.creditWise.DataHandler.BankNameMap;
+import com.creditWise.DataHandler.CardTypeMap;
+import com.creditWise.DataHandler.HtmlToText;
+import com.creditWise.DataHandler.Webcrawler;
+import com.creditWise.Mahzabin.SpellCheck;
+import com.creditWise.Mahzabin.WordCompletion;
+import com.creditWise.Prerak.PageRanking;
+import com.creditWise.Prerak.WordFrequency;
+import com.creditWise.Prerak.WordSearcher;
+import com.creditWise.Sagar.Validation;
+import com.creditWise.Sagar.mergeSort;
+import com.creditWise.Sakshi.SearchFrequencyRBTree;
 
 /**
  * Credit Card Suggestion Tool
  */
 public class Executer
 {
-	private static WordCompletion wordCompletion = new WordCompletion();
-	private static SpellCheck spellCheck = new SpellCheck();
-	private static BankNameMap bankNameMap =new BankNameMap();
-	private static Webcrawler Webcrawler = new Webcrawler();
+	private static WordCompletion	wordCompletion	= new WordCompletion();
+	private static SpellCheck		spellCheck		= new SpellCheck();
+	private static BankNameMap		bankNameMap		= new BankNameMap();
+	private static Webcrawler		Webcrawler		= new Webcrawler();
 
 	public static void main(String[] args) throws IOException
 	{
@@ -41,9 +53,9 @@ public class Executer
 				case 1:
 					System.out.println("\nYou chose to crawl the website.");
 					System.out.println("Initializing web crawler...");
-				    Webcrawler.main(args);
+					Webcrawler.main(args);
 					HtmlToText.main(args);
-					
+
 					case2Handler();
 					return;
 
@@ -74,8 +86,9 @@ public class Executer
 			System.out.println("3. Fetch data according to word Frequency");
 			System.out.println("4. Search");
 			System.out.println("5. Most Popular Suggetions");
-			System.out.println("6. Go Back to Main Menu");
-		
+			System.out.println("6. Ranking website according to your specific requirement");
+			System.out.println("7. Go Back to Main Menu");
+
 			System.out.print("Enter your choice (1, 2, 3, 4, 5 or 6): ");
 
 			ArrayList<CreditCard> cardList = Engine.Engine1();
@@ -98,16 +111,20 @@ public class Executer
 
 					break;
 				case 4:
-                    SearchFrequencyRBTree.SearchInputs();
-				    break;
+					SearchFrequencyRBTree.SearchInputs();
+					break;
 				case 5:
-				    viewPopularSearchTerms();
-				    break;
-				
+					viewPopularSearchTerms();
+					break;
+
 				case 6:
-				System.out.println("Going back to the main menu...");
-				return;
-				
+					wordFrequencyRankBased(cardList);
+					break;
+
+				case 7:
+					System.out.println("Going back to the main menu...");
+					scanner.close();
+					return;
 
 				default:
 					System.out.println("Invalid choice. Please restart the tool and enter 1, 2, 3, or 4:");
@@ -115,7 +132,6 @@ public class Executer
 			}
 		}
 	}
-
 
 	private static void prefernceBaseCaseHandler(ArrayList<CreditCard> cardList)
 	{
@@ -136,28 +152,25 @@ public class Executer
 			{
 				case 1:
 
-					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
-					while (true) {
-						System.out.println("Select Card Type From These Options. \n"+ "    Visa Card\n" +
-								"    American Express\n" +
-								"    Costco Cards\n" +
-								"    Student Cards\n" +
-								"    Cash Back Cards\n" +
-								"    Travel Rewards Cards\n" +
-								"    Business Credit Cards\n" +
-								"    Low Interest Cards\n" +
-								"    Mastercard");
+					if(sc.hasNextLine())
+						sc.nextLine(); // Clears leftover newline
+					while(true)
+					{
+						System.out.println("Select Card Type From These Options. \n" + "    Visa Card\n" + "    American Express\n" + "    Costco Cards\n" + "    Student Cards\n"
+								+ "    Cash Back Cards\n" + "    Travel Rewards Cards\n" + "    Business Credit Cards\n" + "    Low Interest Cards\n" + "    Mastercard");
 						System.out.println("Input:");
 
 						// Take user input
 						userInput = sc.nextLine();
 
 						// Step 1: Validate Bank Name
-						if (!Validation.ValidationCardType(userInput)) {
+						if(!Validation.ValidationCardType(userInput))
+						{
 							System.out.println("Please Enter a Valid Credit Card Type.");
 							continue; // Restart the loop for a valid input
 						}
-						if(!CardTypeMap.getCardType(userInput).equalsIgnoreCase("Null")){
+						if(!CardTypeMap.getCardType(userInput).equalsIgnoreCase("Null"))
+						{
 							resultCardList = basedOnCardType(userInput, cardList);
 							break;
 						}
@@ -166,7 +179,8 @@ public class Executer
 						userInput = spellCheckAndWordComplete(userInput);
 
 						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if (userInput.equalsIgnoreCase("Try Again")) {
+						if(userInput.equalsIgnoreCase("Try Again"))
+						{
 							System.out.println("Invalid input after suggestions. Please try again.");
 							continue; // Restart the loop for new input
 						}
@@ -174,7 +188,8 @@ public class Executer
 						// Step 3: Map Lookup
 						String cardType = CardTypeMap.getCardType(userInput);
 
-						if (cardType.equalsIgnoreCase("Null")) {
+						if(cardType.equalsIgnoreCase("Null"))
+						{
 							System.out.println("Please Enter a Valid Card Type.");
 							continue; // Restart the loop if no valid bank name is found in the map
 						}
@@ -197,19 +212,23 @@ public class Executer
 
 					break;
 				case 3:
-					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
-					while (true) {
+					if(sc.hasNextLine())
+						sc.nextLine(); // Clears leftover newline
+					while(true)
+					{
 						System.out.println("Select card based on Bank Name, Enter Your preferred Bank: [RBC, Scotia Bank, CIBC, TD Bank]");
 
 						// Take user input
 						userInput = sc.nextLine();
 
 						// Step 1: Validate Bank Name
-						if (!Validation.ValidationBankName(userInput)) {
+						if(!Validation.ValidationBankName(userInput))
+						{
 							System.out.println("Invalid Bank Name. Please enter a valid bank name.");
 							continue; // Restart the loop for a valid input
 						}
-						if(!bankNameMap.getBankName(userInput).equalsIgnoreCase("Null")){
+						if(!bankNameMap.getBankName(userInput).equalsIgnoreCase("Null"))
+						{
 							resultCardList = basedOnBankName(userInput, cardList);
 							break;
 						}
@@ -218,7 +237,8 @@ public class Executer
 						userInput = spellCheckAndWordComplete(userInput);
 
 						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if (userInput.equalsIgnoreCase("Try Again")) {
+						if(userInput.equalsIgnoreCase("Try Again"))
+						{
 							System.out.println("Invalid input after suggestions. Please try again.");
 							continue; // Restart the loop for new input
 						}
@@ -226,7 +246,8 @@ public class Executer
 						// Step 3: Map Lookup
 						String bankName = bankNameMap.getBankName(userInput);
 
-						if (bankName.equalsIgnoreCase("Null")) {
+						if(bankName.equalsIgnoreCase("Null"))
+						{
 							System.out.println("Bank Name not found. Please enter a valid bank name from the options.");
 							continue; // Restart the loop if no valid bank name is found in the map
 						}
@@ -259,441 +280,551 @@ public class Executer
 		}
 	}
 
-
 	//Spell checking and word completion implementation.
-	public static String spellCheckAndWordComplete(String userInput) {
+	public static String spellCheckAndWordComplete(String userInput)
+	{
 		Scanner scanner = new Scanner(System.in);
 		String correctSpelledWord;
 
-		try {
+		try
+		{
 			// Case 1: The word is spelled correctly
-			if (spellCheck.search(userInput)) {
+			if(spellCheck.search(userInput))
+			{
 				correctSpelledWord = userInput;
 
 				// Move to autocomplete
 				System.out.println("Suggested Autocomplete words: ");
 				List<String> suggestions = wordCompletion.autocomplete(correctSpelledWord, 5);
 
-				for (int i = 0; i < suggestions.size(); i++) {
+				for(int i = 0; i < suggestions.size(); i++)
+				{
 					System.out.println((i + 1) + " " + suggestions.get(i));
 				}
 
 				int input = getValidInput(scanner, 0, suggestions.size(), "To choose a suggested word type the number associated with it, or type 0 to not choose any of the suggestions.");
 
-				if (input == 0) {
+				if(input == 0)
+				{
 					return correctSpelledWord;
-				} else {
+				}
+				else
+				{
 					return suggestions.get(input - 1);
 				}
 			}
-			else {
+			else
+			{
 				// Case 2: The word is not spelled correctly, but has possible prefix matches
-				if (wordCompletion.doesPrefixExist(userInput)) {
+				if(wordCompletion.doesPrefixExist(userInput))
+				{
 					System.out.println("Suggested Autocomplete words: ");
 					List<String> suggestions = wordCompletion.autocomplete(userInput, 5);
 
-					for (int i = 0; i < suggestions.size(); i++) {
+					for(int i = 0; i < suggestions.size(); i++)
+					{
 						System.out.println((i + 1) + " " + suggestions.get(i));
 					}
 
 					int input = getValidInput(scanner, 0, suggestions.size(), "To choose a suggested word type the number associated with it, or type 0 to not choose any and type again.");
 
-					if (input == 0) {
+					if(input == 0)
+					{
 						return "Try Again";
-					} else {
+					}
+					else
+					{
 						return suggestions.get(input - 1);
 					}
 				}
-				else {
+				else
+				{
 					// Case 3: The word does not have valid suggestions or matches
 					System.out.println(userInput + " might be spelled incorrectly.");
 					List<String> correctSpell = spellCheck.suggestAlternatives(userInput);
 
-					if (!correctSpell.isEmpty()) {
+					if(!correctSpell.isEmpty())
+					{
 						System.out.println("Did you mean these?");
-						for (int i = 0; i < correctSpell.size(); i++) {
+						for(int i = 0; i < correctSpell.size(); i++)
+						{
 							System.out.println((i + 1) + " " + correctSpell.get(i));
 						}
 
-						int input = getValidInput(scanner, 0, correctSpell.size(), "To choose a suggested spelling type the number associated with it, or type 0 if none matches and you want to type again.");
+						int input = getValidInput(scanner, 0, correctSpell.size(),
+								"To choose a suggested spelling type the number associated with it, or type 0 if none matches and you want to type again.");
 
-						if (input == 0) {
+						if(input == 0)
+						{
 							return "Try Again";
-						} else {
+						}
+						else
+						{
 							return correctSpell.get(input - 1);
 						}
-					} else {
+					}
+					else
+					{
 						return "Try Again";
 					}
 				}
 			}
 		}
-		catch (Exception e) {
+		catch(Exception e)
+		{
 			System.out.println("An unexpected error occurred: " + e.getMessage());
 			return "Try Again";
 		}
 	}
-	private static int getValidInput(Scanner scanner, int min, int max, String message) {
+
+	private static int getValidInput(Scanner scanner, int min, int max, String message)
+	{
 		int input = -1;
 
-		while (true) {
-			try {
+		while(true)
+		{
+			try
+			{
 				System.out.println(message);
 				input = Integer.parseInt(scanner.nextLine());
 
 				// Check if the input is within the valid range
-				if (input >= min && input <= max) {
+				if(input >= min && input <= max)
+				{
 					break;
-				} else {
+				}
+				else
+				{
 					System.out.println("Invalid input. Please enter a number between " + min + " and " + max + ".");
 				}
-			} catch (NumberFormatException e) {
+			}
+			catch(NumberFormatException e)
+			{
 				System.out.println("Invalid input. Please enter a valid integer.");
 			}
 		}
 
 		return input;
 	}
+
 	// Method to print all credit card data
-	private static void printCreditCardData(ArrayList<CreditCard> cardList) {
-		if (cardList.isEmpty()) {
+	private static void printCreditCardData(ArrayList<CreditCard> cardList)
+	{
+		if(cardList.isEmpty())
+		{
 			System.out.println("No credit card data available.");
 			return;
 		}
+		// Print table header
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-20s | %-50s | %-10s | %-12s | %-22s | %-60s |\n", "Bank Name", "Card Name", "Card Type", "Annual Fee", "Interest Rate", "Additional Features");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");
 
-		System.out.println("Credit Card Details:");
-		for (CreditCard card : cardList) {
-			System.out.println("-----------------------------------------");
-			System.out.println("Bank Name: " + card.getBank());
-			System.out.println("Card Name: " + card.getCardName());
-			System.out.println("Card Type: " + card.getCardType());
-			System.out.println("Annual Fee: " + card.getAnnualFee());
-			System.out.println("Purchase Interest Rate: " + card.getPurchaseInterestRate());
-			System.out.println("Additional Features: " + card.getAdditionalFeatures());
-
+		// Print each card's details in rows
+		for(CreditCard card : cardList)
+		{
+			System.out.printf("| %-20s | %-50s | %-10s | %-12.2s | %-22s | %-60s |\n", card.getBank(), card.getCardName(), card.getCardType(), card.getAnnualFee(), card.getPurchaseInterestRate(),
+					card.getAdditionalFeatures());
 		}
+
+		// Footer line for the table
+		System.out.println("----------------------------------------------------------------------------------");
+
 	}
 
-	private static void documentWordSearchAndFrequency(ArrayList<CreditCard> cardList) throws IOException {
+	private static void documentWordSearchAndFrequency(ArrayList<CreditCard> cardList) throws IOException
+	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String word;
-	
+
 		// Loop until valid input is provided
-		while (true) {
+		while(true)
+		{
 			System.out.println("Enter the word you want to look for in the bank website:");
 			word = reader.readLine();
-	
+
 			// Validate input using the regex
-			if (Validation.documentWordSearchAndFrequency(word)) {
+			if(Validation.documentWordSearchAndFrequency(word))
+			{
 				break; // Exit loop if input is valid
-			} else {
+			}
+			else
+			{
 				System.out.println("Invalid input. Please enter a valid word.");
 			}
 		}
-	
+
 		HashMap<String, HashMap<String, ArrayList<String>>> dataForFrequency = WordSearcher.invertedIndexing(cardList, word.trim().toLowerCase());
-		if (dataForFrequency != null) {
+		if(dataForFrequency != null)
+		{
 			System.out.println("Do you want word count from this bankWebsite? (Y | N):");
 			String freqInput = reader.readLine();
 			freqInput = freqInput.trim();
-	
-			if (freqInput.equalsIgnoreCase("Y")) {
+
+			if(freqInput.equalsIgnoreCase("Y"))
+			{
 				WordFrequency.countFrequency(dataForFrequency);
-			} else if (freqInput.equalsIgnoreCase("N")) {
+			}
+			else if(freqInput.equalsIgnoreCase("N"))
+			{
 				System.out.println("Skipping word count...");
-			} else {
+			}
+			else
+			{
 				System.out.println("Invalid input. Please enter 'Y' or 'N'.");
 			}
 		}
 	}
 
-	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList) {
+	private static ArrayList<CreditCard> basedOnInterestRate(String userInput, ArrayList<CreditCard> cardList)
+	{
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
-	
+
 		// Validate input
-		while (!Validation.isValidInterestRate(userInput)) {
+		while(!Validation.isValidInterestRate(userInput))
+		{
 			System.out.println("Invalid Interest Rate. Please enter a valid non-negative number:");
 			userInput = scanner.nextLine();
 		}
-	
+
 		// Convert the validated input to a double
 		double userInterestRate = -1;
-		try {
+		try
+		{
 			userInterestRate = Double.parseDouble(userInput); // Convert String to double
-		} catch (NumberFormatException e) {
+		}
+		catch(NumberFormatException e)
+		{
 			System.out.println("Error: Invalid number format.");
 			return resultCardList; // Return empty list if input is invalid
 		}
-	
+
 		// Filter the cards based on interest rate
-		for (CreditCard card : cardList) {
-			try {
+		for(CreditCard card : cardList)
+		{
+			try
+			{
 				// Extract numeric part from the interest rate string (remove non-numeric characters)
 				String interestRateString = card.getPurchaseInterestRate().replaceAll("[^0-9.]", "");
-	
+
 				// If the string is not empty after removing non-numeric characters
-				if (!interestRateString.isEmpty()) {
+				if(!interestRateString.isEmpty())
+				{
 					double cardInterestRate = Double.parseDouble(interestRateString);
-	
+
 					// Now compare the interest rate
-					if (cardInterestRate <= userInterestRate) {
+					if(cardInterestRate <= userInterestRate)
+					{
 						resultCardList.add(card);
 					}
-				} else {
+				}
+				else
+				{
 					System.out.println("Invalid interest rate for card: " + card.getCardName());
 				}
-			} catch (NumberFormatException e) {
+			}
+			catch(NumberFormatException e)
+			{
 				System.out.println("Error parsing the interest rate for card: " + card.getCardName());
 			}
 		}
-	
+
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
-		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
+		{
 			System.out.println("Do you want to sort the results by Interest Rate in : \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
-	
-			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+
+			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
+			{
 				System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
 			}
 		}
-	
+
 		// Check if user chose ascending or descending
 		boolean isAscending = true; // Default is ascending
-		if (orderChoice.equals("2")) {
+		if(orderChoice.equals("2"))
+		{
 			isAscending = false;
 		}
-	
+
 		// Sort the result list using MergeSort
 		resultCardList = mergeSort.sort(resultCardList, isAscending);
-	
+
 		// Handle the result and display
-		if (resultCardList.isEmpty()) {
+		if(resultCardList.isEmpty())
+		{
 			System.out.println("No credit cards found with an interest rate of " + userInterestRate + " or less.");
-		} else {
-			System.out.println("Credit cards found with an interest rate of " + userInterestRate + " or less:");
-			for (CreditCard card : resultCardList) {
-				System.out.println("Card Name: " + card.getCardName() + ", Interest Rate: " + card.getPurchaseInterestRate());
-			}
 		}
-	
+		else
+		{
+			System.out.println("Credit cards found with an interest rate of " + userInterestRate + " or less:");
+			printCreditCardData(resultCardList);
+		}
+
 		return resultCardList;
 	}
-	
 
 	// Implement word Completion, spell checking , validation
-	private static ArrayList<CreditCard> basedOnBankName(String userInput, ArrayList<CreditCard> cardList) {
+	private static ArrayList<CreditCard> basedOnBankName(String userInput, ArrayList<CreditCard> cardList)
+	{
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
-	
+
 		// Validate the user input (you may add any specific validation for the input)
-		while (userInput == null || userInput.isEmpty()) {
+		while(userInput == null || userInput.isEmpty())
+		{
 			System.out.println("Invalid input. Please enter a valid bank name:");
 			userInput = scanner.nextLine();
 		}
-	
+
 		// Filter the cards based on the bank name (case insensitive matching)
-		for (CreditCard card : cardList) {
-			if (card.getBank() != null && card.getBank().toLowerCase().contains(userInput.toLowerCase())) {
+		for(CreditCard card : cardList)
+		{
+			if(card.getBank() != null && card.getBank().toLowerCase().contains(userInput.toLowerCase()))
+			{
 				resultCardList.add(card);
 			}
 		}
-	
+
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
-		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
+		{
 			System.out.println("Do you want to sort the results in : \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
-	
-			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+
+			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
+			{
 				System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
 			}
 		}
-	
+
 		// Check if user chose ascending or descending
 		boolean isAscending = true; // Default is ascending
-		if (orderChoice.equals("2")) {
+		if(orderChoice.equals("2"))
+		{
 			isAscending = false;
 		}
-	
+
 		// Sort the result list by Annual Fee
 		resultCardList = mergeSort.sortByAnnualFee(resultCardList, isAscending);
-	
+
 		// Display the result
-		if (resultCardList.isEmpty()) {
+		if(resultCardList.isEmpty())
+		{
 			System.out.println("No credit cards found for the specified bank name.");
-		} else {
-			System.out.println("Credit cards found for the bank: " + userInput);
-			for (CreditCard card : resultCardList) {
-				System.out.println("Card Name: " + card.getCardName() + ", Bank Name: " + card.getBank() + ", Annual Fee: " + card.getAnnualFee());
-			}
 		}
-	
+		else
+		{
+			System.out.println("Credit cards found for the bank: " + userInput);
+			printCreditCardData(resultCardList);
+		}
+
 		return resultCardList;
 	}
-	
 
-	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList) {
-        ArrayList<CreditCard> resultCardList = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-    
-        // Validate input
-        while (!Validation.isValidInterestRate(userInput)) {
-            System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
-            userInput = scanner.nextLine();
-        }
-    
-        // Convert the validated input to a double
-        double userAnnualFee = -1;
-        try {
-            userAnnualFee = Double.parseDouble(userInput); // Convert String to double
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid number format.");
-            return resultCardList; // Return empty list if input is invalid
-        }
-    
-        // Filter the cards based on annual fee
-        for (CreditCard card : cardList) {
-            try {
-                // Extract numeric part from the annual fee string (remove non-numeric characters)
-                String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "");
-    
-                // If the string is not empty after removing non-numeric characters
-                if (!annualFeeString.isEmpty()) {
-                    double cardAnnualFee = Double.parseDouble(annualFeeString);
-    
-                    // Now compare the annual fee
-                    if (cardAnnualFee <= userAnnualFee) {
-                        resultCardList.add(card);
-                    }
-                } else {
-                    // Handle case where annual fee is not a valid number
-                    //System.out.println("Invalid annual fee for card: " + card.getCardName());
-                }
-            } catch (NumberFormatException e) {
-                // In case parsing still fails
-                System.out.println("Error parsing the annual fee for card: " + card.getCardName());
-            }
-        }
-    
-        // Ask the user for sorting preference: 1 for Ascending, 2 for Descending
-        String orderChoice = "";
-        while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-            System.out.println("Do you want to sort the results in Annual Fee by: \n 1. Ascending order\n 2. Descending order");
-            orderChoice = scanner.nextLine();
-            
-            if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
-                System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
-            }
-        }
-    
-        // Check if user chose ascending or descending
-        boolean isAscending = true; // Default is ascending
-        if (orderChoice.equals("2")) {
-            isAscending = false;
-        }
-    
-        // Sort the result list using MergeSort
-        resultCardList = mergeSort.sort(resultCardList, isAscending);  // Corrected method call
-    
-        // Handle the result and display
-        if (resultCardList.isEmpty()) {
-            System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
-        } else {
-            System.out.println("Credit cards found with an annual fee of " + userAnnualFee + " or less:");
-            for (CreditCard card : resultCardList) {
-                System.out.println("Card Name: " + card.getCardName() + ", Annual Fee: " + card.getAnnualFee());
-            }
-        }
-    
-        return resultCardList;
-    }
-    
-
-	// implement word completion, spell checking and validation.
-	private static ArrayList<CreditCard> basedOnCardType(String userInput, ArrayList<CreditCard> cardList) {
+	private static ArrayList<CreditCard> basedOnAnnualFee(String userInput, ArrayList<CreditCard> cardList)
+	{
 		ArrayList<CreditCard> resultCardList = new ArrayList<>();
 		Scanner scanner = new Scanner(System.in);
-	
+
+		// Validate input
+		while(!Validation.isValidInterestRate(userInput))
+		{
+			System.out.println("Invalid annual fee. Please enter a valid non-negative number:");
+			userInput = scanner.nextLine();
+		}
+
+		// Convert the validated input to a double
+		double userAnnualFee = -1;
+		try
+		{
+			userAnnualFee = Double.parseDouble(userInput); // Convert String to double
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("Error: Invalid number format.");
+			return resultCardList; // Return empty list if input is invalid
+		}
+
+		// Filter the cards based on annual fee
+		for(CreditCard card : cardList)
+		{
+			try
+			{
+				// Extract numeric part from the annual fee string (remove non-numeric characters)
+				String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "");
+
+				// If the string is not empty after removing non-numeric characters
+				if(!annualFeeString.isEmpty())
+				{
+					double cardAnnualFee = Double.parseDouble(annualFeeString);
+
+					// Now compare the annual fee
+					if(cardAnnualFee <= userAnnualFee)
+					{
+						resultCardList.add(card);
+					}
+				}
+				else
+				{
+					// Handle case where annual fee is not a valid number
+					//System.out.println("Invalid annual fee for card: " + card.getCardName());
+				}
+			}
+			catch(NumberFormatException e)
+			{
+				// In case parsing still fails
+				System.out.println("Error parsing the annual fee for card: " + card.getCardName());
+			}
+		}
+
+		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
+		String orderChoice = "";
+		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
+		{
+			System.out.println("Do you want to sort the results in Annual Fee by: \n 1. Ascending order\n 2. Descending order");
+			orderChoice = scanner.nextLine();
+
+			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
+			{
+				System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
+			}
+		}
+
+		// Check if user chose ascending or descending
+		boolean isAscending = true; // Default is ascending
+		if(orderChoice.equals("2"))
+		{
+			isAscending = false;
+		}
+
+		// Sort the result list using MergeSort
+		resultCardList = mergeSort.sort(resultCardList, isAscending); // Corrected method call
+
+		// Handle the result and display
+		if(resultCardList.isEmpty())
+		{
+			System.out.println("No credit cards found with an annual fee of " + userAnnualFee + " or less.");
+		}
+		else
+		{
+			System.out.println("Credit cards found with an annual fee of " + userAnnualFee + " or less:");
+			printCreditCardData(resultCardList);
+		}
+
+		return resultCardList;
+	}
+
+	// implement word completion, spell checking and validation.
+	private static ArrayList<CreditCard> basedOnCardType(String userInput, ArrayList<CreditCard> cardList)
+	{
+		ArrayList<CreditCard> resultCardList = new ArrayList<>();
+		Scanner scanner = new Scanner(System.in);
+
 		// Validate the user input (you may add any specific validation for the input)
-		while (userInput == null || userInput.isEmpty()) {
+		while(userInput == null || userInput.isEmpty())
+		{
 			System.out.println("Invalid input. Please enter a valid card type:");
 			userInput = scanner.nextLine();
 		}
-	
+
 		// Filter the cards based on the card type (case-insensitive matching)
-		for (CreditCard card : cardList) {
-			if (card.getCardType() != null && card.getCardType().toLowerCase().contains(userInput.toLowerCase())) {
+		for(CreditCard card : cardList)
+		{
+			if(card.getCardType() != null && card.getCardType().toLowerCase().contains(userInput.toLowerCase()))
+			{
 				resultCardList.add(card);
 			}
 		}
-	
+
 		// Ask the user for sorting preference: 1 for Ascending, 2 for Descending
 		String orderChoice = "";
-		while (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
+		{
 			System.out.println("Do you want to sort the results by Annual Fee in \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
-	
-			if (!orderChoice.equals("1") && !orderChoice.equals("2")) {
+
+			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
+			{
 				System.out.println("Invalid input! Please enter 1 for ascending or 2 for descending.");
 			}
 		}
-	
+
 		// Check if user chose ascending or descending
 		boolean isAscending = true; // Default is ascending
-		if (orderChoice.equals("2")) {
+		if(orderChoice.equals("2"))
+		{
 			isAscending = false;
 		}
-	
+
 		// Sort the result list by Annual Fee
 		resultCardList = mergeSort.sortByAnnualFee(resultCardList, isAscending);
-	
+
 		// Display the result
-		if (resultCardList.isEmpty()) {
+		if(resultCardList.isEmpty())
+		{
 			System.out.println("No credit cards found for the specified card type.");
-		} else {
-			System.out.println("Credit cards found for the card type: " + userInput);
-			for (CreditCard card : resultCardList) {
-				System.out.println("Card Name: " + card.getCardName() + ", Card Type: " + card.getCardType() + ", Annual Fee: " + card.getAnnualFee());
-			}
 		}
-	
+		else
+		{
+			System.out.println("Credit cards found for the card type: " + userInput);
+			printCreditCardData(resultCardList);
+		}
+
 		return resultCardList;
 	}
-	
 
+	private static void wordFrequencyRankBased(ArrayList<CreditCard> cardList) throws IOException
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter the word you want to look for in bank website:");
+		String word = reader.readLine();
+
+		Map<String, Integer> rankedWiseWebsite = PageRanking.RankBankBasedOnWordFrequency(word, cardList);
+		for(Entry<String, Integer> rankedData : rankedWiseWebsite.entrySet())
+		{
+			System.out.println(rankedData.getKey() + " - Score: " + rankedData.getValue());
+		}
+	}
 
 	//Case 4 Popular Search 
-	  public static void viewPopularSearchTerms() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("\nChoose a field to view popular search terms:");
-            System.out.println("1. Bank Name");
-            System.out.println("2. Card Name");
-            System.out.println("3. Card Type");
-        
-    
-            System.out.print("Enter your choice (1-3): ");
-            String fieldChoice = reader.readLine(); // Read input
-    
-            switch (fieldChoice) {
-                case "1":
-                    SearchFrequencyRBTree.displaySearchTerms("Bank Name");
-                    break;
-                case "2":
-                    SearchFrequencyRBTree.displaySearchTerms("Card Name");
-                    break;
-                case "3":
-                    SearchFrequencyRBTree.displaySearchTerms("Card Type");
-                    break;
-            
-                default:
-                    System.out.println("Invalid choice.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public static void viewPopularSearchTerms()
+	{
+		try
+		{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("\nChoose a field to view popular search terms:");
+			System.out.println("1. Bank Name");
+			System.out.println("2. Card Name");
+			System.out.println("3. Card Type");
+
+			System.out.print("Enter your choice (1-3): ");
+			String fieldChoice = reader.readLine(); // Read input
+
+			switch(fieldChoice)
+			{
+				case "1":
+					SearchFrequencyRBTree.displaySearchTerms("Bank Name");
+					break;
+				case "2":
+					SearchFrequencyRBTree.displaySearchTerms("Card Name");
+					break;
+				case "3":
+					SearchFrequencyRBTree.displaySearchTerms("Card Type");
+					break;
+
+				default:
+					System.out.println("Invalid choice.");
+			}
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 }

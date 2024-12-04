@@ -64,8 +64,7 @@ public class PageRanking
 
 	public static Map<String, Integer> RankBankBasedOnWordFrequency(String wordSearch, ArrayList<CreditCard> cardList) throws IOException
 	{
-		String userInput = "master card";
-		Map<String, Integer> rankedBanks = rankBanksByKeywordFrequency(cardList, userInput);
+		Map<String, Integer> rankedBanks = rankBanksByKeywordFrequency(cardList, wordSearch);
 		return rankedBanks;
 	}
 	//	public static void main(String[] args) throws IOException

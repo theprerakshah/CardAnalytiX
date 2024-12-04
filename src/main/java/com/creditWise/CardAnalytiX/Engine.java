@@ -34,6 +34,7 @@ public class Engine
 
 		for(Map.Entry<String, String> mapi : BankDataPath.entrySet())
 		{
+			boolean firstTimer = false;
 			InputStream inputStream = Engine.class.getResourceAsStream(mapi.getValue());
 			if(inputStream == null)
 			{
@@ -46,8 +47,13 @@ public class Engine
 			//			String bankName = bankPath.split("/")[6].split("_")[0];
 			while((line = br.readLine()) != null)
 			{
-				String[] tsvElement = line.split("\t");
-				cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4], mapi.getKey()));
+				if(firstTimer)
+				{
+					String[] tsvElement = line.split("\t");
+					cardList.add(new CreditCard(tsvElement[0], tsvElement[1], tsvElement[2], tsvElement[3], tsvElement[4], mapi.getKey()));
+
+				}
+				firstTimer = true;
 			}
 		}
 
