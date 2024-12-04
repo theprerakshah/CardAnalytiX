@@ -25,41 +25,39 @@ public class SearchFrequencyRBTree
 	private static RedBlackTree<String>	cardNamesTree	= new RedBlackTree<>();
 	private static RedBlackTree<String>	cardTypesTree	= new RedBlackTree<>();
 
+
 	public static void SearchInputs() throws IOException
 	{
 		Scanner scanner = new Scanner(System.in); // Use Scanner instead of BufferedReader
-		while(true)
+
+		System.out.println("\nChoose an option:");
+		System.out.println("1. Bank Name");
+		System.out.println("2. Card Name");
+		System.out.println("3. Card Type");
+		System.out.println("4. Exit");
+
+		System.out.print("Enter your choice (1-3): ");
+		String choice = scanner.nextLine(); // Read input using Scanner
+
+		switch(choice)
 		{
-			System.out.println("\nChoose an option:");
-			System.out.println("1. Bank Name");
-			System.out.println("2. Card Name");
-			System.out.println("3. Card Type");
-			System.out.println("4. Exit");
-
-			System.out.print("Enter your choice (1-3): ");
-			String choice = scanner.nextLine(); // Read input using Scanner
-
-			switch(choice)
-			{
-				case "1":
-					String bankName = Validation.getWordOnlyInput(scanner, "Enter Bank Name: ").toLowerCase(); // Get user input for Bank Name
-					addSearchTerm(bankName, "Bank Name");
-					break;
-				case "2":
-					String cardName = Validation.getWordOnlyInput(scanner, "Enter Card Name: ").toLowerCase(); // Get user input for Card Name
-					addSearchTerm(cardName, "Card Name");
-					break;
-				case "3":
-					String cardType = Validation.getWordOnlyInput(scanner, "Enter Card Type: ").toLowerCase(); // Get user input for Card Type
-					addSearchTerm(cardType, "Card Type");
-					break;
-				case "4":
-					System.out.println("Going Back To The Search Menu...");
-					break;
-				default:
-					System.out.println("Invalid choice. Please try again.");
-					break;
-			}
+			case "1":
+				String bankName = Validation.getWordOnlyInput(scanner, "Enter Bank Name: ").toLowerCase(); // Get user input for Bank Name
+				addSearchTerm(bankName, "Bank Name");
+				break;
+			case "2":
+				String cardName =  Validation.getWordOnlyInput(scanner, "Enter Card Name: ").toLowerCase(); // Get user input for Card Name
+				addSearchTerm(cardName, "Card Name");
+				break;
+			case "3":
+				String cardType = Validation.getWordOnlyInput(scanner, "Enter Card Type: ").toLowerCase(); // Get user input for Card Type
+				addSearchTerm(cardType, "Card Type");
+				break;
+			case "4":
+				System.out.println("Going Back To The Search Menu...");
+				break;
+			default:
+				System.out.println("Invalid choice. Please try again.");
 		}
 	}
 
