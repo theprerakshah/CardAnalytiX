@@ -159,7 +159,7 @@ public class PreferenceBasedFilter
 		String orderChoice = "";
 		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
 		{
-			System.out.println("Do you want to sort the results in Annual Fee by: \n 1. Ascending order\n 2. Descending order");
+			System.out.println("Do you want to sort the results by Interest Rate by: \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
 
 			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
@@ -276,7 +276,7 @@ public class PreferenceBasedFilter
 		String orderChoice = "";
 		while(!orderChoice.equals("1") && !orderChoice.equals("2"))
 		{
-			System.out.println("Do you want to sort the results by Annual Fee in \n 1. Ascending order\n 2. Descending order");
+			System.out.println("Do you want to sort the results by Interest Rate in \n 1. Ascending order\n 2. Descending order");
 			orderChoice = scanner.nextLine();
 
 			if(!orderChoice.equals("1") && !orderChoice.equals("2"))
