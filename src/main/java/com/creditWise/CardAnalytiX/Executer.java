@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,34 +46,49 @@ public class Executer
 			System.out.println("2. Or do you want to use existing data?");
 			System.out.println("3. Do you want to Exit the Tool");
 			System.out.print("Enter your choice (1, 2, or 3): ");
-
-			int choice = scanner.nextInt();
-
-			switch(choice)
+			try
 			{
-				case 1:
-					System.out.println("\nYou chose to crawl the website.");
-					System.out.println("Initializing web crawler...");
-					Webcrawler.main(args);
-					HtmlToText.main(args);
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				switch(choice)
+				{
+					case 1:
+						System.out.println("\nYou chose to crawl the website.");
+						System.out.println("Initializing web crawler...");
+						Webcrawler.main(args);
+						HtmlToText.main(args);
 
-					case2Handler();
-					return;
+						case2Handler();
+						return;
 
-				case 2:
-					case2Handler();
+					case 2:
+						case2Handler();
 
-					break;
-				case 3:
-					System.out.println("Exiting the tool...");
-					scanner.close();
-					return; // Exit the program
+						break;
+					case 3:
+						System.out.println("Exiting the tool...");
+						scanner.close();
+						return; // Exit the program
 
-				default:
-					System.out.println("Invalid choice. Please restart the tool and enter 1, 2 or 3.");
-					break;
+					default:
+						System.out.println("Invalid choice. Please restart the tool and enter 1, 2 or 3.");
+						break;
+				}
 			}
+			catch(InputMismatchException e)
+			{
+				// Handle non-integer input
+				System.out.println("Invalid input! Please enter a number between 1 and 7.");
 
+				// Clear the invalid input
+				scanner.nextLine();
+			}
+			catch(Exception e)
+			{
+				// Catch any other unexpected exceptions
+				System.out.println("An unexpected error occurred: " + e.getMessage());
+				scanner.nextLine(); // Clear the input buffer
+			}
 		}
 	}
 
@@ -81,6 +97,7 @@ public class Executer
 		Scanner scanner = new Scanner(System.in);
 		while(true)
 		{
+
 			System.out.println("\n1. Show all Credit card Data");
 			System.out.println("2. Fetch credit card according to this preferences: Card Type, Annual Fee, Bank Name, Interest Rate");
 			System.out.println("3. Fetch data according to word Frequency");
@@ -90,52 +107,70 @@ public class Executer
 			System.out.println("7. Go Back to Main Menu");
 
 			System.out.print("Enter your choice (1, 2, 3, 4, 5 or 6): ");
-
-			ArrayList<CreditCard> cardList = Engine.Engine1();
-			int choice = scanner.nextInt();
-			switch(choice)
+			try
 			{
-				case 1:
-					System.out.println("Fetching all Credit card Data");
-					System.out.println("Showing all Credit card Data");
-					printCreditCardData(cardList);
+				ArrayList<CreditCard> cardList = Engine.Engine1();
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				switch(choice)
+				{
+					case 1:
+						System.out.println("Fetching all Credit card Data");
+						System.out.println("Showing all Credit card Data");
+						printCreditCardData(cardList);
 
-					break;
+						break;
 
-				case 2:
-					prefernceBaseCaseHandler(cardList);
+					case 2:
+						prefernceBaseCaseHandler(cardList);
 
-					break;
-				case 3:
-					documentWordSearchAndFrequency(cardList);
+						break;
+					case 3:
+						documentWordSearchAndFrequency(cardList);
 
-					break;
-				case 4:
-					SearchFrequencyRBTree.SearchInputs();
-					break;
-				case 5:
-					viewPopularSearchTerms();
-					break;
+						break;
+					case 4:
+						SearchFrequencyRBTree.SearchInputs();
+						break;
+					case 5:
+						viewPopularSearchTerms();
+						break;
 
-				case 6:
-					wordFrequencyRankBased(cardList);
-					break;
+					case 6:
+						wordFrequencyRankBased(cardList);
+						break;
 
-				case 7:
-					System.out.println("Going back to the main menu...");
-					scanner.close();
-					return;
+					case 7:
+						System.out.println("Going back to the main menu...");
+						scanner.close();
+						return;
 
-				default:
-					System.out.println("Invalid choice. Please restart the tool and enter 1, 2, 3, or 4:");
-					break;
+					default:
+						System.out.println("Invalid choice. Please restart the tool and enter 1, 2, 3, or 4:");
+						break;
+				}
+
+			}
+			catch(InputMismatchException e)
+			{
+				// Handle non-integer input
+				System.out.println("Invalid input! Please enter a number between 1 and 7.");
+
+				// Clear the invalid input
+				scanner.nextLine();
+			}
+			catch(Exception e)
+			{
+				// Catch any other unexpected exceptions
+				System.out.println("An unexpected error occurred: " + e.getMessage());
+				scanner.nextLine(); // Clear the input buffer
 			}
 		}
 	}
 
 	private static void prefernceBaseCaseHandler(ArrayList<CreditCard> cardList)
 	{
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		while(true)
 		{
 			System.out.println("\n1. for Searching card according to Card type ");
@@ -144,139 +179,155 @@ public class Executer
 			System.out.println("4. for Searching card according to Interest Rate");
 			System.out.println("5. Go Back to Previous Menu");
 			System.out.print("Enter your choice (1, 2, 3, 4, or 5): ");
-
-			int choice = sc.nextInt();
-			String userInput = "";
-			ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
-			switch(choice)
+			try
 			{
-				case 1:
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				String userInput = "";
+				ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
+				switch(choice)
+				{
+					case 1:
 
-					if(sc.hasNextLine())
-						sc.nextLine(); // Clears leftover newline
-					while(true)
-					{
-						System.out.println("Select Card Type From These Options. \n" + "    Visa Card\n" + "    American Express\n" + "    Costco Cards\n" + "    Student Cards\n"
-								+ "    Cash Back Cards\n" + "    Travel Rewards Cards\n" + "    Business Credit Cards\n" + "    Low Interest Cards\n" + "    Mastercard");
-						System.out.println("Input:");
-
-						// Take user input
-						userInput = sc.nextLine();
-
-						// Step 1: Validate Bank Name
-						if(!Validation.ValidationCardType(userInput))
+						if(scanner.hasNextLine())
+							scanner.nextLine(); // Clears leftover newline
+						while(true)
 						{
-							System.out.println("Please Enter a Valid Credit Card Type.");
-							continue; // Restart the loop for a valid input
-						}
-						if(!CardTypeMap.getCardType(userInput).equalsIgnoreCase("Null"))
-						{
+							System.out.println("Select Card Type From These Options. \n" + "    Visa Card\n" + "    American Express\n" + "    Costco Cards\n" + "    Student Cards\n"
+									+ "    Cash Back Cards\n" + "    Travel Rewards Cards\n" + "    Business Credit Cards\n" + "    Low Interest Cards\n" + "    Mastercard");
+							System.out.println("Input:");
+
+							// Take user input
+							userInput = scanner.nextLine();
+
+							// Step 1: Validate Bank Name
+							if(!Validation.ValidationCardType(userInput))
+							{
+								System.out.println("Please Enter a Valid Credit Card Type.");
+								continue; // Restart the loop for a valid input
+							}
+							if(!CardTypeMap.getCardType(userInput).equalsIgnoreCase("Null"))
+							{
+								resultCardList = basedOnCardType(userInput, cardList);
+								break;
+							}
+
+							// Step 2: Spell Check and Word Completion
+							userInput = spellCheckAndWordComplete(userInput);
+
+							// If "Try Again" is returned, it means neither spelling nor word completion succeeded
+							if(userInput.equalsIgnoreCase("Try Again"))
+							{
+								System.out.println("Invalid input after suggestions. Please try again.");
+								continue; // Restart the loop for new input
+							}
+
+							// Step 3: Map Lookup
+							String cardType = CardTypeMap.getCardType(userInput);
+
+							if(cardType.equalsIgnoreCase("Null"))
+							{
+								System.out.println("Please Enter a Valid Card Type.");
+								continue; // Restart the loop if no valid bank name is found in the map
+							}
+
+							// If all checks pass, break out of the loop
 							resultCardList = basedOnCardType(userInput, cardList);
 							break;
 						}
 
-						// Step 2: Spell Check and Word Completion
-						userInput = spellCheckAndWordComplete(userInput);
+					case 2:
+						System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
+						userInput = scanner.next();
 
-						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if(userInput.equalsIgnoreCase("Try Again"))
+						while(!Validation.ValidationAnnualFee(userInput))
 						{
-							System.out.println("Invalid input after suggestions. Please try again.");
-							continue; // Restart the loop for new input
+							System.out.println("Enter Annual Fee in Correct Format ");
+							userInput = scanner.next();
 						}
+						resultCardList = basedOnAnnualFee(userInput, cardList);
 
-						// Step 3: Map Lookup
-						String cardType = CardTypeMap.getCardType(userInput);
-
-						if(cardType.equalsIgnoreCase("Null"))
-						{
-							System.out.println("Please Enter a Valid Card Type.");
-							continue; // Restart the loop if no valid bank name is found in the map
-						}
-
-						// If all checks pass, break out of the loop
-						resultCardList = basedOnCardType(userInput, cardList);
 						break;
-					}
-
-				case 2:
-					System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
-					userInput = sc.next();
-
-					while(!Validation.ValidationAnnualFee(userInput))
-					{
-						System.out.println("Enter Annual Fee in Correct Format ");
-						userInput = sc.next();
-					}
-					resultCardList = basedOnAnnualFee(userInput, cardList);
-
-					break;
-				case 3:
-					if(sc.hasNextLine())
-						sc.nextLine(); // Clears leftover newline
-					while(true)
-					{
-						System.out.println("Select card based on Bank Name, Enter Your preferred Bank: [RBC, Scotia Bank, CIBC, TD Bank]");
-
-						// Take user input
-						userInput = sc.nextLine();
-
-						// Step 1: Validate Bank Name
-						if(!Validation.ValidationBankName(userInput))
+					case 3:
+						if(scanner.hasNextLine())
+							scanner.nextLine(); // Clears leftover newline
+						while(true)
 						{
-							System.out.println("Invalid Bank Name. Please enter a valid bank name.");
-							continue; // Restart the loop for a valid input
-						}
-						if(!bankNameMap.getBankName(userInput).equalsIgnoreCase("Null"))
-						{
+							System.out.println("Select card based on Bank Name, Enter Your preferred Bank: [RBC, Scotia Bank, CIBC, TD Bank]");
+
+							// Take user input
+							userInput = scanner.nextLine();
+
+							// Step 1: Validate Bank Name
+							if(!Validation.ValidationBankName(userInput))
+							{
+								System.out.println("Invalid Bank Name. Please enter a valid bank name.");
+								continue; // Restart the loop for a valid input
+							}
+							if(!bankNameMap.getBankName(userInput).equalsIgnoreCase("Null"))
+							{
+								resultCardList = basedOnBankName(userInput, cardList);
+								break;
+							}
+
+							// Step 2: Spell Check and Word Completion
+							userInput = spellCheckAndWordComplete(userInput);
+
+							// If "Try Again" is returned, it means neither spelling nor word completion succeeded
+							if(userInput.equalsIgnoreCase("Try Again"))
+							{
+								System.out.println("Invalid input after suggestions. Please try again.");
+								continue; // Restart the loop for new input
+							}
+
+							// Step 3: Map Lookup
+							String bankName = bankNameMap.getBankName(userInput);
+
+							if(bankName.equalsIgnoreCase("Null"))
+							{
+								System.out.println("Bank Name not found. Please enter a valid bank name from the options.");
+								continue; // Restart the loop if no valid bank name is found in the map
+							}
+
+							// If all checks pass, break out of the loop
 							resultCardList = basedOnBankName(userInput, cardList);
 							break;
 						}
+					case 4:
+						System.out.println("Select card based on Interest Rate, Enter Your preferd Interest Rate:");
+						userInput = scanner.next();
 
-						// Step 2: Spell Check and Word Completion
-						userInput = spellCheckAndWordComplete(userInput);
-
-						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if(userInput.equalsIgnoreCase("Try Again"))
+						while(!Validation.ValidationInterestRate(userInput))
 						{
-							System.out.println("Invalid input after suggestions. Please try again.");
-							continue; // Restart the loop for new input
+							System.out.println("Enter Interest Rate in Correct Format");
+							userInput = scanner.next();
 						}
+						resultCardList = basedOnInterestRate(userInput, cardList);
 
-						// Step 3: Map Lookup
-						String bankName = bankNameMap.getBankName(userInput);
-
-						if(bankName.equalsIgnoreCase("Null"))
-						{
-							System.out.println("Bank Name not found. Please enter a valid bank name from the options.");
-							continue; // Restart the loop if no valid bank name is found in the map
-						}
-
-						// If all checks pass, break out of the loop
-						resultCardList = basedOnBankName(userInput, cardList);
 						break;
-					}
-				case 4:
-					System.out.println("Select card based on Interest Rate, Enter Your preferd Interest Rate:");
-					userInput = sc.next();
+					case 5:
+						System.out.println("Going back to the previous menu...");
+						return;
 
-					while(!Validation.ValidationInterestRate(userInput))
-					{
-						System.out.println("Enter Interest Rate in Correct Format");
-						userInput = sc.next();
-					}
-					resultCardList = basedOnInterestRate(userInput, cardList);
-
-					break;
-				case 5:
-					System.out.println("Going back to the previous menu...");
-					return;
-
-				default:
-					System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
-					break;
+					default:
+						System.out.println("Invalid choice. Please restart the tool and enter 1 or 2.");
+						break;
+				}
 			}
+			catch(InputMismatchException e)
+			{
+				// Handle non-integer input
+				System.out.println("Invalid input! Please enter a number between 1 and 7.");
 
+				// Clear the invalid input
+				scanner.nextLine();
+			}
+			catch(Exception e)
+			{
+				// Catch any other unexpected exceptions
+				System.out.println("An unexpected error occurred: " + e.getMessage());
+				scanner.nextLine(); // Clear the input buffer
+			}
 		}
 	}
 
@@ -416,19 +467,20 @@ public class Executer
 			return;
 		}
 		// Print table header
-		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.printf("| %-20s | %-50s | %-10s | %-12s | %-22s | %-60s |\n", "Bank Name", "Card Name", "Card Type", "Annual Fee", "Interest Rate", "Additional Features");
-		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-20s | %-50s | %-20s | %-12s | %-22s | %-150s |\n", "Bank Name", "Card Name", "Card Type", "Annual Fee", "Interest Rate", "Additional Features");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 		// Print each card's details in rows
 		for(CreditCard card : cardList)
 		{
-			System.out.printf("| %-20s | %-50s | %-10s | %-12.2s | %-22s | %-60s |\n", card.getBank(), card.getCardName(), card.getCardType(), card.getAnnualFee(), card.getPurchaseInterestRate(),
+			System.out.printf("| %-20s | %-50s | %-20s | %-12.2s | %-22s | %-150s |\n", card.getBank(), card.getCardName(), card.getCardType(), card.getAnnualFee(), card.getPurchaseInterestRate(),
 					card.getAdditionalFeatures());
 		}
 
 		// Footer line for the table
-		System.out.println("----------------------------------------------------------------------------------");
+		System.out.println(
+				"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 	}
 
