@@ -165,8 +165,6 @@ private static void saveSearchTermToCSV(String term, String field) {
                             termFrequencyMap.put(term, termFrequencyMap.getOrDefault(term, 0) + frequency);
                         }
                     } catch (NumberFormatException e) {
-                        // Skip rows with invalid frequency values
-                        System.out.println("Skipping invalid row: " + line);
                     }
                 }
             }
@@ -175,7 +173,7 @@ private static void saveSearchTermToCSV(String term, String field) {
             System.out.println("Popular " + field + "s based on user search frequency:");
             termFrequencyMap.entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue() - e1.getValue())
-                .forEach( e -> System.out.println(e.getKey() + " is popular tith " + e.getValue() + " Searches"));
+                .forEach( e -> System.out.println(e.getKey() + " is popular with " + e.getValue() + " Searches"));
     
         } catch (IOException e) {
             e.printStackTrace();
