@@ -129,8 +129,7 @@ public class PreferenceBasedFilter
 		{
 			try
 			{
-				// Extract numeric part from the annual fee string (remove non-numeric characters)
-				String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "");
+				String annualFeeString = card.getAnnualFee().replaceAll("[^0-9.]", "").trim();
 
 				// If the string is not empty after removing non-numeric characters
 				if(!annualFeeString.isEmpty())
@@ -235,7 +234,7 @@ public class PreferenceBasedFilter
 		}
 
 		// Sort the result list by Annual Fee
-		resultCardList = mergeSort.sortByAnnualFee(resultCardList, isAscending);
+		resultCardList = mergeSort.sort(resultCardList, isAscending);
 
 		// Display the result
 		if(resultCardList.isEmpty())
@@ -294,7 +293,7 @@ public class PreferenceBasedFilter
 		}
 
 		// Sort the result list by Annual Fee
-		resultCardList = mergeSort.sortByAnnualFee(resultCardList, isAscending);
+		resultCardList = mergeSort.sort(resultCardList, isAscending);
 
 		// Display the result
 		if(resultCardList.isEmpty())
