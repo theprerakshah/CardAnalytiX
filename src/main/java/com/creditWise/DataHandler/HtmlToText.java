@@ -28,11 +28,11 @@ public class HtmlToText
 		// Parse the JSON content
 		JSONObject jsonObject = new JSONObject(jsonContent);
 
-		// Get the selectors for 'td', 'scotiabank', 'cibc', and
+		// Get the selectors for 'td', 'scotiabank', 'cibc', and 'RBC'
 		JSONObject tdSelectors = jsonObject.getJSONObject("selectors").getJSONObject("td");
 		JSONObject scotiaSelectors = jsonObject.getJSONObject("selectors").getJSONObject("scotiabank");
 		JSONObject cibcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("cibc");
-		
+
 		JSONObject rbcSelectors = jsonObject.getJSONObject("selectors").getJSONObject("rbc");
 
 		// Extract the selectors
@@ -132,7 +132,7 @@ public class HtmlToText
 					{
 						cardType = "MasterCard";
 					}
-					
+
 					if(flag)
 					{
 						tdExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
@@ -216,7 +216,6 @@ public class HtmlToText
 						interestRates = "No Interest Rates";
 					}
 
-					
 					if(flag)
 					{
 						cibcExtractedText.append("Card Name\tCardtype\tAnnual Fee\tPurchase Interest Rate\tAdditional Feature\n");
@@ -249,14 +248,13 @@ public class HtmlToText
 					rbcExtractedText.append("Card Type: ").append(cardType).append("\n");
 				}
 
-				
 			}
 
 			// Save the extracted data to output files
 			saveToFile(outputDirectory + "td_cards.txt", tdExtractedText.toString());
 			System.out.println("The data for TD Bank is stored in td_cards.txt");
-			saveToFile(outputDirectory + "scotiabank_cards.tsv", scotiaExtractedText.toString());
-			System.out.println("The data for Scotiabank is stored in scotiabank_cards.tsv");
+			saveToFile(outputDirectory + "scotiabank_cards.txt", scotiaExtractedText.toString());
+			System.out.println("The data for Scotiabank is stored in scotiabank_cards.txt");
 			saveToFile(outputDirectory + "cibc_cards.txt", cibcExtractedText.toString());
 			System.out.println("The data for CIBC is stored in cibc_cards.txt");
 			saveToFile(outputDirectory + "rbc_cards.txt", rbcExtractedText.toString());

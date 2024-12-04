@@ -14,6 +14,7 @@ import java.util.Scanner;
 import com.creditWise.CardAnalytiX.CreditCard;
 import com.creditWise.CardAnalytiX.Engine;
 import com.creditWise.CardAnalytiX.Executer;
+import com.creditWise.CardAnalytiX.PreferenceBasedFilter;
 import com.creditWise.Sagar.Validation;
 
 public class SearchFrequencyRBTree
@@ -55,7 +56,7 @@ public class SearchFrequencyRBTree
 					break;
 				case "4":
 					System.out.println("Going Back To The Search Menu...");
-					break;
+					return;
 				default:
 					System.out.println("Invalid choice. Please try again.");
 					break;
@@ -106,7 +107,7 @@ public class SearchFrequencyRBTree
 			}
 
 		}
-		Executer.printCreditCardData(resultList);
+		PreferenceBasedFilter.printCreditCardData(resultList);
 	}
 
 	private static void saveSearchTermToCSV(String term, String field)
