@@ -17,9 +17,9 @@ import com.creditWise.DataHandler.HtmlToText;
 import com.creditWise.DataHandler.Webcrawler;
 import com.creditWise.Mahzabin.SpellCheck;
 import com.creditWise.Mahzabin.WordCompletion;
-import com.creditWise.Prerak.PageRanking;
 import com.creditWise.Prerak.WordFrequency;
 import com.creditWise.Prerak.WordSearcher;
+import com.creditWise.Sagar.PageRanking;
 import com.creditWise.Sagar.Validation;
 import com.creditWise.Sagar.mergeSort;
 import com.creditWise.Sakshi.SearchFrequencyRBTree;
@@ -59,7 +59,7 @@ public class Executer
 						HtmlToText.main(args);
 
 						case2Handler();
-						return;
+						break;
 
 					case 2:
 						case2Handler();
@@ -111,7 +111,7 @@ public class Executer
 			{
 				ArrayList<CreditCard> cardList = Engine.Engine1();
 				int choice = scanner.nextInt();
-				scanner.nextLine();
+				//				scanner.nextLine();
 				switch(choice)
 				{
 					case 1:
@@ -142,7 +142,7 @@ public class Executer
 
 					case 7:
 						System.out.println("Going back to the main menu...");
-						scanner.close();
+						//						scanner.close();
 						return;
 
 					default:
@@ -182,7 +182,7 @@ public class Executer
 			try
 			{
 				int choice = scanner.nextInt();
-				scanner.nextLine();
+				//				scanner.nextLine();
 				String userInput = "";
 				ArrayList<CreditCard> resultCardList = new ArrayList<CreditCard>();
 				switch(choice)
@@ -235,6 +235,7 @@ public class Executer
 							resultCardList = basedOnCardType(userInput, cardList);
 							break;
 						}
+						break;
 
 					case 2:
 						System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
@@ -293,6 +294,7 @@ public class Executer
 							resultCardList = basedOnBankName(userInput, cardList);
 							break;
 						}
+						break;
 					case 4:
 						System.out.println("Select card based on Interest Rate, Enter Your preferd Interest Rate:");
 						userInput = scanner.next();
@@ -317,7 +319,7 @@ public class Executer
 			catch(InputMismatchException e)
 			{
 				// Handle non-integer input
-				System.out.println("Invalid input! Please enter a number between 1 and 7.");
+				System.out.println("Invalid input! Please enter a number between 1 and.");
 
 				// Clear the invalid input
 				scanner.nextLine();
@@ -459,7 +461,7 @@ public class Executer
 	}
 
 	// Method to print all credit card data
-	private static void printCreditCardData(ArrayList<CreditCard> cardList)
+	public static void printCreditCardData(ArrayList<CreditCard> cardList)
 	{
 		if(cardList.isEmpty())
 		{
