@@ -138,7 +138,15 @@ public class Executer
 
 					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
 					while (true) {
-						System.out.println("Select card type from this Options: [MasterCard, Visa Card, American Express]");
+						System.out.println("Select Card Type From These Options. \n"+ "    Visa Card\n" +
+								"    American Express\n" +
+								"    Costco Cards\n" +
+								"    Student Cards\n" +
+								"    Cash Back Cards\n" +
+								"    Travel Rewards Cards\n" +
+								"    Business Credit Cards\n" +
+								"    Low Interest Cards\n" +
+								"    Mastercard");
 						System.out.println("Input:");
 
 						// Take user input
@@ -169,12 +177,12 @@ public class Executer
 						if (cardType.equalsIgnoreCase("Null")) {
 							System.out.println("Please Enter a Valid Card Type. [Like- Visa Card\n" +
 									"    American Express\n" +
-									"    COSTCO CARDS\n" +
-									"    STUDENT CARDS\n" +
-									"    CASH BACK CARDS\n" +
-									"    TRAVEL REWARDS CARDS\n" +
-									"    BUSINESS CREDIT CARDS\n" +
-									"    LOW INTEREST CARDS\n" +
+									"    Costco Cards\n" +
+									"    Student Cards\n" +
+									"    Cash Back Cards\n" +
+									"    Travel Rewards Cards\n" +
+									"    Business Credit Cards\n" +
+									"    Low Interest Cards\n" +
 									"    Mastercard]");
 							continue; // Restart the loop if no valid bank name is found in the map
 						}
@@ -260,7 +268,6 @@ public class Executer
 	}
 
 
-	//Spell checking and word completion implementation.
 	//Spell checking and word completion implementation.
 	public static String spellCheckAndWordComplete(String userInput) {
 		Scanner scanner = new Scanner(System.in);
