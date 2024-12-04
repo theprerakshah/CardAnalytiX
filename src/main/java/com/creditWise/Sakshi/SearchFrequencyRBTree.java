@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.creditWise.CardAnalytiX.Executer;
+
 
 public class SearchFrequencyRBTree {
     private static final String RESOURCE_PATH = "src/main/resources/";
@@ -18,156 +20,124 @@ public class SearchFrequencyRBTree {
     private static RedBlackTree<String> bankNamesTree = new RedBlackTree<>();
     private static RedBlackTree<String> cardNamesTree = new RedBlackTree<>();
     private static RedBlackTree<String> cardTypesTree = new RedBlackTree<>();
-    private static RedBlackTree<String> annualFeesTree = new RedBlackTree<>();
-    private static RedBlackTree<String> interestRatesTree = new RedBlackTree<>();
+    
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the Credit Card Search Tool!");
-        boolean continueSearching = true;
-
-        while (continueSearching) {
-            System.out.println("\nChoose an option:");
-            System.out.println("1. Bank Name");
-            System.out.println("2. Card Name");
-            System.out.println("3. Card Type");
-            System.out.println("4. Annual Fee");
-            System.out.println("5. Interest Rate");
-            System.out.println("6. View popular search terms");
-            System.out.println("7. Exit");
-
-            System.out.print("Enter your choice (1-7): ");
-            String choice = scanner.nextLine();
-
-            switch (choice) {
-                case "1":
-                    System.out.print("Enter Bank Name: ");
-                    String bankName = scanner.nextLine().toLowerCase();
-                    addSearchTerm(bankName, "Bank Name");
-                    break;
-                case "2":
-                    System.out.print("Enter Card Name: ");
-                    String cardName = scanner.nextLine().toLowerCase();
-                    addSearchTerm(cardName, "Card Name");
-                    break;
-                case "3":
-                    System.out.print("Enter Card Type: ");
-                    String cardType = scanner.nextLine().toLowerCase();
-                    addSearchTerm(cardType, "Card Type");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-
-        scanner.close();
+      
     }
 
      public static void SearchInputs() {
-        try {
-            // Initialize BufferedReader with System.in
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    Scanner scanner = new Scanner(System.in); // Use Scanner instead of BufferedReader
 
-            System.out.println("\nChoose an option:");
-            System.out.println("1. Bank Name");
-            System.out.println("2. Card Name");
-            System.out.println("3. Card Type");
-          
-            System.out.print("Enter your choice (1-3): ");
-            String choice = reader.readLine(); // Read input using BufferedReader
+    System.out.println("\nChoose an option:");
+    System.out.println("1. Bank Name");
+    System.out.println("2. Card Name");
+    System.out.println("3. Card Type");
+    System.out.println("4. Exit");
 
-            switch (choice) {
-                case "1":
-                    System.out.print("Enter Bank Name: ");
-                    String bankName = reader.readLine().toLowerCase(); // Get user input for Bank Name
-                    addSearchTerm(bankName, "Bank Name");
-                    break;
-                case "2":
-                    System.out.print("Enter Card Name: ");
-                    String cardName = reader.readLine().toLowerCase(); // Get user input for Card Name
-                    addSearchTerm(cardName, "Card Name");
-                    break;
-                case "3":
-                    System.out.print("Enter Card Type: ");
-                    String cardType = reader.readLine().toLowerCase(); // Get user input for Card Type
-                    addSearchTerm(cardType, "Card Type");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
+    System.out.print("Enter your choice (1-3): ");
+    String choice = scanner.nextLine(); // Read input using Scanner
 
-            reader.close(); // Close the reader after use
+    switch (choice) {
+        case "1":
+            System.out.print("Enter Bank Name: ");
+            String bankName = scanner.nextLine().toLowerCase(); // Get user input for Bank Name
+            addSearchTerm(bankName, "Bank Name");
+            break;
+        case "2":
+            System.out.print("Enter Card Name: ");
+            String cardName = scanner.nextLine().toLowerCase(); // Get user input for Card Name
+            addSearchTerm(cardName, "Card Name");
+            break;
+        case "3":
+            System.out.print("Enter Card Type: ");
+            String cardType = scanner.nextLine().toLowerCase(); // Get user input for Card Type
+            addSearchTerm(cardType, "Card Type");
+            break;
+            case "4":
+				System.out.println("Going Back To The Search Menu...");
+				break;
+        default:
+            System.out.println("Invalid choice. Please try again.");
+    }
+}
 
-        } catch (IOException e) {
-            System.out.println("Error with reading input: " + e.getMessage());
-        }
+    
+    
+
+private static void addSearchTerm(String term, String field) {
+    // Call the autocomplete and get the selected term
+    String selectedTerm = Executer.spellCheckAndWordComplete(term);
+
+    // Only proceed if a valid selection is made
+    if (selectedTerm == null || selectedTerm.isEmpty()) {
+        System.out.println("No valid selection made. Term not saved.");
+        return;
     }
 
-    
-    
+    // Insert into the appropriate tree
+    switch (field) {
+        case "Bank Name":
+            bankNamesTree.insert(selectedTerm);
+            break;
+        case "Card Name":
+            cardNamesTree.insert(selectedTerm);
+            break;
+        case "Card Type":
+            cardTypesTree.insert(selectedTerm);
+            break;
+    }
 
-    private static void addSearchTerm(String term, String field) {
+    // Save the selected term to the CSV
+    saveSearchTermToCSV(selectedTerm, field);
+}
+
+private static void saveSearchTermToCSV(String term, String field) {
+    File csvFile = new File(SEARCHES_CSV);
+    Map<String, String[]> data = new HashMap<>();
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+        String line;
+
+        // Read all existing records and store them
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 4) { // Ensure correct column count
+                String existingTerm = parts[0].trim();
+                data.put(existingTerm, parts);
+            }
+        }
+
+        // Update or add the record
+        String[] updatedValues = data.getOrDefault(term, new String[]{"", "", "", "0"});
         switch (field) {
             case "Bank Name":
-                bankNamesTree.insert(term);
-                break;
+                updatedValues[0] = term;
+                break; // No return, just break
             case "Card Name":
-                cardNamesTree.insert(term);
-                break;
+                updatedValues[1] = term;
+                break; // No return, just break
             case "Card Type":
-                cardTypesTree.insert(term);
-                break;
+                updatedValues[2] = term;
+                break; // No return, just break
         }
-        saveSearchTermToCSV(term, field);
-    }
+        updatedValues[3] = String.valueOf(Integer.parseInt(updatedValues[3]) + 1); // Increment frequency
+        data.put(term, updatedValues);
 
-    private static void saveSearchTermToCSV(String term, String field) {
-        File csvFile = new File(SEARCHES_CSV);
-        Map<String, String[]> data = new HashMap<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-            String line;
-
-            // Read all existing records and store them
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 4) { // Ensure correct column count
-                    String existingTerm = parts[0].trim();
-                    data.put(existingTerm, parts);
-                }
+        // Write back to CSV
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
+            writer.write("Bank Name,Card Name,Card Type,Frequency\n"); // Header
+            for (String[] values : data.values()) {
+                writer.write(String.join(",", values) + "\n");
             }
-
-            // Update or add the record
-            String[] updatedValues = data.getOrDefault(term, new String[]{"", "", "", "0"});
-            switch (field) {
-                case "Bank Name":
-                    updatedValues[0] = term;
-                    break;
-                case "Card Name":
-                    updatedValues[1] = term;
-                    break;
-                case "Card Type":
-                    updatedValues[2] = term;
-                    break;
-            
-              
-            }
-            updatedValues[3] = String.valueOf(Integer.parseInt(updatedValues[3]) + 1); // Increment frequency
-            data.put(term, updatedValues);
-
-            // Write back to CSV
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
-                writer.write("Bank Name,Card Name,Card Type,Frequency\n"); // Header
-                for (String[] values : data.values()) {
-                    writer.write(String.join(",", values) + "\n");
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
+    
 
    
 
@@ -205,7 +175,7 @@ public class SearchFrequencyRBTree {
             System.out.println("Popular " + field + "s based on user search frequency:");
             termFrequencyMap.entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue() - e1.getValue())
-                .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue() + " searches"));
+                .forEach( e -> System.out.println(e.getKey() + " is popular tith " + e.getValue() + " Searches"));
     
         } catch (IOException e) {
             e.printStackTrace();

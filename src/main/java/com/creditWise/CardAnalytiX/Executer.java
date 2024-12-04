@@ -5,17 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import com.creditWise.DataHandler.BankNameMap;
-import com.creditWise.DataHandler.CardTypeMap;
-import com.creditWise.DataHandler.HtmlToText;
-import com.creditWise.DataHandler.Webcrawler;
-import com.creditWise.Mahzabin.SpellCheck;
-import com.creditWise.Mahzabin.WordCompletion;
-import com.creditWise.Prerak.WordFrequency;
-import com.creditWise.Prerak.WordSearcher;
-import com.creditWise.Sagar.Validation;
-import com.creditWise.Sagar.mergeSort;
-import com.creditWise.Sakshi.SearchFrequencyRBTree;
+import com.creditWise.DataHandler.*;
+import com.creditWise.Mahzabin.*;
+import com.creditWise.Prerak.*;
+import com.creditWise.Sagar.*;
+import com.creditWise.Sakshi.*;
 
 /**
  * Credit Card Suggestion Tool
@@ -105,10 +99,10 @@ public class Executer
 					break;
 				case 4:
                     SearchFrequencyRBTree.SearchInputs();
-				return;
+				    break;
 				case 5:
 				    viewPopularSearchTerms();
-				    return;
+				    break;
 				
 				case 6:
 				System.out.println("Going back to the main menu...");
@@ -143,53 +137,40 @@ public class Executer
 				case 1:
 
 					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
-					while (true) {
-						System.out.println("Select card type from this Options: [MasterCard, Visa Card, American Express]");
-						System.out.println("Input:");
+					System.out.println("Select card type from this Options: [MasterCard, Visa]");
+					System.out.println("Input:");
+					userInput = sc.nextLine();
 
-						// Take user input
+					while(!Validation.ValidationCardType(userInput))
+					{
+						System.out.println("Enter a correct Card Type");
 						userInput = sc.nextLine();
-
-						// Step 1: Validate Bank Name
-						if (!Validation.ValidationCardType(userInput)) {
-							System.out.println("Please Enter a Valid Credit Card Type.");
-							continue; // Restart the loop for a valid input
-						}
-						if(!CardTypeMap.getCardType(userInput).equalsIgnoreCase("Null")){
-							resultCardList = basedOnCardType(userInput, cardList);
-							break;
-						}
-
-						// Step 2: Spell Check and Word Completion
-						userInput = spellCheckAndWordComplete(userInput);
-
-						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if (userInput.equalsIgnoreCase("Try Again")) {
-							System.out.println("Invalid input after suggestions. Please try again.");
-							continue; // Restart the loop for new input
-						}
-
-						// Step 3: Map Lookup
-						String cardType = CardTypeMap.getCardType(userInput);
-
-						if (cardType.equalsIgnoreCase("Null")) {
-							System.out.println("Please Enter a Valid Card Type. [Like- Visa Card\n" +
-									"    American Express\n" +
-									"    COSTCO CARDS\n" +
-									"    STUDENT CARDS\n" +
-									"    CASH BACK CARDS\n" +
-									"    TRAVEL REWARDS CARDS\n" +
-									"    BUSINESS CREDIT CARDS\n" +
-									"    LOW INTEREST CARDS\n" +
-									"    Mastercard]");
-							continue; // Restart the loop if no valid bank name is found in the map
-						}
-
-						// If all checks pass, break out of the loop
-						resultCardList = basedOnCardType(userInput, cardList);
-						break;
 					}
 
+					userInput=spellCheckAndWordComplete(userInput);
+					while(userInput.equalsIgnoreCase("Try Again")){
+						System.out.println("No suggested Spelling or Word Completion Found for this input. Try Again.");
+						userInput = sc.nextLine();
+						userInput=spellCheckAndWordComplete(userInput);
+					}
+
+					String cardType = CardTypeMap.getCardType(userInput);
+					while (cardType.equalsIgnoreCase("Null")){
+						System.out.println("Please Enter a Valid Card Type. [Like- Visa Card\n" +
+								"    American Express\n" +
+								"    COSTCO CARDS\n" +
+								"    STUDENT CARDS\n" +
+								"    CASH BACK CARDS\n" +
+								"    TRAVEL REWARDS CARDS\n" +
+								"    BUSINESS CREDIT CARDS\n" +
+								"    LOW INTEREST CARDS\n" +
+								"    Mastercard]");
+						userInput = sc.nextLine();
+						cardType =CardTypeMap.getCardType(userInput);
+					}
+					resultCardList = basedOnCardType(userInput, cardList);
+
+					break;
 
 				case 2:
 					System.out.println("Select card based on Annual Fee, Enter Your preferd annual fee:");
@@ -206,44 +187,31 @@ public class Executer
 				case 3:
 
 					if (sc.hasNextLine()) sc.nextLine(); // Clears leftover newline
-					while (true) {
-						System.out.println("Select card based on Bank Name, Enter Your preferred Bank: [RBC, Scotia Bank, CIBC, TD Bank]");
+					System.out.println("Select card based on Bank Name, Enter Your preferd Bank:[RBC, Scotia Bank, CIBC, TD Bank]");
+					userInput = sc.nextLine();
 
-						// Take user input
+					while(!Validation.ValidationBankName(userInput))
+					{
+						System.out.println("Enter a Correct Bank Name ");
 						userInput = sc.nextLine();
-
-						// Step 1: Validate Bank Name
-						if (!Validation.ValidationBankName(userInput)) {
-							System.out.println("Invalid Bank Name. Please enter a valid bank name.");
-							continue; // Restart the loop for a valid input
-						}
-						if(!bankNameMap.getBankName(userInput).equalsIgnoreCase("Null")){
-							resultCardList = basedOnBankName(userInput, cardList);
-							break;
-						}
-
-						// Step 2: Spell Check and Word Completion
-						userInput = spellCheckAndWordComplete(userInput);
-
-						// If "Try Again" is returned, it means neither spelling nor word completion succeeded
-						if (userInput.equalsIgnoreCase("Try Again")) {
-							System.out.println("Invalid input after suggestions. Please try again.");
-							continue; // Restart the loop for new input
-						}
-
-						// Step 3: Map Lookup
-						String bankName = bankNameMap.getBankName(userInput);
-
-						if (bankName.equalsIgnoreCase("Null")) {
-							System.out.println("Bank Name not found. Please enter a valid bank name from the options.");
-							continue; // Restart the loop if no valid bank name is found in the map
-						}
-
-						// If all checks pass, break out of the loop
-						resultCardList = basedOnBankName(userInput, cardList);
-						break;
+					}
+					userInput=spellCheckAndWordComplete(userInput);
+					while(userInput.equalsIgnoreCase("Try Again")){
+						System.out.println("Enter a Bank Name");
+						userInput = sc.nextLine();
+						userInput=spellCheckAndWordComplete(userInput);
 					}
 
+
+					String bankName = bankNameMap.getBankName(userInput);
+					while (bankName.equalsIgnoreCase("Null")){
+						System.out.println("Please Enter a Valid Bank Name. [Like- TD bank/ CIBC/ RBC/ Scotia Bank]");
+						userInput = sc.nextLine();
+						bankName =bankNameMap.getBankName(userInput);
+					}
+					resultCardList = basedOnBankName(userInput, cardList);
+
+					break;
 				case 4:
 					System.out.println("Select card based on Interest Rate, Enter Your preferd Interest Rate:");
 					userInput = sc.next();
@@ -270,101 +238,102 @@ public class Executer
 
 
 	//Spell checking and word completion implementation.
-	private static String spellCheckAndWordComplete(String userInput) {
+	public static String spellCheckAndWordComplete(String userInput)
+	{
 		Scanner scanner = new Scanner(System.in);
-		String correctSpelledWord;
-
-		try {
-			// Case 1: The word is spelled correctly
-			if (spellCheck.search(userInput)) {
-				correctSpelledWord = userInput;
-
-				// Move to autocomplete
+		String correctspelledWord;
+		if(spellCheck.search(userInput))
+		{
+			//Spelled Correctly
+			correctspelledWord = userInput;
+			// So move to autocomplete
+			System.out.println("Suggested Autocomplete words: ");
+			// Generating list of word complete suggestions based on user's input.
+			List<String> suggestions = wordCompletion.autocomplete(correctspelledWord, 5);
+			for(int i = 0; i < suggestions.size(); i++)
+			{
+				System.out.println((i + 1) + " " + suggestions.get(i));
+			}
+			System.out.println("To choose a suggested word type the number associated with it. or Type 0 to not choose any of the suggestions.");
+			int input = Integer.parseInt(scanner.nextLine());
+			if(input == 0)
+			{
+				return correctspelledWord;
+			}
+			else
+			{
+				return suggestions.get(input - 1);
+			}
+		}
+		else
+		{
+			if(wordCompletion.doesPrefixExist(userInput))
+			{
 				System.out.println("Suggested Autocomplete words: ");
-				List<String> suggestions = wordCompletion.autocomplete(correctSpelledWord, 5);
-
-				for (int i = 0; i < suggestions.size(); i++) {
+				// Generating list of word complete suggestions based on user's input.
+				List<String> suggestions = wordCompletion.autocomplete(userInput, 5);
+				for(int i = 0; i < suggestions.size(); i++)
+				{
 					System.out.println((i + 1) + " " + suggestions.get(i));
 				}
-
-				int input = getValidInput(scanner, 0, suggestions.size(), "To choose a suggested word type the number associated with it, or type 0 to not choose any of the suggestions.");
-
-				if (input == 0) {
-					return correctSpelledWord;
-				} else {
+				System.out.println("To choose a suggested word type the number associated with it. or Type 0 to not choose any and type again.");
+				int input = Integer.parseInt(scanner.nextLine());
+				if(input == 0)
+				{
+					return "Try Again";
+				}
+				else
+				{
 					return suggestions.get(input - 1);
 				}
 			}
-			else {
-				// Case 2: The word is not spelled correctly, but has possible prefix matches
-				if (wordCompletion.doesPrefixExist(userInput)) {
-					System.out.println("Suggested Autocomplete words: ");
-					List<String> suggestions = wordCompletion.autocomplete(userInput, 5);
-
-					for (int i = 0; i < suggestions.size(); i++) {
-						System.out.println((i + 1) + " " + suggestions.get(i));
+			else
+			{
+				System.out.println(userInput + " might be spelled incorrectly.");
+				List<String> correctSpell = spellCheck.suggestAlternatives(userInput);
+				if(!correctSpell.isEmpty())
+				{
+					System.out.println("Did you mean these?");
+					for(int i = 0; i < correctSpell.size(); i++)
+					{
+						System.out.println((i + 1) + " " + correctSpell.get(i));
 					}
-
-					int input = getValidInput(scanner, 0, suggestions.size(), "To choose a suggested word type the number associated with it, or type 0 to not choose any and type again.");
-
-					if (input == 0) {
-						return "Try Again";
-					} else {
-						return suggestions.get(input - 1);
-					}
-				}
-				else {
-					// Case 3: The word does not have valid suggestions or matches
-					System.out.println(userInput + " might be spelled incorrectly.");
-					List<String> correctSpell = spellCheck.suggestAlternatives(userInput);
-
-					if (!correctSpell.isEmpty()) {
-						System.out.println("Did you mean these?");
-						for (int i = 0; i < correctSpell.size(); i++) {
-							System.out.println((i + 1) + " " + correctSpell.get(i));
-						}
-
-						int input = getValidInput(scanner, 0, correctSpell.size(), "To choose a suggested spelling type the number associated with it, or type 0 if none matches and you want to type again.");
-
-						if (input == 0) {
-							return "Try Again";
-						} else {
-							return correctSpell.get(input - 1);
-						}
-					} else {
+					System.out.println("To choose a suggested spelling type the number associated with it. Type 0 if none matches and you want to Type again.");
+					int input = Integer.parseInt(scanner.nextLine());
+					if(input == 0)
+					{
 						return "Try Again";
 					}
+					else
+					{
+						return correctSpell.get(input - 1);
+					}
+				}
+				else
+				{
+					return "Try Again";
 				}
 			}
+
 		}
-		catch (Exception e) {
-			System.out.println("An unexpected error occurred: " + e.getMessage());
-			return "Try Again";
-		}
+
 	}
-	private static int getValidInput(Scanner scanner, int min, int max, String message) {
-		int input = -1;
-
-		while (true) {
-			try {
-				System.out.println(message);
-				input = Integer.parseInt(scanner.nextLine());
-
-				// Check if the input is within the valid range
-				if (input >= min && input <= max) {
-					break;
-				} else {
-					System.out.println("Invalid input. Please enter a number between " + min + " and " + max + ".");
-				}
-			} catch (NumberFormatException e) {
-				System.out.println("Invalid input. Please enter a valid integer.");
-			}
-		}
-
-		return input;
-	}
-
-
+////Test remove later
+//	private static void printCreditCardType(ArrayList<CreditCard> cardList) {
+//		// Use a HashSet to store unique card types
+//		HashSet<String> uniqueCardTypes = new HashSet<>();
+//
+//		// Add each card type to the HashSet
+//		for (CreditCard card : cardList) {
+//			uniqueCardTypes.add(card.getCardType());
+//		}
+//
+//		// Print the unique card types
+//		System.out.println("Unique Credit Card Types:");
+//		for (String cardType : uniqueCardTypes) {
+//			System.out.println(cardType);
+//		}
+//	}
 	// Method to print all credit card data
 	private static void printCreditCardData(ArrayList<CreditCard> cardList) {
 		if (cardList.isEmpty()) {
