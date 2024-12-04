@@ -175,15 +175,7 @@ public class Executer
 						String cardType = CardTypeMap.getCardType(userInput);
 
 						if (cardType.equalsIgnoreCase("Null")) {
-							System.out.println("Please Enter a Valid Card Type. [Like- Visa Card\n" +
-									"    American Express\n" +
-									"    Costco Cards\n" +
-									"    Student Cards\n" +
-									"    Cash Back Cards\n" +
-									"    Travel Rewards Cards\n" +
-									"    Business Credit Cards\n" +
-									"    Low Interest Cards\n" +
-									"    Mastercard]");
+							System.out.println("Please Enter a Valid Card Type.");
 							continue; // Restart the loop if no valid bank name is found in the map
 						}
 
