@@ -13,9 +13,6 @@ CardAnalytix is a modular Java application that collects a user’s financial pr
   - **Priority Queues**: Rank cards by a calculated suitability score  
   - **Hash Maps**: Fast lookup of card attributes  
   - **Graphs**: Model relationships (e.g., bonus categories, partnership networks)  
-- **Dual Interfaces**  
-  - **CLI** for quick terminal-based usage  
-  - **Swing/JavaFX GUI** for point-and-click interaction  
 - **Modular Design**  
   Easily add new recommendation heuristics or card data sources.  
 - **Configurable Data Source**  
